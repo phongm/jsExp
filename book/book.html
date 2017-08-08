@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图书的增删改查</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/book.css">
+</head>
+<body>
+	<div id="app">
+		<table class="table table-hover">
+			<caption><h2>图书管理</h2></caption>
+			<thead>
+				<tr>
+					<th @click="chageType('ID')">编号</th>
+					<th @click="chageType('name')">书名</th>
+					<th @click="chageType('author')">作者</th>
+					<th @click="chageType('price')">价格</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="b in books | filterBy:typeFun(type) | orderBy:price ">
+					<td v-model="{{b.ID}}">{{b.ID}}</td>
+					<td v-model="{{b.name}}">{{b.name}}</td>
+					<td v-model="{{b.author}}">{{b.author}}</td>
+					<td v-model="{{b.price}}">{{b.price | currency}}</td>
+					<td>
+						<span @click="del">删除</span> /
+						<span data-toggle="modal" data-target="#myModal">修改</span> 
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+
+		<!--搜索-->
+		<div class="search">
+			<input class="text" type="text" v-model="inputVal" placeholder="{{type}}">
+			<button  class="btn btsearch" >搜索</button>
+		</div><br>
+		<!--增加-->
+		<div class="add">
+			<input v-model="{{b.ID}}" id="ID" placeholder="编号"/>-
+			<input v-model="{{b.name}}" id="name" placeholder="姓名"/>-
+			<input v-model="{{b.author}}" id="author" placeholder="作者" />-
+			<input v-model="{{b.price}}" id="price" placeholder="价格"/>
+			<button  class="btn btsearch" @click="add">增加</button>
+		</div>
+		<!--修改框的模态框-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								修改图书信息
+							</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						编号：<input v-model="{{b.ID}}" id="ID"/><br>
+						书名：<input v-model="{{b.name}}" /><br>
+						作者：<input v-model="{{b.author}}" /><br>
+						价格：<input v-model="{{b.price}}" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消
+					</button>
+					<button type="button" class="btn btn-primary" @click="sureEdit">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+		</div>
+
+	</div>
+</body>
+
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/book.js"></script>
+
+</html>

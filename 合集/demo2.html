@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		function Person(id,name,sex,age,address){
+			this.id = id;
+			this.name = name;
+			this.sex = sex;
+			this.age = age;
+			this.address = address;
+		}
+		function Student(id,name,sex,age,address,clazz){
+			Person.apply(this,arguments);
+			this.clazz = clazz;
+		}
+		Person.prototype.sleep = function(){
+			alert(this.name + "sleep...");
+		}
+		Person.prototype.beat = function(){
+			alert(this.name + "beat...");
+		}
+		Function.prototype.extend = function(another,extend){
+			for(var attr in another.prototype){
+				this.prototype[attr] = another.prototype[attr];
+			}
+			for(var attr in extend){
+				this.prototype[attr] = extend[attr];
+			}
+		}
+		// Student.inherit(Person);
+		
+		Student.extend(Person,{
+			study:function(){
+				alert(this.name + "123");
+			},
+			doHomework:function(){
+				alert(this.name + "456");
+			}
+		})
+		var stu = new Student("001","小zhou","nv","13","123");
+		var per = new Person("001","小明","nv","13","123");
+		//拷贝式继承
+		// for(var attr in Person.prototype){
+		// 	Student.prototype[attr] = Person.prototype[attr];
+		// }
+		
+		// function inherit(son,father){
+		// 	for(var attr in Person.prototype){
+		// 	son[attr] = father[attr];
+		// }
+		// }
+		// Function.prototype.inherit = function(fn){
+		// 	for(var attr in fn.prototype){
+		// 		this.prototype[attr] = fn.prototype[attr];
+		// 	}
+		// } 
+		
+		stu.sleep();
+		stu.beat();
+		stu.study();
+		stu.doHomework();
+		//console.log(Student.prototype);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

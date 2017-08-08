@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="data/iconfont.css">
+	<style type="text/css">
+		body{overflow: hidden;display: -webkit-flex; flex-direction: column;}
+		.content{flex: 1;position: absolute;top: 2.2rem;bottom: 2.2rem;width: 100%;overflow: hidden;background-color: #f1f1f1;}
+		.con_box{border-bottom: 1px solid #e5e5e5;background-color: #fff;margin-bottom: .25rem;}
+		.con_user{height: 3.5rem;box-sizing: border-box;padding: 1rem 1.025rem 0 1.025rem;}
+		.user_pic{width: 2.375rem;height: 2.375rem;float: left;box-sizing: border-box;}
+		.user_pic > img{width: 100%;height: 100%;border: 1px solid #d5d5d5;border-radius: 100%;}
+		.user_info{float: left;margin-left: 1rem;}
+		.userTitle{width: 100%;overflow: hidden;margin-bottom: .625rem}
+		.userId{font-size: .7rem;color: #000;float: left;position: relative;}
+		.like{position: absolute;right: 1.5rem;font-size: .35rem;color: #ccc;}
+		.mark{position: absolute;right: .5rem;font-size: .35rem;}
+		.userIntro{font-size: 0.55rem;color: #999;}
+		.con_pic{width: 100%;margin-top: .6rem;}
+		.con_pic > img{width: 100%;}
+		.con_info{padding: .25rem 0 .25rem 0;}
+		.con_info > p{text-indent: 1rem;color: #333;font-size: .6rem;line-height: 1rem;}
+
+	</style>
+</head>
+<body>
+	<div>
+		<header>
+			<div class="title">
+				<div class="hot">热点</div>
+				<div class="attention">关注</div>
+			</div>
+		</header>
+		<div class="content" id="wrapper">
+			<div>
+				<div class="con_box">
+					<div class="con_user">
+						<div class="user_pic"><img src="img/user.png" alt="头像"></div>
+						<div class="user_info">
+							<div class="userTitle">
+								<div class="userId">我叫猫小萌</div>
+								<div class="like">382344</div>
+								<div class="mark iconfont">&#xe665;</div>
+							</div>
+							<div class="userIntro">我是小萌我怕谁？哈哈哈哈！</div>
+						</div>
+					</div>
+					<div class="con_pic">
+						<img src="img/info_pic.png" alt="图片">
+					</div>
+					<div class="con_info">
+						<p>小丸子啊小丸子啊，你好</p>
+					</div>
+				</div>
+				<div class="con_box">
+					<div class="con_user">
+						<div class="user_pic"><img src="img/user.png" alt="头像"></div>
+						<div class="user_info">
+							<div class="userTitle">
+								<div class="userId">我叫猫小萌</div>
+								<div class="like">382344</div>
+								<div class="mark iconfont">&#xe665;</div>
+							</div>
+							<div class="userIntro">我是小萌我怕谁？哈哈哈哈！</div>
+						</div>
+					</div>
+					<div class="con_pic">
+						<img src="img/info_pic.png" alt="图片">
+					</div>
+					<div class="con_info">
+						<p>小丸子啊小丸子啊，你好</p>
+					</div>
+				</div>
+				<div class="con_box">
+					<div class="con_user">
+						<div class="user_pic"><img src="img/user.png" alt="头像"></div>
+						<div class="user_info">
+							<div class="userTitle">
+								<div class="userId">我叫猫小萌</div>
+								<div class="like">382344</div>
+								<div class="mark iconfont">&#xe665;</div>
+							</div>
+							<div class="userIntro">我是小萌我怕谁？哈哈哈哈！</div>
+						</div>
+					</div>
+					<div class="con_pic">
+						<img src="img/info_pic.png" alt="图片">
+					</div>
+					<div class="con_info">
+						<p>小丸子啊小丸子啊，你好</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<footer>
+			<div class="home iconfont active">&#xe600;<p>首页</p></div>
+			<div class="discover iconfont">&#xe62c;<p>发现</p></div>
+			<div class="camera iconfont"><p>&#xe6dd;</p></div>
+			<div class="my iconfont">&#xe611;<p>我的</p></div>
+			<div class="exit iconfont">&#xe607;<p>退出</p></div>
+		</footer>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/iscroll-min.js"></script>
+	<script type="text/javascript" src="js/common.index.js"></script>
+	<script type="text/javascript">
+		var scroll = new IScroll("#wrapper", {
+			mouseWheel : true,
+			scrollbars : true
+		});
+	</script>
+</body>
+</html>

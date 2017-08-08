@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/book.css">
+</head>
+<body>
+	<div id="app">
+		<table class="table table-hover">
+			<caption><h2>图书管理</h2></caption>
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>书名</th>
+					<th>作者</th>
+					<th>价格</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="b in books">
+					<td>{{b.ID}}</td>
+					<td>{{b.name}}</td>
+					<td>{{b.author}}</td>
+					<td>{{b.price}}</td>
+					<td>
+						<span>删除</span> /
+						<span>修改</span> /
+						<span>增加</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+	
+</body>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/book.js"></script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<style type="text/css">
+		.middle {width:400px; height:400px; position:absolute; top:200px; left:100px;}
+		.middle img {width:400px; height:400px;}
+		.pop {width:200px; height:200px; position:absolute; background:black; top:0; left:0; opacity:0.3; display:none;}
+		.big {width:400px; height:400px; position:absolute; left:550px; top:200px; border:1px solid; overflow:hidden; display:none;}
+		.big img{position:absolute; width:800px; height:800px;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var middleWidth = $(".middle").width(),
+				middleHeight = $(".middle").height(),
+				popWidth = $(".pop").width(),
+				popHeight = $(".pop").height();
+
+			$(".middle").hover(function(){
+				$(".pop,.big").show();
+			}, function(){
+				$(".pop,.big").hide();
+			}).on("mousemove", function(event){
+				// 计算出遮罩在整个文档中的绝对定位位置(即使光标在遮罩中心的位置)
+				var _left = event.pageX - popWidth / 2,
+					_top = event.pageY - popHeight / 2;
+				$(".pop").offset({
+					"top":_top,
+					"left":_left
+				});
+				// 获取到遮罩相对 .middle 的定位
+				_left = $(".pop").position().left;
+				_top = $(".pop").position().top;
+				// 判断是否越界
+				if (_left < 0)
+					_left = 0;
+				else if (_left > middleWidth - popWidth)
+					_left = middleWidth - popWidth;
+				if (_top < 0)
+					_top = 0;
+				else if (_top > middleHeight - popHeight)
+					_top = middleHeight - popHeight;
+				// 重新设置定位
+				$(".pop").css({
+					"top":_top,
+					"left":_left
+				});
+
+				// 设置放大镜效果：将 .big 盒子中的图片按比率移动位置
+				$(".big img").css({
+					"top": -2 * _top,
+					"left": -2 * _left
+				});
+			});
+		});
+	</script>
+</head>
+<body style="background:#ccc;">
+	<div class="middle">
+		<img src="imgs/430_001.jpg">
+		<div class="pop"></div>
+	</div>
+
+	<div class="big">
+		<img src="imgs/800_001.jpg">
+	</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		function Person(id, name, sex, age, address) {
+			this.id = id;
+			this.name = name;
+			this.sex = sex;
+			this.age = age;
+			this.address = address;
+		}
+
+		Person.prototype.eat = function(){
+			alert(this.name + "吃饭...");
+		}
+
+		Person.prototype.sleep = function(){
+			alert(this.name + "睡觉...");
+		}
+
+		Person.prototype.beat = function() {
+			alert(this.name + "打豆豆...");
+		}
+
+		function Student(id, name, sex, age, address, clazz) {
+			// Person.call(this, id, name, sex, age, address);
+			// Person.apply(this, [id, name, sex, age, address]);
+			Person.apply(this, arguments); // arguments 类数组对象
+			this.clazz = clazz;
+		}
+
+		// alert(typeof Person.prototype)
+
+		// 拷贝式继承
+		for (var attr in Person.prototype) {
+			Student.prototype[attr] = Person.prototype[attr];
+		}
+
+		Student.prototype.study = function(){
+			alert(this.name + "学习...");
+		}
+
+		// var stu = new Student("s001", "小红", "女", 18, "成都", "001班");
+		// stu.eat();
+
+		// Student.eat();
+		// Person.eat();
+
+		// 静态方法
+		// Student.eat = function(){}
+
+		// alert(stu.name)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

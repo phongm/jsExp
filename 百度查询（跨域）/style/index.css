@@ -1,0 +1,52 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html{
+	height: 100%;
+	background: url(../images/background.jpg) center center no-repeat;
+}
+ul {
+	list-style: none;
+}
+input {
+	outline: none;
+}
+#logo {
+	display: block;
+	margin: 100px auto 0;
+	width: 280px;
+}
+#search_form {
+	position: relative;
+	margin: 30px auto;
+	width: 640px;
+}
+#search_content {
+	padding: 5px 8px;
+	width: 524px;
+	height: 30px;
+	line-height: 30px;
+	border: 0;
+}
+#submit {
+	width: 100px;
+	height: 40px;
+	border: none;
+	font-size: 16px;
+	cursor: pointer;
+	vertical-align: bottom;
+}
+#search_list {
+	position: absolute;
+	margin-top: 1px;
+	width: 100%;
+	background: #fff;
+}
+#search_list li {
+	padding: 4px 6px;
+	font-size: 14px;
+}
+#search_list .active {
+	background: #ccc;
+}

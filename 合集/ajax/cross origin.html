@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cross origin</title>
+
+	<script type="text/javascript">
+	/*
+	利用script标签本身的跨域能力进行跨域请求数据
+	 */
+	window.onload = function(){
+		var oBtn = document.getElementById('btn');
+		oBtn.onclick = function(){
+			var oScript = document.createElement('script');
+			oScript.src="test1.js";
+			document.body.appendChild(oScript);
+		}
+	}
+	function test1(data){
+		console.log(data);
+	}
+	</script>
+</head>
+<body>
+	<button id="btn">点击按钮</button>
+</body>
+</html>

@@ -1,0 +1,43 @@
+@charset "utf-8";
+/*reset*/
+body,button,input,select,textarea{font:100%/1 "Helvetica Neue",Helvetica,STHeiTi,"Microsoft YaHei";}
+body,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,th,td,p,blockquote,pre,form,fieldset,legend,input,button,textarea,article,aside,footer,header,hgroup,nav,section,menu{margin:0; padding:0;-webkit-text-size-adjust:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+em,i{font-style:normal;}
+li{list-style:none;}
+img{border:0;}
+input,img{vertical-align:middle;}
+article,aside,footer,header,hgroup,nav,section,menu{display:block;}
+a{text-decoration:none;}
+.clearfix:after{content:"";display:block;height:0;clear:both;visibility:hidden;}
+html,body{height:100%;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;color: #666666;font-size:20px;}
+a,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);tap-highlight-color:rgba(0,0,0,0);outline:none; -webkit-font-smoothing:antialiased}
+
+body > div{overflow: hidden;}
+header{height: 2.2rem;background-color: #0dc441;position: absolute;left: 0; top: 0;right: 0;}
+.title{width: 5.9rem;height: 1.2rem;position: absolute;left: 50%;margin-left: -2.95rem;top: 50%;margin-top: -0.6rem;display: -webkit-flex;color: #0dc441;z-index: 1;}
+.hot, .attention{flex: 1;text-align: center;height: 100%;line-height: 1.2rem;font-size: 0.35rem;}
+.hot{background-color: #3dd067;border-top-left-radius: 20px;border-bottom-left-radius: 20px;}
+.attention{background-color: #64d985;border-top-right-radius: 20px;border-bottom-right-radius: 20px;}
+footer{height: 2.2rem;position: absolute;z-index: 999;left: 0; bottom: 0;right: 0;display: -webkit-flex;box-sizing: border-box; padding-top: .25rem;border-top: 1px solid #d9d9d9}
+.home,.discover,.camera,.my,.exit{flex: 1;text-align: center;}
+footer .iconfont{font-size: .8rem;}
+.iconfont p{font-size: .6rem;margin-top: .25rem;}
+.active{color: #0dc441;}
+footer .iconfont.camera{position: relative;}
+.camera > p{position: absolute;font-size: 1.45rem;width: 2.6rem;height: 2.6rem;background-color: #fff;bottom: 0;left: 50%;margin-left: -1.3rem;text-align: center; line-height:2.6rem;border: 1px solid #dedede;border-radius: 100%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

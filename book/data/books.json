@@ -1,0 +1,9 @@
+[
+	{"name":"红楼梦","author":"曹雪芹","price":45},
+	{"name":"朝花夕拾","author":"鲁迅","price":23.534},
+	{"name":"冰心全集","author":"冰心","price":43.4212},
+	{"name":"西游记","author":"吴承恩","price":34.432},
+	{"name":"水浒传","author":"罗冠中","price":54.23},
+	{"name":"雨果集","author":"雨果","price":67},
+	{"name":"老人与海","author":"海明威","price":65.552}
+]

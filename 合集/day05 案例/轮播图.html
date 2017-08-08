@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播</title>
+	<style type="text/css">
+		*{margin:0; padding:0;}
+		#container {width:605px; height:284px; position:relative; margin:0 auto;}
+		.box {height:284px; width:605px; list-style:none;}
+		.box li {width:605px; height:284px; overflow:hidden; position:absolute; top:0; left:0; display:none;}
+		.pages_background {width:100%; height:30px; position:absolute; bottom:0; background:black; opacity:0.3;}
+		.pages {  height:20px; padding:5px 0px; margin:0 auto; position:absolute; left:0; right:0; bottom:0; }
+		.pages div {width:20px; height:20px; border-radius:10px; background:white; float:left; margin-left:5px;}
+		.pages div.curr {background:red; }
+		.prev, .next {background:url(img/sprite.bmp) no-repeat; width:45px; height:100px; position:absolute; top:0; bottom:0; margin:auto 0; opacity:0.2;}
+		.next {background-position:top right; right:0;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var currIndex = 0, // 当前显示图片索引
+				nextIndex = 1, // 即将（下一张）显示图片索引
+				$allImgs = $(".box li"), // 所需轮播的所有图片的盒子
+				len = $allImgs.length, // 所有待轮播图片的张数
+				timer = null; // 轮播切换时所使用计时器的 id
+
+			// 添加小圆点
+			for (var i = 0; i < len; i++) {
+				$("<div></div>").appendTo(".pages");
+			}
+			// 为小圆点绑定点击事件(事件委派)
+			$(".pages").on("click", "div", function(){
+				// 判断是否当前点击的就是正在显示的图片
+				if ($(this).index() === currIndex)
+					return;
+				// 获取点击的小圆点索引，也就是即将显示出来的图片索引
+				nextIndex = $(this).index();
+				// 切换
+				move();
+			}).children(":first").addClass("curr");
+			// 默认第一个小圆点选中
+			// $(".pages div").eq(0).trigger("click");
+			// $(".pages div").eq(0).addClass("curr");
+
+			// 上一页
+			$(".prev").click(function() {
+				nextIndex = currIndex - 1;
+				if (nextIndex < 0)
+					nextIndex = len - 1;
+				move();
+			});
+
+			// 下一页
+			$(".next").click(move);
+
+			// 鼠标移入盒子停止轮播，移出继续轮播
+			$("#container").hover(function(){
+				clearInterval(timer);
+			}, function(){
+				timer = setInterval(move, 3000);
+			}).trigger('mouseleave');
+
+			// 自动轮播切换
+			// timer = setInterval(move, 3000);
+
+			// 切换显示轮播图片
+			function move(){
+				$allImgs.eq(currIndex).fadeOut(); // 正显示的图片淡出
+				$allImgs.eq(nextIndex).fadeIn(); // 下一张图片淡入
+
+				// 小圆点样式切换
+				$(".pages div").eq(currIndex).removeClass("curr");
+				$(".pages div").eq(nextIndex).addClass("curr");
+
+				// 修改索引
+				currIndex = nextIndex;
+				nextIndex++;
+				if (nextIndex >= len)
+					nextIndex = 0;
+			};
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<ul class="box">
+			<li style="display:block;"><img src="img/ad (1).jpg"></li>
+			<li><img src="img/ad (2).jpg"></li>
+			<li><img src="img/ad (3).jpg"></li>
+			<li><img src="img/ad (4).jpg"></li>
+			<li><img src="img/ad (5).jpg"></li>
+		</ul>
+		<div class="pages_background"></div>
+		<div class="pages"></div>
+		<div class="prev"></div>
+		<div class="next"></div>
+	</div>
+</body>
+</html>

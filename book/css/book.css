@@ -1,0 +1,4 @@
+.table tr th{text-align: center;color: #fff;background: darkorange;border: 1px solid #fff;}
+.table tr td{text-align: center;color:#000;background: orange;border: 1px solid #ccc;cursor: pointer;}
+input{width: 200px;height: 30px;margin:10px;}
+.btn{width: 100px;height: 30px;text-align: center;background:orange;color: #fff;border:none;border-radius: 10px;}

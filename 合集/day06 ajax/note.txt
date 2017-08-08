@@ -1,0 +1,29 @@
+ajax:
+	核心对象：XMLHttpRequest
+	步骤：
+		1. 创建核心对象
+		2. 打开(建立连接) -- open(method, url, async)
+		3. 发送请求 -- setRequestHeader(key, value), send(param)
+		4. 处理响应
+			onreadystatechange
+			readyState -- 0~4
+			status -- HTTP响应状态码
+			responseText
+
+
+jQuery 中 ajax 方法
+	$.ajax();   ---- ajax()
+	load() ---- 加载静态资源
+	$.get() 
+	$.post() 
+	$.getJSON()
+	$.getScript()
+
+跨域
+	同源策略 -- 安全策略
+		同源：协议、域名、端口
+	ajax 跨域
+	jsonp 跨域
+		利用的是 <script> 元素的功能
+		callback
+		

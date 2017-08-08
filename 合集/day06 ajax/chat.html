@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>聊天</title>
+	<style type="text/css">
+		#info {width:500px; height:400px; border:1px solid; overflow:auto;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#send").click(function() {
+				var _nickname = $("#nickname").val(),
+					_message = $("#message").val();
+
+				$.get(
+					"http://10.7.157.66:8080/api/chat.do", // url
+					{"action":"send", "nickname":_nickname, "message":_message}, // data
+					function(json){
+						// var json = JSON.parse(data.replace("{{", "{").replace("}}","}"));
+						data = json.data;
+						// 显示当前所说
+						$("<div>"+ _nickname +"("+data.ip+") 在 "+ data.date +" 说："+ _message +"</div>").appendTo("#info");
+						// 清空消息框
+						$("#message").val("").focus();
+					}, // callback
+					"json" // dataType
+				);
+			});
+
+			// ctrl + enter 发送消息
+			$("#message").keydown(function(event){
+				if (event.ctrlKey && event.which === 13){
+					var _nickname = $("#nickname").val(),
+						_message = $("#message").val();
+
+					$.ajax({
+						"type":"get",
+						"url":"http://10.7.157.66:8080/api/chat.do",
+						"data":{"action":"send", "nickname":_nickname, "message":_message},
+						"dataType":"json",
+						"success":function(json){
+							// var json = JSON.parse(data.replace("{{", "{").replace("}}","}"));
+							data = json.data;
+							// 显示当前所说
+							$("<div>"+ _nickname +"("+data.ip+") 在 "+ data.date +" 说："+ _message +"</div>").appendTo("#info");
+							// 清空消息框
+							$("#message").val("").focus();
+							// 自动滚动到最后
+							$("<div>").appendTo('#info').get(0).scrollIntoView();
+						}
+					});
+
+					/*$.get(
+						"http://10.7.157.66:8080/api/chat.do", // url
+						// {"action":"send", "nickname":_nickname, "message":_message}, // data
+						"action=send&nickname="+_nickname+"&message="+_message, // data
+						function(data){
+							var json = JSON.parse(data.replace("{{", "{").replace("}}","}"));
+							data = json.data;
+							// 显示当前所说
+							$("<div>"+ _nickname +"("+data.ip+") 在 "+ data.date +" 说："+ _message +"</div>").appendTo("#info");
+							// 清空消息框
+							$("#message").val("").focus();
+							// 自动滚动到最后
+							$("<div>").appendTo('#info').get(0).scrollIntoView();
+						}, // callback
+						"text" // dataType
+					);*/
+				}
+			});
+
+			// 每隔 1s 接收一次消息
+			setInterval(function(){
+				$.getJSON(
+					"http://10.7.157.66:8080/api/chat.do", // url
+					"action=receive", // data
+					function(data){
+						var array = data.data,
+							html = "";
+
+						$.each(array, function(){
+							html += "<div>"+ this.nickname +"("+this.ip+") 在 "+ this.date +" 说："+ this.message +"</div>";
+						});
+
+						$("#info").html(html);
+					} // callback
+				);
+				/*$.get(
+					"http://10.7.157.66:8080/api/chat.do", // url
+					"action=receive", // data
+					function(data){
+						var array = data.data,
+							html = "";
+
+						$.each(array, function(){
+							html += "<div>"+ this.nickname +"("+this.ip+") 在 "+ this.date +" 说："+ this.message +"</div>";
+						});
+
+						$("#info").html(html);
+					}, // callback
+					"json" // dataType
+				);*/
+			}, 1000);
+		});
+	</script>
+</head>
+<body>
+	<div id="info"></div>
+	<div>昵称：<input type="text" id="nickname" value="小明"></div>
+	<div>消息：<textarea id="message"></textarea><br>
+	<input type="button" value="发送" id="send"></div>
+</body>
+</html>

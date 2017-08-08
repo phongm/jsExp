@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style:none;
+		}
+		#container{
+			width: 300px;
+			height: 500px;
+			border: 1px solid darkblue;
+			position: absolute;
+			top: 50px;
+			left: 300px; 
+		}
+		#text-box{
+			border-bottom: 1px solid darkred;
+			background: red;
+			overflow: hidden;
+		}
+		#text{
+			width:250px;
+			height: 50px;
+			border:0;
+			float: left;
+		}
+		#btn{
+			width:50px;
+			height: 50px;
+			border: 0;
+			background: red;
+			cursor: pointer;
+			float: left;
+		}
+	</style>
+	<meta charset="UTF-8">
+	<title>百度API</title>
+	<script type="text/javascript" src="js/ajax1.js"></script>
+	<script type="text/javascript">
+	window.onload = function(){
+		var 
+			oBtn = $('btn'),
+			oContent = $('content');
+			
+		oBtn.onclick = function(){
+			phoneNum = $('text').value;
+			var options = {
+				method: 'get',
+				url: "http://apis.baidu.com/apistore/mobilenumber/mobilenumber",
+				isAsync: true,
+				data:{"phone":phoneNum},
+				header:{"apikey":"ca98cae782dd8df8a1c6da9fb63a231f"},
+				success:function(data){
+					var result = JSON.parse(data);
+					console.log(result);
+					var arr = [];
+					if(result.errNum == 0){
+						var city = result.retData.city;
+						var phone = result.retData.phone;
+						var province = result.retData.province;
+						var supplier = result.retData.supplier;
+						arr.push({"城市":city},{"电话号码":phone},{"省份":province},{"供应商":supplier});
+						//arr1.push("城市","电话号码","省份","供应商");
+						//console.log(arr);
+						oContent.innerHTML = "";
+						for(var i in arr){
+							var oLi = document.createElement('li');
+							for(var key in arr[i]){
+								oLi.innerHTML = key +":"+ arr[i][key];
+							}
+							oContent.appendChild(oLi);
+						}
+					}else if(result.errNum==-1){
+						alert(result.retMsg);
+					}
+				},
+				error: function(xhr){	
+					console.log("发生错误："xhr.status);
+				}
+			};
+			ajax(options);
+		}
+	}
+	function $(id){
+		return document.getElementById(id);
+	}
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div id="text-box">
+			<input type="text" id="text">
+			<input type="button" id="btn" value="查询">
+		</div>
+		<ul id="content"></ul>
+	</div>
+</body>
+</html>

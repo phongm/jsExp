@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		* {margin:0; padding:0;}
+		#container {width:90%; margin:0 auto;}
+		.topic {width:200px; border:1px solid #ccc; border-radius:5px; padding:5px; box-shadow:5px 5px 5px #ccc; margin-top:15px;}
+		.topic img {width:200px;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var position = []; // 存放各列高度;
+
+			$(window).on("load", function(){
+				var containerWidth = $("#container").innerWidth(), // 容器宽度
+					$topics = $(".topic"), // 所有待布局的图片盒子
+					topicWidth = $topics.eq(0).outerWidth(), // 每个图片盒子的宽度
+					cols = Math.floor(containerWidth / topicWidth), // 一行中的列数
+					spacing = (containerWidth - topicWidth * cols) / (cols + 1), // 水平间距
+					html = ""; // 用于保存中间处理过程中的 html 字符串
+
+				// 循环，向 #container 盒子中存放 cols 个列的盒子
+				for (var i = 0; i < cols; i++) {
+					html += "<div style='display:inline-block; width:"+ topicWidth +"px; margin-left:"+ spacing +"px; vertical-align:top;'></div>";
+				}
+
+				// 将 html 字符串中表示的节点添加到 #container 的容器中
+				var $conCols = $(html).appendTo("#container");
+
+				// 遍历 $topics 中的每个元素，将其添加到对应所在的列盒子中显示
+				$topics.each(function(index, element){
+					if (index < cols) // 向数组中添加初始列高度值
+						position.push(0);
+					// 找出 position 数组中的最小值
+					var min = Math.min.apply(null, position);
+					// 查找最短列的索引
+					var minIndex = $.inArray(min, position);
+					// 向最短列添加当前遍历到的元素
+					$conCols.eq(minIndex).append(element);
+					// 重新计算 minIndex 列高度
+					position[minIndex] += $(element).outerHeight(true);
+				});
+
+				/*// 动态加载
+				html = "";
+				// 创建需要动态加载节点的 html 字符串
+				for (i = 16; i <= 56; i++) {
+					html += '<div class="topic"><img src="img/'+i+'.jpg"></div>';
+				}
+				// 遍历每个需动态添加的节点，一一向最短列中添加
+				$(html).each(function(index, element){
+					// 当前遍历到节点中的图片资源加载完毕后，再向最短列中添加
+					$(element).children("img").on("load", function(){
+						// 找出 position 数组中的最小值
+						var min = Math.min.apply(null, position);
+						// 查找最短列的索引
+						var minIndex = $.inArray(min, position);
+						// 向最短列添加当前遍历到的元素
+						$conCols.eq(minIndex).append(element);
+						// 重新计算 minIndex 列高度
+						position[minIndex] += $(element).outerHeight(true);
+					})
+				});	*/			
+			});
+
+			// 当滚动高度超过最短列时，
+			// ajax 加载更多图片
+			var _page = 2,
+				isLoading = false; // 是否是正在通常 ajax 加载图片
+			$(window).on("scroll", function(){
+				var _scTop = $(this).scrollTop(),
+					minHeight = Math.min.apply(null, position),
+					winHeight = $(window).height(); // 窗口高度
+				if (!isLoading && _scTop > minHeight - winHeight) {
+					isLoading = true; // ajax 开始加载图片
+					$.ajax({
+						type : "get",
+						url : "http://apis.baidu.com/txapi/mvtp/meinv",
+						data : {num:20},
+						headers : {apikey:"2c6d2927ef76200697018e989f6afbbb"},
+						dataType : "json",
+						success : function(data){
+							var array = data.newslist,
+								html = "";
+							$.each(array, function(){
+								html += '<div class="topic"><img src="'+this.picUrl+'"></div>';
+							});
+							$(html).each(function(index, element){
+								$(this).children('img').on("load", function(){
+									var minIndex = $.inArray(Math.min.apply(null, position), position);
+									$("#container>div").eq(minIndex).append(element);
+									position[minIndex] += $(element).outerHeight(true);
+								});
+							});
+							isLoading = false; // 可以继续加载
+						}
+					});
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div class="topic"><img src="img/1.jpg"></div>
+		<div class="topic"><img src="img/2.jpg"></div>
+		<div class="topic"><img src="img/3.jpg"></div>
+		<div class="topic"><img src="img/4.jpg"></div>
+		<div class="topic"><img src="img/5.jpg"></div>
+		<div class="topic"><img src="img/6.jpg"></div>
+		<div class="topic"><img src="img/7.jpg"></div>
+		<div class="topic"><img src="img/8.jpg"></div>
+		<div class="topic"><img src="img/9.jpg"></div>
+		<div class="topic"><img src="img/10.jpg"></div>
+		<div class="topic"><img src="img/11.jpg"></div>
+		<div class="topic"><img src="img/12.jpg"></div>
+		<div class="topic"><img src="img/13.jpg"></div>
+		<div class="topic"><img src="img/14.jpg"></div>
+		<div class="topic"><img src="img/15.jpg"></div>
+	</div>
+</body>
+</html>

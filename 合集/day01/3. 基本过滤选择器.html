@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>基本过滤选择器</title>
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <script src="js/jquery-1.12.4.min.js"></script>
+ <script>
+ 	$(function(){
+ 		$("#btn1").on("click",function(){
+ 			$("div:first").css("background","red");
+ 		});
+ 		$("#btn2").on("click",function(){
+ 			$("div:last").css("background","red");
+ 		});
+ 		$("#btn3").on("click",function(){
+ 			$("div:not(.one)").css("background","red");
+ 		});
+ 		$("#btn4").on("click",function(){
+ 			$("div:even").css("background","red");
+ 		});
+ 		$("#btn5").on("click",function(){
+ 			$("div:odd").css("background","red");
+ 		});
+ 		$("#btn6").on("click",function(){
+ 			$("div:eq(3)").css("background","red");
+ 		});
+ 		$("#btn7").on("click",function(){
+ 			$("div:gt(3)").css("background","red");
+ 		});
+ 		$("#btn8").on("click",function(){
+ 			$("div:lt(3)").css("background","red");
+ 		});
+ 		$("#btn9").on("click",function(){
+ 			$(":header").css("background","red");
+ 		});
+ 		$("#btn10").on("click",function(){
+ 			
+ 			$("#mover").animate({height:300},1000);
+ 			$(":animated").css("background","red");
+ 		});
+ 		$("#btn11").on("click",function(){
+ 			$(":focus").css("background","red");
+ 		});
+ 	});
+</script>
+</head>
+<body>
+  <h3>基本过滤选择器.</h3>
+  <input type="button" value="选择第一个div元素." id="btn1"/>
+  <input type="button" value="选择最后一个div元素." id="btn2"/>
+  <input type="button" value="选择class不为one的 所有div元素." id="btn3"/>
+  <input type="button" value="选择索引值为偶数 的div元素." id="btn4"/>
+  <input type="button" value="选择索引值为奇数 的div元素." id="btn5"/>
+  <input type="button" value="选择索引值等于3的元素." id="btn6"/>
+  <input type="button" value="选择索引值大于3的元素." id="btn7"/>
+  <input type="button" value="选择索引值小于3的元素." id="btn8"/>
+  <input type="button" value="选择所有的标题元素." id="btn9"/>
+  <input type="button" value="选择当前正在执行动画的所有元素." id="btn10"/>
+  <input type="button" value="选择当前获取焦点的所有元素." id="btn11"/>
+ 
+<br /><br />
+   
+<!-- 测试的元素 -->
+<div class="one" id="one" >
+	id为one,class为one的div
+	<div class="mini">class为mini</div>
+</div>
+
+<div class="one"  id="two" title="test" >
+	id为two,class为one,title为test的div.
+	<div class="mini"  title="other">class为mini,title为other</div>
+	<div class="mini"  title="test">class为mini,title为test</div>
+</div>
+
+<div class="one">
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini"></div>
+</div>
+
+<div class="one">
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini"  title="tesst">class为mini,title为tesst</div>
+</div>
+
+
+<div style="display:none;"  class="none">
+	style的display为"none"的div
+</div>
+
+<div class="hide">class为"hide"的div</div>
+
+<div>
+	包含input的type为"hidden"的div<input type="hidden" size="8"/>
+</div>
+
+<span id="mover">id 为 "mover" 的span元素.</span>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+	<style type="text/css">
+		* {margin: 0;padding: 0;}
+		img{vertical-align: bottom;}
+		#box {position: relative;margin: 0 auto;}
+		#box .panel {position: absolute;}
+		#box img {margin: 10px;padding: 10px;width: 200px;border-radius: 5px;box-shadow: 0 0 8px #ccc;background: #fff;}
+	</style>
+	<script type="text/javascript" src="jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$(window).on("load", function(){
+				var 
+					winWidth = $(window).width(),	//视窗宽度
+					$divs = $("#box .panel"),		//获取div元素
+					imgWidth = $divs.outerWidth(true),  //图片宽度
+					cols = Math.floor(winWidth / imgWidth), //显示的列数
+					html = "",		//保存添加元素的字符串
+					heights = [];   //保存各列的高度
+
+				//初始化盒子的宽度
+				$("#box").width(cols * imgWidth);
+				//初始化每张图的位置
+				$divs.each(function(index, element){
+					//console.log(index, element);
+					if(index < cols){ //第一排一次排列，用数组保存高度
+						$(element).css({left : index*imgWidth});
+						heights.push($(element).outerHeight(true));
+					}else{//第二排开始找最低高度 一次排列，同时更新高度数组
+						var minHeightIndex = $.inArray(Math.min.apply(null, heights), heights);
+						$(element).css({
+							left : minHeightIndex * imgWidth,
+							top  : heights[minHeightIndex]
+						});
+						heights[minHeightIndex] += $(element).outerHeight(true);
+					}
+				});
+
+				//为window 添加scroll事件  需要用到两个变量
+				var winHeight = $(window).height(); //视窗高度
+				var loading   = false; 				//是否在加载 
+
+				$(window).on("scroll", function(){
+					//滚动条的距离顶部的高度
+					var scrollTop = $(this).scrollTop();
+					//滚动最后 最短列高度
+					var shortHeight = Math.min.apply(null, heights);
+					
+					//判断是否到达加载的临界点(没有在加载切高度到达)
+					if(!loading && scrollTop+winHeight > shortHeight){
+						//更新 加载状态
+						loading = true;
+						//通过ajax动态获取图片
+						$.ajax({
+							type 	: "get",
+							url		: "http://apis.baidu.com/txapi/mvtp/meinv",
+							dataType: "json",
+							headers : {apikey : "95821d4e7f9e44068f4120ba202d6e02"},
+							data 	: {num : 20},
+							success : function(data){
+								html = "";
+								$.each(data.newslist, function(index, element){
+									html += "<div class='panel'><img src='"+element.picUrl+"'></div>";
+								});
+								$(html).each(function(index, element){
+									// 在图片内容加载完毕后，再将图片盒子添加到最短列中
+									//console.log($(this));
+									$(this).children('img').on("load", function(){
+										// 求最短列的索引
+										var shortestIndex = $.inArray(Math.min.apply(null, heights), heights);
+										$(this).parents(".panel").css({
+											left : (winWidth - imgWidth) / 2,
+											top  : winHeight + scrollTop
+										}).appendTo("#box").animate({
+											left : shortestIndex * imgWidth,
+											top  : heights[shortestIndex]
+										});
+										// 重新计算数组元素值
+										heights[shortestIndex] += $(element).outerHeight(true);
+									});
+								});
+								loading = false;
+								$(".load").hide();
+							},
+							error	: function(){
+								alert("加载失败");
+								console.log(xhr);
+							}
+						});
+					}
+
+
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div class="panel"><a href="javascript:;"><img src="img/1.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/2.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/3.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/4.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/5.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/6.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/7.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/8.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/9.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/10.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/11.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/12.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/13.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/14.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/15.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/16.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/17.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/18.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/19.jpg" alt=""></a></div>
+		<div class="panel"><a href="javascript:;"><img src="img/20.jpg" alt=""></a></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0; padding:0;}
+		#container {position:relative; left:100px;}
+		.nav {list-style:none;}
+		li {width:100px; height:30px; line-height:30px; background:red;}
+		.sub_nav {position:absolute; top:0; left:99px;}
+		.sub_nav div {width:200px; height:200px; background:#ccc; display:none;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("li").hover(function() {
+				$(this).css("background", "#ccc");
+				$(".sub_nav").children('div').eq($(this).index()).show();
+			}, function() {
+				$(this).css("background","");
+				$(".sub_nav").children('div').eq($(this).index()).hide();
+			});
+
+			$(".sub_nav div").hover(function() {
+				$(".nav li").eq($(this).index()).css("background", "#ccc");
+				$(this).show();
+			}, function() {
+				$(".nav li").eq($(this).index()).css("background", "");
+				$(this).hide();
+			});
+		})
+	</script>
+</head>
+<body>
+	<div id="container">
+		<ul class="nav">
+			<li>家用电器</li>
+			<li>电脑</li>
+			<li>手机</li>
+		</ul>
+		<div class="sub_nav">
+			<div>家用电器二级导航</div>
+			<div>电脑二级导航</div>
+			<div>手机二级导航</div>
+		</div>
+	</div>
+</body>
+</html>

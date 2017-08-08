@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo3</title>
+	<script>
+		function Person(){
+			this.hobbies = ["eat","sleep"];
+		}
+		Person.prototype.showHobbies = function(){
+			alert(this.hobbies);
+		}
+		function Student(){
+
+		}
+		Student.prototype = new Person();
+		var stu = new Student();
+		//alert(stu.hobbies);
+		stu.hobbies.push("da doudou");
+		var stu2 = new Student();
+		stu2.showHobbies();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

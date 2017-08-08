@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		//自执行函数
+		(function(){
+			var i = 0;
+			console.log(i);
+		})();
+
+		(function(){
+			//若要让demo不影响全局变量，将这部分括起来，使其成为自执行函数结构
+			var demo;
+			window.onload = function(){
+				demo = 10;
+			}
+			function test(){
+				console.log(demo);
+			}
+		})();
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

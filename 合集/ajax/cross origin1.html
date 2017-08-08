@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cross origin</title>
+
+	<script type="text/javascript">
+	/*
+	利用script标签本身的跨域能力进行跨域请求数据
+	 */
+	window.onload = function(){
+		var oBtn = document.getElementById('btn');
+		oBtn.onclick = function(){
+			var oScript = document.createElement('script');
+			oScript.src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=中国&json=1&p=3&cb=show&t";
+			document.body.appendChild(oScript);
+		}
+	}
+	//获取百度搜索框的jsonp数据
+	function show(data){
+		console.log(data);
+	}
+	</script>
+</head>
+<body>
+	<button id="btn">点击按钮</button>
+</body>
+</html>

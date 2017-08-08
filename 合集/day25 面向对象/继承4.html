@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		function Person() {
+			this.hobbies = ["吃饭", "睡觉"];
+		}
+
+		Person.prototype.showHobbies = function(){
+			alert(this.hobbies);
+		}
+
+		function Student() {
+		}
+
+		Student.prototype = new Person();
+
+		var stu = new Student();
+		// stu.showHobbies();
+		// alert("属性：" + stu.hobbies);
+		stu.hobbies.push("打豆豆");
+		stu.showHobbies();
+
+		var stu2 = new Student();
+		stu2.showHobbies();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

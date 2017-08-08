@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Please enter the page title</title>
+    <meta name="keywords" content="关键词,关键词" />
+    <meta name="description" content="" />
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+            font-family:'宋体';
+        }
+        html,body{
+            width:100%;
+            height:100%;
+            background-color:rgba(253, 217, 227,.2);
+        }
+        ul{
+            list-style:none;
+        }
+        #container{
+            width:800px;
+            height:600px;
+            margin:auto;
+        }
+        #container ul{
+            width:100%;
+            height:62%;
+        }
+        #container ul li{
+            width:50%;
+            height:100%;
+            float:left;
+            text-align:center;
+        }
+        #container ul li div{
+            width:223px;
+            height:337px;
+            margin:auto;
+            border-radius:50%;
+            border:10px solid rgb(254, 123, 163);
+            background-position:center;
+            background-repeat:no-repeat;
+        }
+        #container ul li p{
+            margin:10px 0px;
+            font-size:30px;
+        }
+        #container ul li div.user{
+            background-image:url('img/readyl.png');
+        }
+        #container ul li div.computer{
+            background-image:url('img/readyr.png');
+        }
+        #container ul li div.guess0,#switch li div.guess0{
+            background-image:url('img/1.png');
+        }
+        #container ul li div.guess1,#switch li div.guess1{
+            background-image:url('img/2.png');
+        }
+        #container ul li div.guess2,#switch li div.guess2{
+            background-image:url('img/3.png');
+        }
+        #container div.play{
+            text-align:center;
+        }
+        #container div.play button{
+            border:10px solid rgb(254, 123, 163);
+            border-radius:50%;
+            outline:none;
+            background-color:rgb(253, 217, 227);
+            height:60px;
+            width:200px;
+            font-size:24px;
+            font-weight:bold;
+            color:rgb(134, 123, 117);
+            cursor:pointer;
+        }
+        #container div.play button.disabled{
+            border:10px solid #bbb;
+            color:#bbb;
+        }
+        #container div.play button:hover{
+            border-color:red;
+            font-size:34px;
+            color:rgb(51, 43, 41);
+        }
+        #container div.play button.disabled:hover{
+            border:10px solid #bbb;
+            font-size:24px;
+            color:#bbb;
+        }
+        #switch{
+            position:fixed;
+            top:0px;
+            left:0px;
+            bottom:0px;
+            display:none;
+        }
+        #switch li{
+            width:200px;
+            height:30%;
+            border-radius:50%;
+            border:10px solid rgb(254, 123, 163);
+            cursor:pointer;
+        }
+        #switch li:hover{
+            background-color:rgb(254, 123, 163);
+        }
+        #switch li div{
+            width:100%;
+            height:100%;
+            text-align:center;
+            font-size:30px;
+            background-position:center;
+            background-repeat:no-repeat;
+        }
+        #result{
+            font-size:50px;
+            text-align:center;
+            width:100%;
+        }
+    </style>
+    <script type="text/javascript" src="js/tools.js"></script>
+    <script type="text/javascript">
+        // 玩家
+        function Player(nickname){
+            this.nickname = nickname; // 昵称
+            this.fist = 0; // 出拳值   0:石头   1:剪刀   2:布
+        }
+
+        // 玩家出拳
+        Player.prototype.showFist = function(fist){
+            this.fist = fist;
+        }
+
+        // 计算机
+        function Computer(nickname){
+            this.nickname = nickname; // 昵称
+            this.fist = 0; // 出拳值   0:石头   1:剪刀   2:布
+        }
+
+        // 计算机出拳
+        Computer.prototype.showFist = function(){
+            this.fist = Math.floor(Math.random() * 3);
+        }
+
+        // 平台
+        function Platform(player, computer){
+            this.player = player;
+            this.computer = computer;
+        }
+
+        // 初始化界面
+        Platform.prototype.init = function(){
+            $("#userName").innerHTML = this.player.nickname;
+            $("#compName").innerHTML = this.computer.nickname;
+
+            var that = this; // 暂存当前 Platform 对象的引用
+            // 绑定开始按钮的点击事件
+            $("#opbtn").onclick = function(){
+                that.startGame();
+            }
+
+            // 绑定玩家选择的项的点击事件
+            var lis = $("li", $("#switch"));
+            for (var i = 0, len = lis.length; i < len; i++) {
+                lis[i].index = i;
+                lis[i].onclick = function(){ // 每点击一次玩家出拳项，则表示玩家与计算机对战一次
+                    that.play(this.index); 
+                };
+            }
+        }
+
+        // 开始游戏
+        Platform.prototype.startGame = function(){
+            console.log("start")
+            /* 界面变化 */
+            // 开始按钮
+            $("#opbtn").disabled = true; // 禁用按钮
+            $("#opbtn").className = "disabled"; // 样式
+            $("#opbtn").innerHTML = "游戏中...";
+            // 显示玩家选择项
+            $("#switch").style.display = "block";
+            // 切换显示玩家与计算机头像动画
+            this.timer = setInterval(function(){
+                $(".animate")[0].className = "user animate guess" + Math.floor(Math.random() * 3);
+                $(".animate")[1].className = "computer animate guess" + Math.floor(Math.random() * 3);
+            }, 100);
+        }
+        
+        // 对战
+        Platform.prototype.play = function(fist){
+            // 玩家出拳
+            this.player.showFist(fist);
+            // 计算机出拳
+            this.computer.showFist();
+            // 显示出玩家与计算机的出拳
+            clearInterval(this.timer);
+            console.log("player:", this.player.fist, ", computer:", this.computer.fist);
+            $(".animate")[0].className = "user animate guess" + this.player.fist;
+            $(".animate")[1].className = "computer animate guess" + this.computer.fist;
+            // 比较
+            var result = this.player.fist - this.computer.fist; // 出拳值之差
+            if (result === 0) { // 平局
+                result = "平局";
+            } else if (result === -1 || result === 2) { // 玩家胜
+                result = "玩家胜";
+            } else { // 计算机胜
+                result = "计算机胜";
+            }
+
+            // 显示结果
+            $("#result").innerHTML = result;
+
+            // 界面变化
+            $("#switch").style.display = "none"; // 隐藏玩家选择项
+            $("#opbtn").disabled = false; // 启动按钮
+            $("#opbtn").className = "";
+            $("#opbtn").innerHTML = "再来一局";
+        }
+
+        var p = new Player("小明"),
+            c = new Computer("小王"),
+            pf = new Platform(p, c);
+
+        window.onload = function(){
+            pf.init(); // 初始化界面
+        }
+    </script>
+</head>
+<body>
+<div id="container">
+    <ul>
+        <li>
+            <p id="userName">我</p>
+            <div class="user animate"></div>
+        </li>
+        <li>
+            <p id="compName">电脑</p>
+            <div class="computer animate"></div>
+        </li>
+    </ul>
+    <div class="play">
+        <button id="opbtn">开&nbsp;始</button>
+        <br/><br/><br/>
+        <div id="result"></div>
+    </div>
+</div>
+<ul id="switch">
+    <li>
+        <div class="guess0">石头</div>
+    </li>
+    <li>
+        <div class="guess1">剪刀</div>
+    </li>
+    <li>
+        <div class="guess2">布</div>
+    </li>
+</ul>
+
+</body>
+</html>

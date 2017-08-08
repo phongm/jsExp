@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		body{text-align: center;}
+		canvas{background-color: #ccc;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 2;
+		ctx.arc(400, 400, 100, 0, 2*Math.PI, false);
+		ctx.stroke();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "orange";
+		ctx.arc(400, 400, 100, 0, Math.PI, true);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "#f66";
+		ctx.arc(400, 400, 100, 0, Math.PI, false);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "#f66";
+		ctx.arc(350, 400, 50, 0, 2*Math.PI, false);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "orange";
+		ctx.arc(450, 400, 50, 0, 2*Math.PI, false);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "orange";
+		ctx.arc(350, 400, 6, 0, 2*Math.PI, false);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "#f66";
+		ctx.arc(450, 400, 6, 0, 2*Math.PI, false);
+		ctx.fill();
+		ctx.closePath();
+	</script>
+</body>
+</html>

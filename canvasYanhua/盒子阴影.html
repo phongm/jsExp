@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>盒子阴影</h2>
+	<p> shadowOffsetX | shadowOffsetY | shadowBlur | shadowColor </p>
+	<p>shadowOffsetX: 水平平移距离</p>
+	<p>shadowOffsetY: 垂直平移距离</p>
+	<p>shadowBlur: 模糊的大小</p>
+	<p>shadowColor: 阴影的大小</p>
+	
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.fillStyle = "#ccc";
+		ctx.shadowOffsetX = 45;
+		ctx.shadowOffsetY = 45;
+		ctx.shadowBlur = 90;
+		ctx.shadowColor = "#000";
+		ctx.fillRect(0, 0, 700, 700);
+	</script>
+	
+</body>
+</html>

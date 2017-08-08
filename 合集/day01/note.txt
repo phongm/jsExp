@@ -1,0 +1,38 @@
+js库:
+	prototype.js
+	mooltools
+	dojo
+	extjs
+	YUI
+	jQuery
+
+使用 jQuery
+	a. 导入 JS 库
+	b. 搭建框架
+		$(document).ready(function(){});
+		或
+		$(function(){});
+
+ready() 方法：
+	a. 执行时机：在 DOM 结构加载完毕即执行 ready() 指定的函数
+	b. 可多次调用
+	c. 可简写 : $(function(){});
+
+window.onload 
+	a. 执行时机：在页面内容加载完毕
+	b. 通常调用一次
+	c. 无简写
+
+$ <==> jQuery
+
+jQuery对象    DOM 对象
+
+	jQuery 对象中通常包装的是 DOM 对象
+	jQuery 对象不能直接调用 DOM 对象的方法，同理，DOM 对象也不能直接调用 jQuery 的方法
+
+	DOM 对象 ==> jQuery 对象
+		$(dom对象)
+	jQuery 对象 ==> DOM 对象
+		jq对象[index]
+		jq对象.get(index)
+

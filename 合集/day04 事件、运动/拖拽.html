@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#container{width:800px; height:600px; border:20px solid red; margin:0 auto; position:relative;}
+		#box{width:200px; height:200px; background:#ccc; position:absolute; }
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			// #container 的盒子在文档中的绝对位置
+			var containerPositionX = $("#container").offset().left,
+				containerPositionY = $("#container").offset().top,
+				containerWidth = $("#container").outerWidth(),
+				containerHeight = $("#container").outerHeight(),
+				boxWidth = $("#box").outerWidth(),
+				boxHeight = $("#box").outerHeight();
+			// mousedown、mousemove、mouseup
+			$("#box").on("mousedown", function(event) {
+				// 获取光标按下的点距离移动的目标元素左/上边沿的距离
+				var offsetX = event.pageX - $(this).offset().left,
+					offsetY = event.pageY - $(this).offset().top;				
+				// 移动鼠标事件
+				$(document).on("mousemove", function(event){
+					// 计算定位位置
+					var _left = event.pageX - offsetX,
+						_top = event.pageY - offsetY;
+
+					if (_left < containerPositionX) // 从左边超出
+						_left = containerPositionX;
+					else if (_left > containerPositionX + containerWidth - boxWidth) // 右
+						_left = containerPositionX + containerWidth - boxWidth;
+					if (_top < containerPositionY) // 从上边超出
+						_top = containerPositionY;
+					else if (_top > containerPositionY + containerHeight - boxHeight) // 下
+						_top = containerPositionY + containerHeight - boxHeight;
+
+					console.log(_top, _left);
+
+					// 设置移动元素在文档中的绝对定位位置
+					$("#box").offset({
+						"top":_top,
+						"left":_left
+					});
+				});
+
+				// 鼠标弹起事件
+				$(document).on("mouseup", function(){
+					$(this).off();
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div id="box"></div>
+	</div>
+</body>
+</html>

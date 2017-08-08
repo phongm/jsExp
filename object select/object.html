@@ -1,0 +1,147 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>js 面向对象</title>
+<meta charset="utf-8" />
+<script src="js/tools.js"></script>
+<script>
+
+	/*var computer = {
+		screen		: "显示器",
+		mouse		: "鼠标",
+		keyboard	: "键盘",
+		center		: "主机",
+		start		: function(){
+			alert("启动计算机");
+			alert("正在启动" + this.center);
+			alert("正在启动" + this.screen);
+			alert("正在启动" + this.mouse);
+			alert("正在启动" + this.keyboard);
+			alert("计算机启动成功！");
+		},
+		shutdown	: function(){
+			alert("关闭计算机");
+			alert("正在关闭" + this.center);
+			alert("正在关闭" + this.screen);
+			alert("正在关闭" + this.mouse);
+			alert("正在关闭" + this.keyboard);
+			alert("计算机关闭成功！");
+		}	
+	}
+	function Student(name, sex){
+		this.name = name;
+		this.sex = sex;
+	}
+	var stu = new Student("lxl", 18);
+	console.dir(Student.prototype);
+	//computer.start();
+	//sleep(3000)
+	//setTimeout(computer.shutdown, 3000);
+//	computer.shutdown();
+	
+	function sleep(numberMillis){ 
+		var now = new Date(); 
+		var exitTime = now.getTime() + numberMillis; 
+		while(true){ 
+			now = new Date(); 
+			if (now.getTime() > exitTime) 
+			return; 
+		} 
+	}*/
+	
+	//面向对象编程
+	function Tab(){
+		//console.dir(Tab);
+		//console.dir(this);
+		this.selects = $("li", $("#select"));
+		this.imgs    = $("li", $("#img"));
+		this.index   = 0;   //保存正在显示的内容索引
+		
+		var that = this;
+		for(var i = 0; i < this.selects.length; i++){
+			this.selects[i].index   = i;
+			this.selects[i].onmouseover = function(){
+			that,index = this.index;
+				that.clk(this);
+			};
+		}
+	}
+	
+	Tab.prototype.clk = function(select){
+		for(var i = 0; i < this.selects.length; i++){
+			this.selects[i].className = "";
+			this.imgs[i].className = "";
+		}
+		select.className = "on";
+		this.imgs[select.index].className = "on";
+	}
+	
+	Tab.prototype.autoMove = function(){
+		//var index = 0;
+		var that = this;
+		setInterval(function(){
+			index++;
+			if(index > that.selects.length - 1)
+				index = 0;
+			that.clk(that.selects[index]);
+		}, 3000);
+	}
+	
+	
+	
+	window.onload = function(){
+		
+		
+		var tab = new Tab();
+		tab.autoMove();
+		//面向过程编程...
+		/*var aSelect = $("li", $("#select"));
+		var aImg = $("li", $("#img"));
+		console.log(aSelect);
+		for(var i = 0; i < aSelect.length; i++){
+			aSelect[i].index = i;
+			aSelect[i].onmouseover = function(){
+				for(var i = 0; i < aSelect.length; i++)
+				{
+					aSelect[i].className = "";
+					aImg[i].className = "";
+				}
+				aSelect[this.index].className = "on";
+				aImg[this.index].className = "on";
+			}
+		}
+		*/
+	}
+	
+	
+</script>
+</head>
+<body>
+	<div id="banner">
+		<ul id="select">
+			<li class="on">第一张</li>
+			<li>第二张</li>
+			<li>第三张</li>
+			<li>第四张</li>
+		</ul>
+		<ul id="img">
+			<li class="on">第一张内容</li>
+			<li>第二张内容</li>
+			<li>第三张内容</li>
+			<li>第四张内容</li>
+		</ul>
+	</div>
+</body>
+
+<style type="text/css">
+*{margin:0;padding:0;}
+ul li{list-style:none;background:#ccc; cursor:pointer;}
+#banner{position:relative;margin:100px; auto;width:600px;}
+#select{height:48px; margin-top:50px;}
+#select li{float:left;width:150px;text-align:center;line-height:48px;}
+#select .on{background:#666;}
+#img li{display:none;width:600px;height:400px;background:#f66;}
+#img .on{display:block;}
+</style>
+
+</html>

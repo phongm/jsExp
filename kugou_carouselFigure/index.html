@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+	<link rel="stylesheet" href="style/index.css">
+	<script src="js/Tween.js"></script>
+	<script src="js/time_move.js"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			var
+				aImg  = document.getElementsByTagName('img'),
+				aAttr = ['left', 'top', 'opacity', 'width', 'height', 'zIndex'],
+				oTarget = [];
+
+			// 初始化，获取每个li上面所有属性运动的属性以及值
+			for(var i=0; i < aImg.length; i++) {
+				var oAttr = {}; // 存储每个li的6个属性值
+				for(var j =0; j < aAttr.length; j++) {
+					if(aAttr[j] === 'opacity') {
+						oAttr[aAttr[j]] = parseFloat(getStyle(aImg[i], aAttr[j]) * 100);
+					} else {
+						oAttr[aAttr[j]] = parseInt(getStyle(aImg[i], aAttr[j]));
+					}					
+				}
+				oTarget.push(oAttr);
+			}
+			// 让他们动起来
+			setInterval(function () {
+				oTarget.push(oTarget.shift());
+
+				for(var i=0; i < aImg.length; i++) {-
+					timeMove(aImg[i], oTarget[i], Tween.Linear, 500);
+				}
+			}, 3000);
+
+			function getStyle(obj, sAttr) {
+				if(obj.currentStyle) {
+					return obj.currentStyle[sAttr];
+				} else {
+					return getComputedStyle(obj, null)[sAttr];
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li><a href="javascript:;"><img src="images/1.jpg" alt="" class="flash_1"></a></li>
+			<li><a href="javascript:;"><img src="images/2.jpg" alt="" class="flash_2"></a></li>
+			<li><a href="javascript:;"><img src="images/3.jpg" alt="" class="flash_3"></a></li>
+			<li><a href="javascript:;"><img src="images/4.jpg" alt="" class="flash_4"></a></li>
+			<li><a href="javascript:;"><img src="images/5.jpg" alt="" class="flash_5"></a></li>
+			<li><a href="javascript:;"><img src="images/6.jpg" alt="" class="flash_6"></a></li>
+			<li><a href="javascript:;"><img src="images/7.jpg" alt="" class="flash_7"></a></li>
+		</ul>
+	</div>
+</body>
+</html>

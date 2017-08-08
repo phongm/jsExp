@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>跨域练习</title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{background: #ccc;}
+			#searchBox{width: 640px;margin: 100px auto 0;position: relative;}
+			ul li{list-style: none;}
+			input{border: 0;outline: none;}
+			#txt{width: 524px;padding: 5px 8px;height: 30px;line-height: 30px;}
+			#submit{width: 100px;height: 40px;font-size: 16px;text-align: center;line-height: 40px;background: #999;vertical-align: bottom;}
+			#searchList{position:absolute;width: 100%;background: #fff;margin-top: 1px;}
+			#searchList li{padding: 5px 6px;}
+		</style>
+		
+	</head>
+	<body>
+		<form action="#" method="post" id="searchBox">
+			<input type="text" id="txt" /><input type="submit" id="submit" value="百度一下"/>
+			<ul id="searchList"></ul>
+		</form>
+		<script>
+			function callback(res){
+				var oNew = "";
+				for(var i = 0; i < res.s.length; i++)
+				{
+					oNew += "<li>"+res.s[i]+"</li>";
+					
+				}
+				var oList = $("searchList");
+				
+				oList.innerHTML = oNew;
+				console.log(oList);
+			}
+			window.onload = function(){
+				var oForm = $(searchBox)
+				var oSearch = $("txt");
+				
+				oSearch.oninput = oSearch.onpropertychange = function(){
+					if(this.value !== "")
+					{
+						var oScript = document.createElement("script");
+						oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + this.value + '&json=1&p=3&req=2&cb=callback&_=' + new Date().getTime();
+						document.body.appendChild(oScript);
+					}else{
+						$('searchList').innerHTML = '';
+					}
+				}
+			}
+			function $(id){
+				return document.getElementById(id);
+			}
+		</script>
+	</body>
+</html>

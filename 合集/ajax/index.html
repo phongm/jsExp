@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script type="text/javascript" src="js/ajax1.js"></script>
+	<script>
+	window.onload = function(){
+		 var oBtn = $('btn');
+		// //创建ajax对象
+		// var xhr = new XMLHttpRequest();			//非IE6
+		// var xhr = new ActiveXObject("Micosoft.XMLHTTP");	//ie6
+		/*	//解决兼容性问题
+		var xhr = null;
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else{
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		//连接到服务器
+		//open(方法，地址，是否异步)
+		xhr.open('get','../data/json1.json',true);//ie缓存很严重
+		//发送请求
+		xhr.send();
+		//接受返回数据
+		xhr.onreadystatechange = function(){
+			//onreadystate事件的作用是监听浏览器和服务器进行到哪一步了，我们关心的是4表示交互过程已经完成
+			if(xhr.readyState == 4 ){
+				if(xhr.status == 200){
+					var obj = JSON.parse(xhr.responseText);
+					console.log(obj);
+					console.log(obj);
+				}else{
+
+				}
+				
+		}
+		*/
+		oBtn.onclick = function(){
+			var options = {
+				method:'get',
+				url:'http://apis.baidu.com/netpopo/idcard/city2code',
+				isAsync:'',
+				data:{"city": "成都","apikey": "5292d6abaf0ec95c2b7924551e50668f"},
+				success:function(data){
+					var obj = JSON.parse(data);
+					console.log(obj);
+				},
+				error: function(xhr){
+					alert("发生错误："+xhr.status);
+				}	
+			}
+			ajax(options);
+		}
+	}
+	function $(id){
+		return document.getElementById(id);
+	}
+	//get和post的区别
+	//get传输数据时，数据跟着URL后面以?key=value&key2=value2
+	</script>
+</head>
+<body>
+	asfdorgjsdgrgflgjsalfj
+	<input type="button" id="btn" value="点击">
+</body>
+</html>

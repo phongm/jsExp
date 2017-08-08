@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>委托时间</title>
+		
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			ul li{list-style: none;}
+			a{text-decoration: none;}
+			.content{position:relative;width: 200px; overflow: hidden; padding: 10px;margin: 100px auto;background: #ccc;border: 2px solid #3E3E3E;}
+			#add_news{position: absolute;right: 20px; top: 20px;cursor: pointer;}
+			#news_list{margin-top: 40px;padding: 10px;}
+			#news_list li{line-height: 24px;}
+			#news_list span{float: right;cursor: pointer;}
+			#news_list a{color: #fff;}
+		</style>
+		<script>
+			window.onload = function(){ 
+				var oAddNews = document.getElementById("add_news");
+				var oNewsList = document.getElementById("news_list");
+				var oNewsListLi = oNewsList.getElementsByTagName("LI");
+				var oDel = oNewsList.getElementsByClassName("SPAN");
+				console.dir(oDel);
+				var iCount = oNewsListLi.length;
+				
+				oAddNews.onclick = function(){
+					var oNewLi = document.createElement("li");
+					oNewLi.innerHTML = "<span>&times;</span>" + "<a href='#'>这是第" +  ++iCount + "条新闻"+"</a>";
+					oNewsList.appendChild(oNewLi);
+				}
+				oNewsList.onclick = function(ev){
+					var ev = ev || window.event;
+					var oTarget = ev.srcElement || ev.target;
+					
+					if(oTarget.nodeName == "SPAN")
+					{
+						iCount--;
+						oNewsList.removeChild(oTarget.parentNode);
+					}
+				}
+				
+			}	
+		</script>
+	</head>
+	<body>
+		<div class="content">
+			<button id="add_news">添加新闻</button>
+			<ul id="news_list">
+				<li><span>&times;</span><a href="#">这是第1条新闻</a></li>
+				<li><span>&times;</span><a href="#">这是第2条新闻</a></li>
+				<li><span>&times;</span><a href="#">这是第3条新闻</a></li>
+				<li><span>&times;</span><a href="#">这是第4条新闻</a></li>
+				<li><span>&times;</span><a href="#">这是第5条新闻</a></li>
+			</ul>
+		</div>
+	</body>
+</html>

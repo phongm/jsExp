@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+	<style type="text/css">
+		* {margin: 0;padding: 0;}
+		ul {list-style: none;}
+		img{vertical-align: bottom;}
+		#box {position: relative;margin: 0 auto;}
+		#box .panel {position: absolute;}
+		#box img {margin: 10px;padding: 10px;width: 200px;border-radius: 5px;box-shadow: 0 0 8px #ccc;background: #fff;}
+		.load{position:fixed; bottom:10px; display:none;}
+		.load img{width:20px;height: 20px;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		// ready() : 是在 DOM 结构加载结束就执行，DOM 结构加载结束不代表页面内容加载结束
+		$(function(){
+			$(window).on("load", function(){
+				var containerWidth = $("#box").width(), // 外层容器宽度
+					$divs = $("#box div"), // 页面中已有的所有小图片盒子
+					imgWidth = $divs.eq(0).outerWidth(), // 每个图片盒子的宽度
+					cols = Math.floor(containerWidth / imgWidth), // 一行中放置的列数
+					spacing = (containerWidth - imgWidth * cols) / (cols + 1), // 水平间距
+					html = "", // html 标签字符串
+					position = []; // 保存各列的高度的数组
+
+				//初始化盒子的宽度
+				$("#box").width(cols * imgWidth);
+				//初始化每张图的位置
+				$divs.each(function(index, element){
+					//console.log(index, element);
+					if(index < cols){ //第一排一次排列，用数组保存高度
+						$(element).css({left : index*imgWidth});
+						position.push($(element).outerHeight(true));
+					}else{//第二排开始找最低高度 一次排列，同时更新高度数组
+						var minHeightIndex = $.inArray(Math.min.apply(null, position), position);
+						$(element).css({
+							left : minHeightIndex * imgWidth,
+							top  : position[minHeightIndex]
+						});
+						position[minHeightIndex] += $(element).outerHeight(true);
+					}
+				});
+
+				// 为 window 绑定 scroll 事件
+				var winHeight = $(window).height(), winWidth = $(window).width(), loading = false;
+				$(window).on("scroll", function(){
+					// 滚动距离
+					var scrollTop = $(this).scrollTop();
+					// 最短列的高度
+					var shortest = Math.min.apply(null, position);
+					// 判断是否到达临界点
+					if (!loading && scrollTop + winHeight > shortest){
+						loading = true;
+						$(".load").show();
+						$.ajax({
+							type: "get",
+							url : "http://apis.baidu.com/txapi/mvtp/meinv",
+							dataType : "json",
+							headers : {apikey : "2c6d2927ef76200697018e989f6afbbb"},
+							data : {num : 20},
+							success : function(data){
+								html = "";
+								$.each(data.newslist, function(index, element){
+									html += "<div class='panel'><img src='"+element.picUrl+"'></div>";
+								});
+								$(html).each(function(index, element){
+									// 在图片内容加载完毕后，再将图片盒子添加到最短列中
+									//console.log($(this));
+									$(this).children('img').on("load", function(){
+										// 求最短列的索引
+										var shortestIndex = $.inArray(Math.min.apply(null, position), position);
+										$(element).css({
+											left : (winWidth - imgWidth) / 2,
+											top  : winHeight + scrollTop
+										}).appendTo("#box").animate({
+											left : shortestIndex * imgWidth,
+											top  : position[shortestIndex]
+										});
+										// 重新计算数组元素值
+										position[shortestIndex] += $(element).outerHeight(true);
+									});
+								});
+								loading = false;
+								$(".load").hide();
+							}
+						});
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div class="panel"><img src="images/1.jpg" alt=""></div>
+		<div class="panel"><img src="images/2.jpg" alt=""></div>
+		<div class="panel"><img src="images/3.jpg" alt=""></div>
+		<div class="panel"><img src="images/4.jpg" alt=""></div>
+		<div class="panel"><img src="images/5.jpg" alt=""></div>
+		<div class="panel"><img src="images/6.jpg" alt=""></div>
+		<div class="panel"><img src="images/7.jpg" alt=""></div>
+		<div class="panel"><img src="images/8.jpg" alt=""></div>
+		<div class="panel"><img src="images/9.jpg" alt=""></div>
+		<div class="panel"><img src="images/10.jpg" alt=""></div>
+		<div class="panel"><img src="images/11.jpg" alt=""></div>
+		<div class="panel"><img src="images/12.jpg" alt=""></div>
+		<div class="panel"><img src="images/13.jpg" alt=""></div>
+		<div class="panel"><img src="images/14.jpg" alt=""></div>
+		<div class="panel"><img src="images/15.jpg" alt=""></div>
+		<div class="panel"><img src="images/16.jpg" alt=""></div>
+		<div class="panel"><img src="images/17.jpg" alt=""></div>
+		<div class="panel"><img src="images/18.jpg" alt=""></div>
+		<div class="panel"><img src="images/19.jpg" alt=""></div>
+		<div class="panel"><img src="images/20.jpg" alt=""></div>
+	</div>
+	<div class="load"><img src="images/load.gif"></div>
+</body>
+</html>

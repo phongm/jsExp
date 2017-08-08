@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>轮播图效果</title>
+		<style type="text/css">
+			* {margin:0; padding:0;}
+			#banner{width:800px; height:400px; position:relative; margin:0 auto; border:10px solid #f66; overflow:hidden;}
+			#img_list{list-style:none; position:absolute;}
+			#img_list li{width:800px; height:400px; float:left;}
+			#num_list {width:100%; height:20px; padding:5px 0px; position:absolute; bottom:0; background:black;}
+			#num_list div {width:20px; height:20px; border-radius:10px; margin-left:10px; background:white; float:left;}
+			#num_list div.on {background:red;}
+			#prev, #next { width:45px; height:100px;background:#000; cursor: pointer; opacity:0.6; position:absolute; top:0; bottom:0; margin:auto 0;}
+			#next {right:0; background-position:top right;}
+		</style>
+		
+		
+		<script>
+			
+			window.onload = function(){
+				var 
+					lis = $("li", $("#img_list")),       //轮播图片获取
+					len = lis.length,					 //轮播图片长度
+					liWidth = lis[0].offsetWidth,		 //轮播单张图片宽度
+					index = 2,							 //轮播下一张索引
+					timer = null,						 //轮播计时器
+					circles = null,						 //获取小圆点
+					first = lis[0].cloneNode(true),      //克隆第一张图片
+					last = lis[len-1].cloneNode(true),	 //克隆最后一张图片
+					isMoving = false;				  	 //判断是否是否正在运动
+					
+				//将克隆的第一张和最后一张图片分别添加到最后和最前
+				$("#img_list").appendChild(first);
+				$("#img_list").insertBefore(last, lis[0]);
+				//更新长度
+				len += 2;
+				// 初始化图片盒子的长度：liWidth*len
+				$("#img_list").style.width = liWidth * len + "px";
+				//初始化显示位置
+				$("#img_list").style.left = -liWidth + "px";
+				//动态添加小圆点
+				for(var i = 0; i < len - 2; i ++){
+					var _div = document.createElement("div");
+					if(i === 0)
+						_div.className = "on";
+					$("#num_list").appendChild(_div);
+					_div.index = i;
+					_div.onmouseover = function(){
+						clearInterval(timer);
+						index = this.index + 1;
+						autoMove();
+						timer = setInterval(autoMove, 3000);
+					}
+				}
+				//获取小圆点
+				circles = $("div", $("#num_list"));
+				//自动轮播
+				timer = setInterval(autoMove, 3000);
+				$("#prev").onclick = function(){
+					if(!isMoving){
+						clearInterval(timer);
+						index -= 2;
+						autoMove();
+						timer = setInterval(autoMove, 3000);
+					}
+				}
+				$("#next").onclick = function(){
+					if(!isMoving){
+						clearInterval(timer);
+						autoMove();
+						timer = setInterval(autoMove, 3000);
+					}
+				}
+				
+				function autoMove(){
+					isMoving = true;				//更新运动状态
+					var _left = -index * liWidth;	//计算ul的left位置
+					var circleIndex = index === 0 ? len - 3 :(index === len - 1 ? 0 : index - 1);
+					//更新 小圆点的显示状态
+					for(var i = 0; i < len - 2; i++){
+						circles[i].className = "";
+					}
+					circles[circleIndex].className = "on";
+					//更新下一张图片的索引
+					index++;
+					animate($("#img_list"), {left: _left}, 1000, function(){
+						//越界判断
+						if(index === len){
+							$("#img_list").style.left = -liWidth + "px";
+							index = 2;
+						}else if(index === 1){
+							$("#img_list").style.left = -liWidth * (len - 2) + "px";
+							index = len - 1;
+						}
+						//运动结束，更新运动状态
+						isMoving = false;
+					});
+				}
+			}
+		function $(param, obj){ // "#box"   ".style"    "div"
+			obj = obj || document;
+			if (param.indexOf("#") === 0) // id
+				return document.getElementById(param.substring(1));
+			if (param.indexOf(".") === 0) // class
+				return getByClass(param.substring(1), obj);
+			return obj.getElementsByTagName(param); // tag
+		}
+
+		// 根据类名查找元素
+		function getByClass(className, obj) {
+			obj = obj || document;
+			if (obj.getElementsByClassName)
+				return obj.getElementsByClassName(className);
+
+			// 保存根据类名查找到的 DOM 元素的数组
+			var result = [];
+			// 查找出所有的DOM元素
+			var objs = obj.getElementsByTagName("*");
+			// 遍历所有的 DOM 元素
+			for (var i = 0, len = objs.length; i < len; i++) {
+				// 获取到当前遍历的 DOM 元素所使用的所有类名
+				var classNames = objs[i].className.split(" ");
+				// 遍历所有的类名
+				for (var j = 0, length = classNames.length; j < length; j++) {
+					if (classNames[j] === className) { // 说明当前遍历的 DOM 元素使用过 className 的类样式
+						result.push(objs[i]);
+						break;
+					} 
+				}
+			}
+			// 返回查找到的 DOM 元素数组
+			return result;
+		}
+		function getStyle(obj, attr){
+			if(obj.currentStyle)
+				return obj.currentStyle[attr];
+			return getComputedStyle(obj, null)[attr];
+		}
+		function animate(element, target, speed, fn) {
+			speed = speed || 400;
+			// 停止 element 元素上已有的运动
+			clearInterval(element.timer);
+			// start : 保存各属性的运动初始值; range : 各属性运动的区间值; startTime : 开始时间
+			var start = {}, range = {}, startTime = +new Date();
+			// 初始化start 与 range
+			for (var attr in target) {
+				start[attr] = parseInt(getStyle(element, attr)) || 0;
+				range[attr] = target[attr] - start[attr];
+			}
+
+			// 运动
+			element.timer = setInterval(function(){
+				// 计算时间差（运动了多少时间了）
+				var elapse = Math.min(+new Date() - startTime, speed);
+				// 遍历 target 所有属性
+				for (var attr in target) {
+					var result = range[attr] / speed * elapse + start[attr]; // 计算运动值
+					element.style[attr] = attr === "opacity" ? result : result + "px";
+					if (attr === "opacity")
+						element.style.filter = "alpha(opacity="+parseInt(result * 100)+")";
+				}
+				// 运动结束则停止计时
+				if (elapse === speed){
+					clearInterval(element.timer);
+					fn && fn();
+				}
+			}, 10);
+		}
+		</script>
+	</head>
+	<body>
+		<div id="banner">
+			<ul id="img_list">
+				<li><a href="#"><img src="img/Chrysanthemum.jpg"/></a></li>
+				<li><a href="#"><img src="img/Desert.jpg"/></a></li>
+				<li><a href="#"><img src="img/Hydrangeas.jpg"/></a></li>
+				<li><a href="#"><img src="img/Jellyfish.jpg"/></a></li>
+				<li><a href="#"><img src="img/Lighthouse.jpg"/></a></li>
+				<li><a href="#"><img src="img/Penguins.jpg"/></a></li>
+				<li><a href="#"><img src="img/Tulips.jpg"/></a></li>
+				<li><a href="#"><img src="img/Koala.jpg"/></a></li>
+			</ul>
+			<ul id="num_list">			
+			</ul>
+			<a id="prev"></a>
+			<a id="next"></a>
+		</div>
+	</body>
+</html>

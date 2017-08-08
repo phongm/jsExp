@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>建议提示</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#info").keyup(function(){
+				var _info = $(this).val();
+
+				// jsonp 跨域
+				$.getJSON(
+					"http://10.7.157.66:8080/api/suggest.do?word="+_info + "&callback=?",
+					function(json){
+						var array = json.data;
+						$("#suggest").empty();
+						$.each(array, function(index, element){
+							$("#suggest").append("<div>"+ element +"</div>");
+						});
+					}
+				);
+
+				/*$.get(
+					"http://10.7.157.66:8080/api/suggest.do",
+					"word=" + _info,
+					function(data){
+						console.log(data);
+					}
+				);*/
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="text" id="info">
+	<div id="suggest"></div>
+</body>
+</html>

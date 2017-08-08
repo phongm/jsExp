@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>渐性渐变</h2>
+	<p>createLinearGradient(x1, y1, x2, y2)</p>
+	<p>x1, y1: 起始坐标</p>
+	<p>x2, y2: 终点坐标</p>
+	<p>addColorStop(p, color)</p>
+	<p>p: 位置(0 - 1)</p>
+	<p>color: 渐变颜色</p>
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var lg = ctx.createLinearGradient(0, 0, 0, 100);
+		lg.addColorStop(0.3, "pink");
+		lg.addColorStop(0.5, "orange");
+		lg.addColorStop(0.7, "#f66");
+		lg.addColorStop(1, "red");
+		ctx.fillStyle = lg;
+		ctx.fillRect(0,0,100,100);
+	</script>
+</body>
+</html>

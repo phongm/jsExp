@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+	<style>
+		div{
+			width:300px;
+			height:100px;
+			background:red;
+			margin-top:10px;
+		}
+	</style>
+	<script src ="js/tools.js"></script>
+	<script>
+		window.onload = function(){
+			var divs = $("div");
+			for(var i = 0;i<divs.length;i++){
+				divs[i].index = i;
+				console.log(divs[i].index);
+				divs[i].onclick = function(){
+					alert("dianjile" + (this.index+1));
+				}
+				// divs[i].onclick = clk(i);
+			}
+		}
+		// function clk(num){
+		// 	return function(){
+		// 		alert(num+1);
+		// 	}
+			
+		// }
+	</script>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+</html>

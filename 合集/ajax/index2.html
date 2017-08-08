@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index2</title>
+	<script type="text/javascript" src= "js/ajax1.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oBtn = $('btn');
+			var form = $('form');
+			form.onsubmit = function(evt){
+				var userName = $('userName').value;
+				ajax({
+					method: 'get',
+					url: 'http://10.7.163.64/data/user_get.php',
+					isAsync: true,
+					data: {"username":userName},
+					success: function(data){
+
+						var obj = JSON.parse(data);
+						if(obj.status===1){
+							var pwd = $('pwd').value;
+							ajax({
+								method:'post',
+								url: 'http://10.7.163.64/data/user_post.php',
+								isAsync: true,
+								data:{"username":userName,"password":pwd},
+								success: function(data){
+									//var o = JSON.parse(data);
+									alert("注册成功");
+								},
+								error: function(data){
+									alert("注册失败");
+								}
+							});
+
+						}else{
+							alert("用户名已经注册");
+						}
+					},
+					error: function(data){
+						// var o = JSON.parse(data);
+						// alert("发生错误："+o.status );
+						alert(data);
+					}
+				})
+				// var e = evt || window.event;
+				// e.preventDefault();
+				return false;
+			}
+			/*var oBtn = $("btn");
+			var form = $("form");
+			form.onsubmit = function(){
+				var userName = $('userName').value;
+				var xhr = null;
+				if(window.XMLHttpRequest){
+					xhr = new XMLHttpRequest();
+				}else{
+					xhr = new ActiveXObject('Microsoft.XMLHTTP');
+				}
+				xhr.open('get','http://10.7.163.64/data/user_get.php?username='+encodeURIComponent(userName),true);
+				xhr.send();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(xhr.status==200){
+							//var obj = eval("("+xhr.responseText+")");//不推荐这种方法。性能不好
+							var obj = JSON.parse(xhr.responseText)
+							//console.log(xhr.responseText);
+							//console.log(typeof xhr.responseText);
+							//console.log(obj.status);
+							// if(xhr.responseText.status=0){
+							// 	alert("用户名已经注册");
+							// }
+							if(obj.status==1){
+								var passWord = $('pwd').value;
+								var xhr1 = null;
+								if(window.XMLHttpRequest){
+									xhr1 = new XMLHttpRequest();
+								}else{
+									xhr1 = new ActiveXObject('Microsoft.XMLHTTP');
+								}
+								xhr1.open('post','http://10.7.163.64/data/user_post.php',true);
+								xhr1.setRequestHeader('content-Type','application/x-www-form-urlencoded');
+								xhr1.send('username='+encodeURIComponent(userName)+'&password='+encodeURIComponent(passWord));
+								xhr1.onreadystatechange = function(){
+									if(xhr1.readyState==4){
+										if(xhr.status==200){
+											console.log(xhr1.responseText);
+											alert("注册成功");
+										}else{
+											alert("注册失败");
+										}
+									}
+								}
+							}else{
+								alert("用户名已经注册");
+							}
+						}else{
+							alert("出现错误："+xhr.status)	
+						}
+						
+					}
+				}
+				return false;
+			}*/
+
+		}
+		function $(id){
+			return document.getElementById(id);
+		}
+	</script>
+
+</head>
+<body>
+	<form id="form">
+		用户名：<input type="text" id="userName">
+		密码：<input type="password" id="pwd">
+		<input type="submit" id="btn" value="提交">
+	</form>
+</body>
+</html>

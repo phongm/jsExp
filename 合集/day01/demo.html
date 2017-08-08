@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			alert("in load");
+		}
+
+		jQuery(document).ready(function(){
+			alert("in ready");
+		});
+
+		$(document).ready(function(){
+			alert("in ready2...");
+		});
+
+		$(function(){ // $(document).ready(); 的简写
+			alert("in ready3.......")
+		});
+
+		window.onload = function(){
+			alert("in load2....")
+		}
+	</script>
+</head>
+<body>
+</body>
+</html>

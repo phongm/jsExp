@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		var arr = [1, 2, 1, 5, 3, 85, 76, 22, 38, 39, 51, -1, 81];
+
+		// var min = Math.max(arr);
+		// alert(min);
+		// 如果 apply()/call() 的第一个参数为 null，
+		// 则表示在所调用的函数中的 this 指向全局对象
+		// 在浏览器中，通常就指 window
+		var min = Math.max.apply(null, arr);
+		alert(min);
+
+		// 设计模式
+		// 单例、MVC、工厂、装饰者、门面   GOF设计模式
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

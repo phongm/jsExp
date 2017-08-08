@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	ul,li{
+		list-style: none;
+	}
+	#container{
+		width: 1024px;
+		margin: 0 auto;
+	}
+	#container .list{
+		float:left;
+		width: 250px;
+		padding: 3px;
+	}
+	</style>
+	<meta charset="UTF-8">
+	<title>waterfall</title>
+	<script type="text/javascript" src="js/ajax1.js"></script>
+	<script type="text/javascript">
+	var page = 1;	//用于记录加载到几页了
+	window.onload = function(){
+		
+		getWaterfall();
+	}
+	window.onscroll = function(){
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+		if(scrollTop +clientHeight>=getMinHeightIndex()[1]){
+			if(page!=10){
+				page++;		//滚动到一定距离，就加载下一页数据
+			}
+			console.log(page);
+			getWaterfall();
+		}
+	}
+
+
+	function $(id){
+		return document.getElementById(id);
+	}
+
+	function getMinHeightIndex(){
+		var lists = document.getElementsByClassName('list');
+		var arr=[];//存放每一列的高度
+		var result = [];
+		var minIndex = 0;
+		for(var i=0;i<lists.length;i++){
+			var imgs = lists[i].children;
+			var sumHeight=0;
+			for(var j=0;j<imgs.length;j++){
+				sumHeight += parseInt(getStyle(imgs[j],"height") );
+			}
+			arr.push(sumHeight); 
+		}
+		//console.log(arr);
+		var minHeight = arr[0];
+		for(var i=1;i<arr.length;i++){
+			if(minHeight>arr[i]){
+				minHeight = arr[i];
+				minIndex = i;
+			}
+		}
+		result = [minIndex,minHeight];
+		return result;
+	}
+	//封装getStyle函数
+	function getStyle(obj,sAttr){
+		if(window.getComputedStyle){
+			return getComputedStyle(obj,null)[sAttr];
+		}else{
+			return obj.currentStyle[sAttr];
+		}
+	}
+	//封装瀑布流获取新数据的函数
+	function getWaterfall(){
+		ajax({
+			method: 'get',
+			url: "../data/json"+page+".json",	//在实际项目中，page需要我们以参数的方式传入
+			isAsync: true,
+			//data: '',
+			success: function(data){
+				var result= JSON.parse(data);
+				//console.log(result);
+				var lists = document.getElementsByClassName('list');
+				for(var i=0; i<result.length; i++){
+					var oImg = document.createElement('img');
+					oImg.src = result[i].src;
+					oImg.style.height = result[i].height;
+					oImg.alt = result[i].alt;
+					oImg.style.width = "250px";
+					var index = getMinHeightIndex()[0];
+					//console.log(index);
+					lists[index].appendChild(oImg);
+				}
+			},
+			error: function(data){
+				var result= JSON.parse(data);
+				alert("发生错误："+ result.status);
+			}
+		});
+	}
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div class="list"></div>
+		<div class="list"></div>
+		<div class="list"></div>
+		<div class="list"></div>
+	</div>
+</body>
+</html>

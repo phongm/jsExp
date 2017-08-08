@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.nav {list-style:none;}
+		li {width:100px; height:30px; line-height:30px; margin-top:2px; background:red;}
+		li div {width:200px; height:200px; border:1px solid; display:none; margin-left:100px; margin-top:-30px;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("li").hover(function() {
+				$(this).children('div').show();
+			}, function() {
+				$(this).children('div').hide();
+			});
+		})
+	</script>
+</head>
+<body>
+	<div id="container">
+		<ul class="nav">
+			<li>家用电器
+				<div>家用电器二级导航</div>
+			</li>
+			<li>电脑
+				<div>电脑二级导航</div>
+			</li>
+			<li>手机
+				<div>手机二级导航</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

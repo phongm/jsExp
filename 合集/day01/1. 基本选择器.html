@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>选择器测试</title>
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <script src="js/jquery-1.12.4.min.js"></script>
+ <script>
+ 	$(function(){
+ 		$("#btn1").on("click",function(){
+ 			$("#one").css("background","red");
+ 		});
+ 		$("#btn2").on("click",function(){
+ 			$(".mini").css("background","red");
+ 		});
+ 		$("#btn3").on("click",function(){
+ 			$("div").css("background","red");
+ 		});
+ 		$("#btn4").on("click",function(){
+ 			$("*").css("background","red");
+ 		});
+ 		$("#btn5").on("click",function(){
+ 			$("span,#two").css("background","red");
+ 		});
+ 	});
+</script>
+</head>
+<body>
+
+<h3>基本选择器.</h3>
+
+<!-- 控制按钮 -->
+<input type="button" value="选择 id为 one 的元素." id="btn1"/>  
+<input type="button" value="选择 class 为 mini 的所有元素." id="btn2"/>
+<input type="button" value="选择 元素名是 div 的所有元素." id="btn3"/>
+<input type="button" value="选择 所有的元素." id="btn4"/>
+<input type="button" value="选择 所有的span元素和id为two的元素." id="btn5"/>
+
+<br /><br />
+
+<!-- 测试的元素 -->
+<div class="one" id="one" >
+	id为one,class为one的div
+	<div class="mini">class为mini</div>
+</div>
+
+<div class="one"  id="two" title="test" >
+	id为two,class为one,title为test的div.
+	<div class="mini"  title="other">class为mini,title为other</div>
+	<div class="mini"  title="test">class为mini,title为test</div>
+</div>
+
+<div class="one">
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini"></div>
+</div>
+
+<div class="one">
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini">class为mini</div>
+	<div class="mini"  title="tesst">class为mini,title为tesst</div>
+</div>
+
+
+<div style="display:none;"  class="none">
+	style的display为"none"的div
+</div>
+
+<div class="hide">class为"hide"的div</div>
+
+<div>
+	包含input的type为"hidden"的div<input type="hidden" size="8"/>
+</div>
+
+<span id="mover">id为"mover"的span元素.</span>
+
+</body>
+</html>

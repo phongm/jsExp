@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#box {width:200px; height:200px; background:red; position:absolute; top:50px;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").click(function() {
+				/*$("#box").show(10000, function(){
+					console.log("show");
+				}); // width、height、opacity*/
+				// $("#box").hide(1000);
+
+				// $("#box").slideUp(10000); // height
+				// $("#box").slideDown(10000);
+				// $("#box").slideToggle();
+
+				// $("#box").fadeIn(5000); // opacity
+				// $("#box").fadeOut(5000);
+				// $("#box").fadeToggle(5000);
+				// $("#box").fadeTo(5000, 0.3);
+
+				// 运动队列
+
+				/*$("#box").animate({
+					"top":300,
+					"left":500,
+					"width":500,
+					"height":50
+				}, 5000).animate({
+					"top":100
+				}, 2000);*/
+
+				/*$("#box").hover(function(){
+					$(this).stop().animate({width:500}, 5000);
+				}, function(){
+					$(this).stop().animate({width:200}, 5000);
+				});*/
+
+				$("#box").animate({width:500}, 2000).delay(5000).animate({height:500}, 2000);
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<div id="box"></div>
+</body>
+</html>

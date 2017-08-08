@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0; padding:0;}
+		a{text-decoration: none;color: #666;}
+		table{border-collapse: collapse;margin: 100px auto;}
+		td{border: 1px solid #ccc;text-align: center;width: 120px;line-height: 24px;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#tab a").click(function(){
+				//获取到商品的id，name，price
+				var $tr = $(this).parents("tr");
+				var product = {
+					id : $tr.children(".id").text(),
+					name : $tr.children(".name").text(),
+					price : $tr.children(".price").text(),
+					amount : 1
+				};
+				//将创建的商品对象保存到数组中，再保存回cookie
+				$.cookie.json =  true;
+				//先从cookie中读取数组
+				var products = $.cookie("products");
+				//判断是否读取到数组
+				if(!products){
+					//没有读取到数据，说明第一次访问
+					products = [];
+				}
+				//将当前添加到购物车的商品保存到数组
+				//判断是否存在相同商品
+				var index = findIndex(product.id, products);
+				if(index === -1){
+					//不存在相同商品时直接加入
+					products.push(product);
+				}else{
+					products[index].amount++;
+				}
+				//将数组保存回cookie中
+				$.cookie("products", products, {expires:7, path:"/"});
+				console.log(products);
+			});
+
+			function findIndex(index, array){
+				for(var i = 0; i < array.length; i++){
+					if(index === array[i].id){
+						return i;
+					}
+				}
+				return -1;
+			}
+		});
+	</script>
+</head>
+<body>
+	<table id="tab">
+		<tr>
+			<td>序号</td>
+			<td>商品名称</td>
+			<td>单价</td>
+			<td>操作</td>
+		</tr>
+		<tr>
+			<td class="id">1</td>
+			<td class="name">笔记本电脑</td>
+			<td class="price">4999</td>
+			<td><a href="javascript:;">添加到购物车</a></td>
+		</tr>
+		<tr>
+			<td class="id">2</td>
+			<td class="name">手机</td>
+			<td class="price">1999</td>
+			<td><a href="javascript:;">添加到购物车</a></td>
+		</tr>
+		<tr>
+			<td class="id">3</td>
+			<td class="name">单反相机</td>
+			<td class="price">3888</td>
+			<td><a href="javascript:;">添加到购物车</a></td>
+		</tr>
+		<tr>
+			<td class="id">4</td>
+			<td class="name">平板</td>
+			<td class="price">2888</td>
+			<td><a href="javascript:;">添加到购物车</a></td>
+		</tr>
+	</table>
+	<a href="shopcar.html">查看我的购物车</a>
+</body>
+</html>

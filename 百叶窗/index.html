@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>图片移动</title>
+<script type="text/javascript" src="js/move.js">
+	
+</script>
+<style>
+	*{margin:0;padding:0;}
+	.content{background:#eee;padding: 10px;}
+	ul{width: 1100px;height: 320px;list-style: none;position:relative;overflow: hidden;margin: 0 auto;}
+	ul li{height: 320px;width: 600px;position: absolute;}
+	ul li img{width:100%;height:100%;}
+</style>
+<script>
+	
+	//
+	window.onload = function()
+	{
+		var aLi = document.getElementsByTagName("li");
+		
+		for(var i = 0; i < aLi.length; i++)
+		{
+			if(i === 0)
+			{
+				aLi[i].style.left = "0px";
+			}
+			else
+			{
+				aLi[i].style.left = (i - 1) * 100 + 600 + "px";
+			}
+			aLi[i].index = i;
+			
+			aLi[i].onmouseover = function() {
+				for(var j = 0; j < aLi.length; j++)
+				{
+					if(j <= this.index)
+					{					
+						move(aLi[j],{left:j * 100});
+						console.log(this);
+					}
+					else
+					{
+						move(aLi[j],{left:j * 100 + 500});
+						console.log(this);
+					}
+				}
+			}
+		}
+	}
+	
+/*	function move(obj, oTarget, fn) {
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function () {
+			var bBtn = true; // 默认运动完毕
+			for(var sAttr in oTarget) {
+				// 获取当前值
+				if(sAttr === 'opacity') {
+					var iCur = parseFloat(getStyle(obj, sAttr)*100);
+				} else {
+					var iCur = parseInt(getStyle(obj, sAttr));
+					console.log(iCur);
+				}
+				var iSpeed = (oTarget[sAttr] - iCur)/8;
+				iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+				// 每执行一次的目标值
+				var iTarget = iCur+iSpeed;
+
+				// 做浏览器的兼容性
+				if(sAttr === 'opacity') {
+					obj.style.filter = 'alpha(opacity=' + iTarget + ')';
+					obj.style.opacity = iTarget/100;
+				} else {
+					obj.style[sAttr] = iCur+iSpeed + 'px';
+				}
+				if(iCur+iSpeed !== oTarget[sAttr]) {
+					bBtn = false;
+				}
+			}
+			// 判断所有属性是否执行完毕，清除计时器
+			if(bBtn) {
+				clearInterval(obj.timer);
+				// 执行回调函数
+				if(fn) {
+					fn();
+				}
+			}
+		},50);
+	}
+	function getStyle(obj, sAttr){
+		if(obj.currentStyle)
+		{
+			return obj.currentStyle(sAttr);
+		}
+		else
+		{
+			return getComputedStyle(obj, null)[sAttr];
+		}		
+	}
+*/		
+	
+</script>
+</head>
+<body>
+	<div class="content">
+		<ul>
+			<li><img src="img/move_1.jpg"></li>
+			<li><img src="img/move_2.jpg"></li>
+			<li><img src="img/move_3.jpg"></li>
+			<li><img src="img/move_4.jpg"></li>
+			<li><img src="img/move_5.jpg"></li>
+			<li><img src="img/move_6.jpg"></li>
+		</ul>
+	</div>
+</body>
+</html>

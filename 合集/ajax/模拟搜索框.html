@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#box{
+			width: 300px;
+			position: relative;
+			margin: 20px auto;
+		}
+		#box input{
+			width: 300px;
+			height: 40px;
+			padding: 5px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-size: 16px;
+		}
+		#box div{
+			width: 312px;
+			position: absolute;
+			left: 0;
+			top: 54px;
+			border: 1px solid #aaa;
+			border-top: 0;
+			border-bottom: 0;
+		}
+		#box div ul li{
+			list-style: none;
+			padding: 8px;
+			color: gray;
+			border-bottom: 1px solid gray;
+			cursor: pointer;
+		}
+	</style>
+
+	<meta charset="UTF-8">
+	<title>模拟搜索框</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		var searchInput = $('searchInput');
+		var tip 		= $('tip');
+		var tipList 	= $('tipList');
+		//创建script标签
+		searchInput.onkeyup  =  function(){
+			var oScript = document.createElement('script');
+			oScript.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+searchInput.value+"&json=1&p=3&cb=test&t";
+			document.body.appendChild(oScript);
+		}
+	}
+	function test(data){
+		var tip = $('tip');
+		var tipList 	= $('tipList');
+		console.log(data);
+		console.log(data.s[0]);
+		var s = data.s;
+		tipList.innerHTML = "";
+		for(var i in s){
+			var oLi = document.createElement('li');
+			oLi.innerHTML = s[i];	
+			tipList.appendChild(oLi);
+			
+		}
+		
+	}
+	function $(id){
+		return document.getElementById(id);
+	}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<input type="text" id="searchInput" placeholder="请输入搜索内容：">
+		<div id="tip">
+			<ul id="tipList">
+				<!-- <li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li>
+				<li>aaa</li> -->
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>

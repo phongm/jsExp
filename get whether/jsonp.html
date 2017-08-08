@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>jsonp 获取天气信息</title>
+<meta charset="utf-8" />
+<script src="js/tools.js"></script>
+<script>
+	//JSONP跨域访问天气信息
+	window.onload = function(){
+		//利用的事<script>自带的跨越能力(src)
+		
+		$("#add").onclick = function(){
+			//创建节点
+			var _script = document.createElement("script");
+			//_script.src = "http://wthrcdn.etouch.cn/weather_mini?city=%E6%88%90%E9%83%BD&callback=handle";
+			_script.src = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query=182.139.181.14&resource_id=6006&cb=test";
+			//添加到页面
+			document.body.appendChild(_script);
+			//用完删除script
+			document.body.removeChild(_script);
+		}
+	}
+	function test(ip){
+		
+		console.log(ip.data[0]);
+		//console.log(ip.data);
+		var html = "";
+		var data = ip.data[0];
+		for(var name in data)
+		{
+			html += "<div>" + name + ": " + data[name] + "</div>";
+		}
+		$("#info").innerHTML = html;
+	}
+	function handle(weather){
+		console.log(weather);
+		var forecast= weather.data.forecast;
+		 var html = "";
+		 for(var name in forecast){
+			html +="<div>" + forecast[name].date+", 最高温" + forecast[name].high + ", 最低温" + forecast[name].low + "</div>";
+		 }
+		 $("#info").innerHTML = html;
+	}
+</script>
+</head>
+<body>
+<button id="add">获取天气信息</button>
+<div id="info"></div>
+</body>
+</html>
