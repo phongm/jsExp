@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.main{width: 284px; height: 400px;margin: 100px auto;position: relative;perspective: 500px;transform-style:preserve-3d;}
+		img{position: absolute;}
+		.img_1{transition: all 0.5s linear 0.2s;z-index:1;}
+		.img_2{transition: all 0.5s linear 0.4s;z-index:2;}
+		.img_3{transition: all 0.5s linear 0.6s;z-index:3;}
+		.img_4{transition: all 0.5s linear 0.6s;z-index:4;}
+		.img_5{transition: all 0.5s linear 0.8s;z-index:5;}
+		/* .main:hover .img_1{transform:translateX(100px) rotate(5deg);} */
+		.main:hover .img_2{transform:translateX(10px) rotate(5deg);}
+		.main:hover .img_3{transform:translateX(20px) rotate(15deg);}
+		.main:hover .img_4{transform:translateX(30px) rotate(25deg);}
+		.main:hover .img_5{transform:translateX(40px) rotate(35deg);}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<img src="../img/k.png" alt="" class="img_1">
+		<img src="../img/k.png" alt="" class="img_2">
+		<img src="../img/k.png" alt="" class="img_3">
+		<img src="../img/k.png" alt="" class="img_4">
+		<img src="../img/k.png" alt="" class="img_5">
+	</div>
+</body>
+</html>

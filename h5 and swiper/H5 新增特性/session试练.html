@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{font-size: 24px;}
+		#stext, #ltext{margin-bottom: 20px;}
+		p{height: 36px; line-height: 36px; }
+	</style>
+</head>
+<body>
+	<fieldset>
+		<legend>sessionStorage</legend>
+		<input type="text" id="stext"><br>
+		<input type="button" id="sread" value="读取数据" onclick="sread()">
+		<input type="button" id="ssave" value="存储数据" onclick="ssave()">
+		<p class="sms" id="sms"></p>
+	</fieldset>
+	<fieldset>
+		<legend>localStorage</legend>
+		<input type="text" id="ltext"><br>
+		<input type="button" id="lread" value="读取数据" onclick="lread()">
+		<input type="button" id="lsave" value="存储数据" onclick="lsave()">
+		<p class="lms" id="lms"></p>
+	</fieldset>
+	<script type="text/javascript" src="../../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		function ssave(){
+			var stext = $("#stext").val();
+			sessionStorage.setItem("sms", stext);
+			$("#stext").val("");
+		}
+		function sread(){
+			$("#sms").text(sessionStorage.getItem("sms"));
+		}
+		function lsave(){
+			localStorage.setItem("lms", $("#ltext").val());
+			$("#ltext").val("");
+		}
+		function lread(){
+			$("#lms").text(localStorage.getItem("lms"));
+		}
+	</script>
+</body>
+</html>

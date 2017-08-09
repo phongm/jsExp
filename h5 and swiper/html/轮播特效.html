@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../lib/swiper-3.3.1.min.css">
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		.swiper-container{width: 300px; height: 300px; margin: 10px auto; }
+		.swiper-slide:nth-of-type(2n){background-color: deeppink;}
+		.swiper-slide:nth-of-type(2n+1){background-color: deepskyblue;}
+		.swiper-container:nth-of-type(3){width: 74%;}
+	</style>
+</head>
+<body>
+	<h2>effect : 轮播的几个特效</h2>
+	<p>fade cube coverflow flip</p>
+	<div class="swiper-container index1">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">星期一</div>
+			<div class="swiper-slide">星期二</div>
+			<div class="swiper-slide">星期三</div>
+			<div class="swiper-slide">星期四</div>
+			<div class="swiper-slide">星期五</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="swiper-container index2">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">星期一</div>
+			<div class="swiper-slide">星期二</div>
+			<div class="swiper-slide">星期三</div>
+			<div class="swiper-slide">星期四</div>
+			<div class="swiper-slide">星期五</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="swiper-container index3">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">星期一</div>
+			<div class="swiper-slide">星期二</div>
+			<div class="swiper-slide">星期三</div>
+			<div class="swiper-slide">星期四</div>
+			<div class="swiper-slide">星期五</div>
+			<div class="swiper-slide">星期一</div>
+			<div class="swiper-slide">星期二</div>
+			<div class="swiper-slide">星期三</div>
+			<div class="swiper-slide">星期四</div>
+			<div class="swiper-slide">星期五</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="swiper-container index4">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">周一</div>
+			<div class="swiper-slide">周二</div>
+			<div class="swiper-slide">周三</div>
+			<div class="swiper-slide">周四</div>
+			<div class="swiper-slide">周五</div>
+		</div>
+		<div class="swiper-pagination"></div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+	</div>
+
+
+
+	<script type="text/javascript" src="../lib/swiper-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		var swiper1 = new Swiper(".index1", {
+			autoplay : 1000,
+			effect : "fade", 		//淡入淡出
+			loop : true
+		});
+		var swiper2 = new Swiper(".index2", {
+			autoplay : 1000,
+			effect : "cube",         // 立体
+			loop : true
+		});
+		var swiper3 = new Swiper(".index3", {
+			autoplay : 1000,
+			effect : "coverflow",
+			slidesPerView : 3,        //将你的轮播图分为份
+			loop : true
+		});
+		var swiper4 = new Swiper(".index4", {
+			autoplay : 1000,
+			effect : "flip",        //翻转
+			loop : true
+		});
+	</script>
+</body>
+</html>

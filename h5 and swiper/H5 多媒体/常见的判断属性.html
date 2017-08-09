@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>常见的判断属性</h2>
+	<p>var oa = document.getElementById("video")</p>
+	<p>oa.play: (返回true | false)</p>
+	<p>oa.currentTime: 返回 时间 秒(当前播放的时间)</p>
+	<p>oa.muted: true | false (返回是否静音状态)</p>
+	<p>oa.duration: 返回整个video的时间 依旧是秒</p>
+	<p>oa.paused(返回 true | false)</p>
+	<p>其他的偏门参数：</p>
+	<video src="../temp/在这个世界相遇.mp4" id="video" autoplay="true">
+		<source src="../temp/在这个世界相遇.mp4"></source>
+	</video>
+	<script type="text/javascript">
+		var oa = document.getElementById("video");
+		console.log(oa.play);
+		console.log(oa.duration);
+		console.log(oa.currentTime);
+		console.log(oa.muted);
+		console.log(oa.paused);
+	</script>
+</body>
+</html>

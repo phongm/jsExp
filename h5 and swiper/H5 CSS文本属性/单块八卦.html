@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		.main{width: 96px;height: 48px;background-color: #fff;border-width: 2px 2px 50px 2px;border-style: solid;border-color: #000;border-radius: 50%;position: relative;}
+		.main:before{
+			display: block;width: 10px;height: 10px;position: absolute;top: 50%;left: 0;border-radius: 50%;border: 20px #fff solid;content: " ";background-color: #000;
+		}
+		.main:after{
+			display: block;width: 10px;height: 10px;position: absolute;top: 50%;right: 0;border-radius: 50%;border: 20px #000 solid;content: " ";background-color: #FFF;
+		}
+		/*-----------------------------------------*/
+		.f{position: relative; width: 100px; height: 100px;background-color: #f66;border-radius: 5px;}
+		.f:before{content:" "; position: absolute;width: 40px;height: 15px;left: 45%; top: 50%;background-color: #fff;z-index:2;}
+		.f:after{content:" "; position: absolute;width: 15px;height: 65px;left: 57%; bottom: 0;background-color: #fff;border-width: 15px 0 0 15px;border-top-left-radius: 10px;border-style: solid;border-color: #fff;background-color: #f66;z-index:1;}
+	</style>
+</head>
+<body>
+	<div class="main fa-spin"></div>
+	<div class="f"></div>
+</body>
+</html>

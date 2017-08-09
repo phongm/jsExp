@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+</head>
+<body>
+	<h2>非date类型</h2>
+	<div>
+		<p>查询属性</p>
+		<input type="search" name="search">
+	</div>
+	<form onsubmit="return check()">
+		<fieldset>
+			<legend>email</legend>
+			<input type="email" name="email" id="email">
+			<input type="submit">
+		</fieldset>
+	</form>
+	--------------------------------------------
+	<div>
+		<input type="range" max="100" min="0" step="5">
+	</div>
+	<div>
+		<input type="number" max="100" min="0" step="5" value="10">
+	</div>
+	<div>
+		<input type="tel">
+	</div>
+	--------------------------------------------
+	<p>上传文件</p>
+	<input type="file" name="file">\
+	<p>颜色采集器</p>
+	<input type="color" name="color">
+	
+	<script type="text/javascript">
+		function check(){
+			var e = document.getElementById("email");
+			if(e.value === ""){
+				alert("请输入");
+				return;
+			}
+			if(e.checkValidity()){
+				alert("输入成功");
+			}else{
+				alert("输入失败");
+			}
+		}
+	</script>
+</body>
+</html>

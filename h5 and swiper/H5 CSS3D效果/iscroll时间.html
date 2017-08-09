@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>Document</title>
+	<style type="text/css">
+		*{padding: 0; margin: 0;}
+		html, body{height: 100%;}
+		body{overflow: hidden;display: flex; flex-direction: column;}
+		.header, .footer{width: 100%; height: 50px; background-color: orange;}
+		.wrapper{flex: 1;width: 100%; overflow: hidden;position: relative;}
+	</style>
+</head>
+<body>
+	<div class="header">
+		
+	</div>
+	<div class="wrapper" id="wrapper">
+		<ul>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+			<li>世界是中国的</li>
+		</ul>
+	</div>
+	<div class="footer">
+		<a href="#" class="top" id="top" onclick="tops()">滚动到顶部</a>
+		<a href="#" class="bottom" id="bottom" onclick="bottom()">滚动到底部</a>
+	</div>
+	<script type="text/javascript" src="../lib/iscroll-min.js"></script>
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript">
+		var scroll = new IScroll("#wrapper", {
+			mouseWheel : true,
+			scrollbars : true
+		});
+		function tops(){
+			//scrollTo 滚动至哪儿(x, y, time)
+			scroll.scrollTo(0, 0, 1000);
+		}
+		function bottom(){
+			//scrollToElement(dom, time, offsetX, offsetY,ease)
+			//滚动元素定位
+			scroll.scrollToElement($("#wrapper li:last-child").get(0),1000,null,null);
+		}
+	</script>
+</body>
+</html>

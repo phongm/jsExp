@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/*.demo{
+			perspective : 200px;
+			-webkit-perspective: 200px;
+		}*/
+		.translateZ{
+			width: 100px;
+			height: 100px;
+			background-color: orange;
+			-webkit-transform: perspective(200px) translateZ(100px);
+			-moz-transform: perspective(200px) translateZ(100px);
+			-ms-transform: perspective(200px) translateZ(100px);
+			margin:0 auto ;
+		}
+	</style>
+</head>
+<body>
+	<h2>3d转换</h2>
+	--------------------------------------
+	<p>prepective</p>
+	<p>透视 视角</p>
+	<p>2中写法 一种写在其父元素上影响子元素；一种写在需要添加效果的子元素上</p>
+	--------------------------------------
+	<p>translate</p>
+	<p>3d 平移</p>
+	<div class="demo"><div class="translateZ"></div></div>
+	<p>translate3D(X, Y, Z); translate(X, Y); translateZ(Z); </p>
+</body>
+</html>

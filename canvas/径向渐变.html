@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>径向渐变</h2>
+	<p>ctx.createRadialGradient ( x1, y1, r1, x2, y2, r2 )| 创建径向渐变</p>
+	<p>x1, y1: 起始圆的坐标</p>
+	<p>r1: 起始圆的半径</p>
+
+	<p>x2, y2: 终点圆的坐标</p>
+	<p>r2: 终点圆的半径</p>
+	<p>同样与 addColorStop()</p>
+
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		/*var ra = ctx.createRadialGradient(100, 100, 50, 0, 0, 200);
+		ra.addColorStop(0, "white");
+		ra.addColorStop(.1, "red");
+		ra.addColorStop(.5, "orange");
+		ra.addColorStop(.7, "yellow");
+		ra.addColorStop(1, "skyblue");
+		ctx.fillStyle = ra;
+		ctx.fillRect(0,0,200,200);*/
+
+		var ra = ctx.createRadialGradient(100,100,0,100,100,100);
+		ra.addColorStop(0, "red");
+		ra.addColorStop(0.5, "green");
+		ra.addColorStop(1, "blue");
+		ctx.fillStyle = ra;
+		ctx.fillRect(0,0,300,300);
+	</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+		<script src="../js/angular.min.js"></script>
+	</head>
+	<body ng-app="my-app">
+		
+		<div ng-controller="firstContrl">
+			<!-- ng-click点击事件的指令 -->
+			<!-- 是在作用域中调用boxAction的方法 -->
+			<div class="box" ng-click="boxAction()">
+				{{name + num}}
+			</div>
+			
+		</div>
+
+		
+		
+		<script>
+			//创建app模型
+			var myapp = angular.module('my-app', []);
+
+          //一般把ajax的请求全部放到service里面去
+			/*myapp.service('hex', ['$http',function($http) {
+			    this.getList = function (api,data,callback) {
+			        $http.get(api).then(function(res){
+                         callback(res);
+			        }, function(){
+
+			        });
+			    }
+			}]);*/
+			//创建控制器
+			//解决代码压缩的问题
+			myapp.controller('firstContrl', ['$scope', '$timeout', '$interval','$http','$location',function($scope, $timeout,$interval,$http,$location){
+				
+				//在js中初始化数据，一般不使用ng-init指令
+				$scope.name = 'hello';
+				
+				$scope.num = 0;
+
+				console.log($location);
+
+				$scope.boxAction = function(){
+					//console.log('点击了');
+					$http.get('test.json').then(function (response){
+						console.log(response.data.testname);
+					    $scope.name = response.data.testname;
+					},function(){
+						$scope.name = "error";
+					});
+                   
+					this.name = 'test';
+					//$scope.name = hex.myFunc($scope.name);
+					//hex.getList('api/getList',{},function(res){
+                         
+				    //})
+					
+					//只要不是AngularJS的执行环境，在方法中对$scope上的变量进行了更改，需要执行$apply
+						//$scope.name = 'hello' + num;
+						//num++;
+						
+						//$scope.$apply();//检查$scope上的所有变量的值
+
+						//上面的写法会检查$scope上的所有变量，下面的写法只检查function中使用到的$scope上的变量
+						//建议：把执行的代码或者函数传递给$apply去执行，而不是执行完之后，调用$apply
+						/*setTimeout(function(){
+						  //$scope.$apply(function(){
+							$scope.name = 'hello';
+						  //})
+						},1000)*/
+					
+						
+					
+					//angular提供的定时器服务
+					$timeout(function(){
+						$scope.name = 'world';
+					}, 2000);
+					
+					$interval(function(){
+						$scope.num++;
+					}, 1000);
+				
+				}
+				
+				/*
+				 第一次点击：执行boxAction中的内置$apply方法，2秒之后 name = 'hello0'
+				 第二次点击：执行boxAction中的内置$apply方法，2秒之后 name = 'hello1'
+				 
+				 * */
+				
+			}]);
+
+		</script>
+	</body>
+</html>

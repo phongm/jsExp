@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.translate, .rotate, .scale, .skew, .origin{width: 100px; height: 100px; background-color: orange;margin: 50px auto;}
+		.translate:hover{transform: translate(50px, 50px); -o-transform: translate(50px, 50px);-webkit-transform: translate(50px, 50px);-moz-transform: translate(50px, 50px);}
+
+		.scale:hover{
+			transform:scale(1.2, 1.2);
+		}
+		.skew:hover{}
+		.skew{transform: skewX(45deg, 30deg);}
+		.origin{transform : rotate(); transform-origin:0% 0%;}
+	</style>
+</head>
+<body>
+	<h2>CSS3转换</h2>
+	<p>transform(-o-, -moz-, -webkit-, -ms-)</p>
+	<h3>tranform{translate(), rotate(), scale(), skew(), matrix()}</h3>
+	<p>tranlate: 平移属性</p>
+	<p>rotate  : 旋转属性</p>
+	<p>scale   :放大缩小属性</p>
+	<p>skew    : 根据x轴， y轴扭曲</p>
+	<p>matrix  : 矩阵模型</p>
+	------------------例如-------------------
+	<h3>translate(x, y)</h3>
+	<div class="translate"></div>
+	------------------例如-------------------
+	<h3>rotate(deg)</h3>
+	<input type="range" id="range">
+	<div class="rotate"></div>
+	------------------例如-------------------
+	<h3>scale(x, y)</h3>
+	<div class="scale"></div>
+	------------------例如-------------------
+	<h3>skew(deg1, deg2)</h3>
+	<div class="skew"></div>
+	------------------例如-------------------
+	<h3>martrix(n, n, n, n, n, n)</h3>
+	<div class="skew"></div>
+	
+	<script type="text/javascript" src="../jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#range").on("change", function(){
+				var e = $(this).val();
+				$(".rotate").css("transform", "rotate(" + e + "deg)");
+			});
+		});
+	</script>
+</body>
+</html>

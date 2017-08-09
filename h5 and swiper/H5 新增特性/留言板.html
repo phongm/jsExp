@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{font-size: 24px;}
+		textarea{margin-bottom: 20px;}
+	</style>
+</head>
+<body>
+	<h2></h2>
+	<fieldset>
+		<legend>留言板</legend>
+		<textarea name="" id="text" cols="100" rows="5"></textarea>
+		<input type="button" id="add" value="增加" onclick="add()">
+		<input type="button" id="info" value="查询" onclick="query()">
+		<input type="button" id="restart" value="初始化" onclick="restart()">
+		<p id="msg"></p>
+	</fieldset>
+	<script type="text/javascript" src="../../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		function add(){
+			var info = $("#text").val();
+			if(info === ""){
+				alert("请输入信息");
+			}else{
+				var dates = new Date().getTime();
+				localStorage.setItem(dates, info);
+				 $("#text").val("");
+				query();
+			}
+		}
+		function query(){
+			var len = localStorage.length;
+		
+			var code = "<table border=1 cellpadding='0' cellspacing='0'>"
+			if (len == 0){
+				code += "<tr><td>没有数据了</td></tr>";
+			}else{
+				for(var i = 0; i < len; i++){
+					var key = localStorage.key(i);
+					var value = localStorage.getItem(key);
+					var dates = new Date();
+					dates.setTime(key);
+					var str = dates.toGMTString();
+					code += "<tr><td>"+value+"</td><td>"+str+"</td></tr>"
+				}
+			}
+			code+="</table>"
+			$("#msg").html(code);
+		}
+		function restart(){
+			localStorage.clear();
+			query();
+			alert("已清除数据");
+			
+		}
+	</script>
+</body>
+</html>

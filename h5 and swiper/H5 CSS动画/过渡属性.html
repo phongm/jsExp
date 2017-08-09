@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.transtion{width: 100px; height: 100px; background-color: #f66;transition: width 1s linear;}
+		.transtion:hover{height: 200px; width: 200px;}
+		/*--------------------------------------------------------------------------*/
+		.con{width: 1000px; margin: 0 auto;height: 400px;position: relative;}
+		.linear, .ease, .ease-in, .ease-out, .ease-in-out{width: 80px; height: 40px;position: absolute;}
+		.linear{transition: all 2s linear;background-color: pink;top: 20px;left: 0;}
+		.ease{transition: left 2s ease;background-color: red;top: 80px;left: 0;}
+		.ease-in{transition: left 2s ease-in;background-color: yellow;top: 140px;left: 0;}
+		.ease-out{transition: left 2s ease-out;background-color: green;top: 200px;left: 0;}
+		.ease-in-out{transition: left 2s ease-in-out;background-color: skyblue;top: 260px;left: 0;} 
+		.con:hover .linear{left: 900px;}
+		.con:hover .ease{left: 900px;}
+		.con:hover .ease-in{left: 900px;}
+		.con:hover .ease-out{left: 900px;}
+		.con:hover .ease-in-out{left: 900px;} 
+
+	</style>
+</head>
+<body>
+	-----------------------------------------
+	<h2>过渡属性</h2>
+	<p>transtion</p>
+	<p>从起始效果到最终效果，其中的过程就是过渡</p>
+	<h3>transition{property, duration, time-function, delay}</h3>
+	<p>property: 过渡的CSS属性名称</p>
+	<p>duration: 过渡需要的时间</p>
+	<p>time-function: 过渡的时间曲线</p>
+	<p>delay: 延迟（从多久后开始过渡）</p>
+	<h3> time-function{ease | ease-in | ease-out | linear | cubic-buzier}</h3>
+	----------------------------------------
+	<div class="transition"></div>
+	<div class="con">
+		<div class="linear"></div>
+		<div class="ease"></div>
+		<div class="ease-in"></div>
+		<div class="ease-out"></div>
+		<div class="ease-in-out"></div>
+	</div>
+</body>
+</html>

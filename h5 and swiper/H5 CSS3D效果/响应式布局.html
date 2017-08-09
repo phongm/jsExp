@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		header{width: 100%; display: -webkit-box;}
+		.box1{-webkit-box-flex: 1;height: 50px;background-color: green;margin: 0 5%;}
+		.box2{-webkit-box-flex: 1;height: 50px;background-color: yellowgreen;margin: 0 5%;}
+		.main{width: 90%; height: 300px;display: -webkit-box;margin: 10px 5%;}
+		.box3{background-color: deeppink; height: 100%;-webkit-box-flex:1;}
+		footer{width: 100%;display: -webkit-box;}
+		.box4{-webkit-box-flex: 1;height: 100%;background-color: red;margin: 0 5%;height: 100px; }
+		.box5{-webkit-box-flex: 1;height: 100%;background-color: #f66;margin: 0 5%;height: 100px;}
+		.box6{-webkit-box-flex: 1;height: 100%;background-color: orange;margin: 0 5%;height: 100px;}
+		@media only screen and (min-width: 768px) and (max-width: 1024px){
+			header{-webkit-box-orient: vertical;}
+			.box1{margin-bottom: 10px;}
+		}
+		@media only screen and (max-width: 767px){
+			header{-webkit-box-orient: vertical;}
+			.box1{margin-bottom: 10px;}
+			footer{-webkit-box-orient: vertical;}
+			.box4{margin-bottom: 10px;}
+			.box5{margin-bottom: 10px;}
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="box1"></div>
+		<div class="box2"></div>
+	</header>
+	<div class="main">
+		<div class="box3"></div>
+	</div>
+	<footer>
+		<div class="box4"></div>
+		<div class="box5"></div>
+		<div class="box6"></div>
+	</footer>
+
+</body>
+</html>

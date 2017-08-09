@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.demo{width: 800px; height: 100px; border:1px solid red; margin: 40px auto;display: box;display: -webkit-box; -webkit-box-orient: horizontal;-webkit-box-direction:reverse;}
+		.box1{background-color: orange;width: 100px;}
+		.box2{background-color: #F66;width: 100px;}
+		.box3{background-color: red;width: 100px;}
+	</style>
+</head>
+<body>
+	<h2>box-orient</h2>
+	<p>规定盒子元素排列方式</p>
+	<p>box-orient{inline-axis | block-axis | horizontal | vetical }</p>
+	<p>inline-axis: 内联盒子排列方式（默认）</p>
+	<p>block-axis: 块级盒子排列方式</p>
+	<p>horizontal: 横向排列</p>
+	<p>vertical: 竖向排列</p>
+	------------------------------------------------------------
+	<div class="demo">
+		<div class="box1">1</div>
+		<div class="box2">2</div>
+		<div class="box3">3</div>
+	</div>
+	------------------------------------------------------------
+	<h2>box-direction</h2>
+	<p>规定元素盒子排列顺序</p>
+	<p>box-direction{ normal | reverse }</p>
+	<p>normal: 正序排列</p>
+	<p>reverse: 倒序排列</p>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>product</title>
+	<style type="text/css">
+		table {border-collapse:collapse;}
+		td{border:1px solid;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			// $("a:not(.show_cart)")
+			// 点击添加到购物车
+			$("a:not(:last)").click(function() {
+				// 获取所在行对象
+				var $tr = $(this).parents("tr");
+				// 获取选中链接行中的商品信息
+				var id = $tr.children(":first").text(),
+					name = $tr.children(":eq(1)").text(),
+					price = $tr.children(":eq(2)").text();
+				// 创建商品对象
+				var product = {
+					"id" : id,
+					"name" : name,
+					"price" : price,
+					"amount" : 1
+				};
+				// 从 cookie 中读取保存购物车信息的数组
+				$.cookie.json = true; // 表示 cookie 中存储的 value 为 json 对象的格式
+				var products = $.cookie("products");
+				if (!products)
+					products = [];
+
+				// 判断购物车中是否存在当前所选购的商品
+				// 如果购物车中存在，则修改数量就可以了
+				// 否则，添加到数组结构中保存
+				var index = getProductIndex(id, products);
+				if (index !== -1) { // 购物车中存在
+					products[index].amount++;
+				} else { // 购物车中不存在
+					// 将选购的商品信息保存到数组中
+					products.push(product);
+				}
+				// 将数组保存回 cookie 中
+				$.cookie("products", products, {expires:7});
+			});
+
+			// 找出指定 id 对应的商品在 products 数组中的索引
+			function getProductIndex(id, products) {
+				var prodIndex = -1;
+				$.each(products, function(index, element){
+					if (element.id === id) {
+						prodIndex = index;
+						return false;
+					}
+				});
+
+				return prodIndex;
+			}
+		});
+		/*var product = {
+			"id" : 1,
+			"name" : "",
+			"price" : 1,
+			"amount" : 1
+		};
+
+		var products = [product, product, product];
+
+		setCookie("products", JSON.stringify(products), {expires:7});*/
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>序号</td>
+			<td>商品名称</td>
+			<td>价格</td>
+			<td>操作</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>水杯</td>
+			<td>59.9</td>
+			<td><a href="javascript:void(0);">添加到购物车</a></td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>笔记本电脑</td>
+			<td>5999</td>
+			<td><a href="javascript:void(0);">添加到购物车</a></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>无线鼠标</td>
+			<td>88.8</td>
+			<td><a href="javascript:void(0);">添加到购物车</a></td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>手机</td>
+			<td>1998</td>
+			<td><a href="javascript:void(0);">添加到购物车</a></td>
+		</tr>
+	</table>
+
+	<a href="购物车.html" target="_blank" class="show_cart">查看购物车</a>
+</body>
+</html>

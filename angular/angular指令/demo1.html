@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<style type="text/css">
+		.red{width: 100px; height: 100px; background-color: red;}
+		.green{width: 100px; height: 100px; background-color: green;}
+		.bigborder{border: 5px solid #ccc;}
+	</style>
+</head>
+<body>
+	<div ng-app="my-app">
+		<div ng-controller="firstContrl">
+			<div ng-class="aClass" ng-click="changeClassAction()">aClass</div>
+			<div ng-class="{{bClass}}">bClass</div>
+			<div ng-class="{'green':cClass,'red':!cClass,'bigborder':true}" ng-click="trggle()"></div>
+			<div ng-class="{hot:'red bigborder', fail:'red'}[dClass]">true</div>
+			<div ng-style="{{aStyle}}">aStyle</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var myApp = angular.module("my-app", []);
+		myApp.controller("firstContrl", ["$scope", function($scope){
+			$scope.aClass = "red";
+			$scope.changeClassAction = function(){
+				this.aClass = "green";
+			};
+
+			$scope.bClass = "{'green' : true, 'bigborder' : true}";
+			$scope.dClass = "hot";
+			$scope.cClass = true;
+			$scope.trggle = function(){
+				$scope.cClass = !$scope.cClass;
+			}
+			$scope.aStyle = "{background:'yellow', width:'100px', height:'100px'}";
+		}]);
+
+
+	</script>
+</body>
+</html>

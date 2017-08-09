@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="my-app">
+		<div ng-controller="firstController">
+			<p>单价：<input type="text" ng-model="price"/></p>
+			<p>数量：<input type="text" ng-model="count"/></p>
+			<p>总价：{{price*count}} / {{fun()}}</p>
+			<p>邮费：{{free}}</p>
+			<p>总计：{{free + price*count}}</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var myApp = angular.module("my-app", []);
+		myApp.controller("firstController", ["$scope", "$timeout", "$interval", function($scope, $timeout, $interval){
+			$scope.price = 5;
+			$scope.count = 1;
+			$scope.free = 40;
+			$scope.fun = function(){
+				return $scope.price * $scope.count;
+			}
+			//监听方法得到结果的变化
+			$scope.$watch($scope.fun, function(newVal, oldVal){
+				console.log("新值："+newVal+"-------旧值"+oldVal);
+				if(newVal > 100){
+					$scope.free = 0;
+				}else if(newVal > 50){
+					$scope.free = 20;
+				}else{
+					$scope.free = 40;
+				}
+			});
+
+				//监听属性的值的变化
+			/*	$scope.$watch('price', function(newValue,oldVal){
+					//console.log(oldVal);
+					//console.log(newValue);
+				})*/
+		}]);
+	</script>
+
+</body>
+</html>

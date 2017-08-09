@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>canvas</h1>
+	<p>画布元素</p>
+	<p>html5 新增的标签</p>
+	<p>(既是用js去画图)</p>
+	<p>它和其他的dom元素一样都有自己及的方法</p>
+	------------------------------------------------------
+	<canvas id="canvas" width="400" heihgt="500"></canvas>
+	<p>
+		<p>声明画笔</p>
+		<script>
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+		</script>
+	</p>
+	------------------------------------------------------
+	<p>基础语法</p>
+	<p>ctx.beginPath() | 开始路径</p>
+	<p>ctx.fill() | 填充</p>
+	<p>ctx.stroke() | 描边</p>
+	<p>ctx.fillStyle = "color"</p>
+	<p>ctx.strokeStyle = "color"</p>
+	<p>ctx.lineWidth | 边框的宽度</p>
+	<p>ctx.closePath() | 结束路径</p>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{font-size: 16px;}
+		h1{height: 3rem; font-size: 2rem;text-align: center; position: relative;line-height: 3rem;border-bottom: 1px solid #ccc;}
+		span{position: absolute;}
+		span:nth-of-type(1){left: 1rem;}
+		span:nth-of-type(2){right: 1rem;}
+		article p{font-size: 1.5rem;line-height: 2rem;min-height: 400px;padding: 0 2rem; text-indent: 2rem;}
+		input{width: 40%;margin: 0 5%;float: left;font-size: 1.5rem; line-height: 2rem; height: 2rem;}
+	</style>
+</head>
+<body>
+	<h1>我的小说<span>返回</span><span>设置</span></h1>
+	<article>
+		<p id="content">
+			我能送你回家嘛可能外面要下雨啦，我能给你个拥抱像朋友一样可以吗？你退后半步的动作认真的吗?小小的动作伤害还那么大，我只能扮演个绅士才能和你说说话，你能给我只左手欠你到马路那头嘛，我会像以前一样看着来往的车子啊，我们的距离在眉间皱了下，迅速还原成路人的样子啊，越有礼貌我越害怕，绅士要放得下我能送你回家嘛可能外面要下雨啦，我能给你个拥抱像朋友一样可以吗？你退后半步的动作认真的吗?小小的动作伤害还那么大，我只能扮演个绅士才能和你说说话，你能给我只左手欠你到马路那头嘛，我会像以前一样看着来往的车子啊，我们的距离在眉间皱了下，迅速还原成路人的样子啊，越有礼貌我越害怕，绅士要放得下我能送你回家嘛可能外面要下雨啦，我能给你个拥抱像朋友一样可以吗？你退后半步的动作认真的吗?小小的动作伤害还那么大，我只能扮演个绅士才能和你说说话，你能给我只左手欠你到马路那头嘛，我会像以前一样看着来往的车子啊，我们的距离在眉间皱了下，迅速还原成路人的样子啊，越有礼貌我越害怕，绅士要放得下我能送你回家嘛可能外面要下雨啦，我能给你个拥抱像朋友一样可以吗？你退后半步的动作认真的吗?小小的动作伤害还那么大，我只能扮演个绅士才能和你说说话，你能给我只左手欠你到马路那头嘛，我会像以前一样看着来往的车子啊，我们的距离在眉间皱了下，迅速还原成路人的样子啊，越有礼貌我越害怕，绅士要放得下
+		</p>
+	</article>
+	<input type="color" id="color">
+	<input type="button" id="down" value="A-" onclick="down()">
+	<input type="button" id="up" value="A+" onclick="up()">
+	<script type="text/javascript" src="../../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		if(localStorage.fontSize){
+			var size = localStorage.getItem("fontSize").split("p")[0];
+			$("#content").css({
+				"font-size" : size+"px",
+				"line-height" : parseInt(size) + 8 + "px"
+			});
+		}else{
+			var initFontSize = $("#content").css("font-size");
+			var initlineHeight = $("#content").css("line-height");
+			$("#content").css({
+				"font-size" : initFontSize,
+				"line-height" : initlineHeight
+			});
+		}
+		function down(){
+			var size = parseInt($("#content").css("font-size")) - 4;
+			if(size < 10){
+				alert("字体不能再小了！！");
+				return;
+			}
+			$("#content").css({
+				"font-size" : size+"px",
+				"line-height" : size + 8 + "px"
+			});
+			localStorage.setItem("fontSize", size+"px");
+			localStorage.setItem("lineHeight", size+8+"px");
+		}
+		function up(){
+			var size = parseInt($("#content").css("font-size")) + 4;
+			$("#content").css({
+				"font-size" : size+"px",
+				"line-height" : size + 8 + "px"
+			});
+			localStorage.setItem("fontSize", size+"px");
+			localStorage.setItem("lineHeight", size+8+"px");
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/angular.min.js"></script>
+		
+	</head>
+	<body >
+		<div ng-app="myApp" ng-controller="firstContrl">
+			<!-- 静态的 -->
+			<div ng-include="tmp1"></div>
+			
+			<div ng-include="tmp2"></div>
+			
+			<!-- <div ng-include src='tmp2'></div> -->
+			
+			
+			<script type="text/ng-template" id="test">
+				<p>今天星期三</p>
+				<p>今天星期三</p>
+				<p>今天星期三</p>
+			</script>
+			
+		</div>
+		
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller("firstContrl", ["$scope", function($scope){
+				$scope.tmp1 = "main.html";
+				$scope.tmp2 = "test";
+			}] );
+
+			app.controller("temp", function($scope){
+				$scope.boxName = ["hot", "my", "find"]
+			});
+		</script>
+	</body>
+</html>

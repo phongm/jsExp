@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>省市级联</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		// 接口:http://api.2011522.com/apidiqu2/api.asp?format=json&callback=回调函数&id=地区代码
+		$(function(){
+			// 加载所有的省份
+			function initProvince() {
+				$.getJSON("http://api.2011522.com/apidiqu2/api.asp?format=json&callback=?", function(data){
+					// console.log(data);
+					var provinces = data.list;
+					$("#province").empty().append("<option>请选择省份</option>");
+					for (var attr in provinces) {
+						// console.log(provinces[attr])
+						var province = provinces[attr];
+
+						$("<option value='"+ province.daima +"'>"+ province.diming +"</option>").appendTo("#province");
+					}
+				});
+			}
+
+			// 加载所选择省份下的城市
+			function initCity() {
+				// 获取所选省份的代码
+				var _id = $("#province").val();
+
+				// 加载城市
+				$.getJSON("http://api.2011522.com/apidiqu2/api.asp?format=json&callback=?&id="+_id, function(data){
+					var cities = data.list;
+					$("#city").empty().append("<option value='-1'>请选择城市</option>");
+					for (var attr in cities) {
+						$("#city").append("<option value="+ cities[attr].daima +">"+ cities[attr].diming +"</option>");
+					}
+				});
+			}
+
+			// 事件绑定
+			$("#province").on("change", initCity);
+
+			initProvince();
+		});
+	</script>
+</head>
+<body>
+	<select id="province"></select>
+	<select id="city"></select>
+	<select id="district"></select>
+</body>
+</html>

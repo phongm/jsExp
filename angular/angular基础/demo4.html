@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="my-app">
+		<div ng-controller="my-controller">
+			{{name}}
+			
+		</div>
+		{{obj}}
+		{{person.name}}
+	</div>
+	<script type="text/javascript">
+		//创建APP模型
+		myApp = angular.module("my-app", []);
+		//创建控制器
+		//解决代码压缩的问题,用数组将参数存起来;
+		myApp.controller("my-controller", ["$scope", "$rootScope", function($scope, $rootScope){
+			$scope.name = "hello";
+			$rootScope.obj = "test";
+		}]);
+		myApp.run(["$rootScope", function($rootScope){
+					$rootScope.person = {
+						name : "dragon Lee"
+					};
+				}]);
+	</script>
+</body>
+</html>

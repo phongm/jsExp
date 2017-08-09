@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="full-screen" content="yes">
+	<script type="text/javascript">
+		var dpr, rem, scale;
+		var docEl = document.documentElement;
+		var fontEl = document.createElement('style');
+		var metaEl = document.querySelector('meta[name="viewport"]');
+
+		dpr = window.devicePixelRatio || 1;
+		rem = docEl.clientWidth * dpr / 10;
+		scale = 1 / dpr;
+		// 设置viewport，进行缩放，达到高清效果
+		metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
+
+		// 设置data-dpr属性，留作的css hack之用
+		docEl.setAttribute('data-dpr', dpr);
+
+		// 动态写入样式
+		docEl.firstElementChild.appendChild(fontEl);
+		fontEl.innerHTML = 'html{font-size:' + rem + 'px!important;}';
+
+		// 给js调用的，某一dpr下rem和px之间的转换函数
+		window.rem2px = function(v) {
+		    v = parseFloat(v);
+		    return v * rem;
+		};
+		window.px2rem = function(v) {
+		    v = parseFloat(v);
+		    return v / rem;
+		};
+
+		window.dpr = dpr;
+		window.rem = rem;
+	</script>
+	<link rel="stylesheet" href="js/lib/swiper-3.3.1.min.css">
+	<link rel="stylesheet" type="text/css" href="js/lib/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" href="css/LandingPage.css">
+	<title>澳洲金鼎</title>
+</head>
+<body>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide page1">
+				<div class="page1_bg2 ani" swiper-animate-effect="pulse" swiper-animate-duration="1s" swiper-animate-delay="0s">
+					<img class="page1_content_1 ani" src="images/page1_content_1.png" alt="" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="0s">
+					<img class="page1_bg_3" src="images/page1_bg_3.png">
+					<img class="page1_text ani" src="images/page1_text.png" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay=".3s">
+					<img class="page1_cate ani" src="images/page1_cate.png">
+					<img class="page1_hotel ani infinite" src="images/page1_hotel.png">
+					<img class="page1_more ani infinite" src="images/page1_more.png">
+					<img class="page1_point_1 ani" src="images/page1_point_1.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay="0s">
+					<img class="page1_point_2 ani" src="images/page1_point_2.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".1s">
+					<img class="page1_point_3 ani" src="images/page1_point_3.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".2s">
+				</div>
+			</div>
+			<div class="swiper-slide page2">
+				<img class="page2_bg_2" src="images/page2_bg_2.png">
+				<img class="page2_cloud_1" src="images/page2_cloud_1.png">
+				<img class="page2_cloud_2" src="images/page2_cloud_2.png">
+				<img class="page2_ballute_1" src="images/page2_ballute_1.png">
+				<img class="page2_circle_1" src="images/page2_circle_1.png">
+				<img class="page2_circle_2" src="images/page2_circle_2.png">
+				<img class="page2_content_1 ani" src="images/page2_content_1.png" swiper-animate-effect="bounceInUp" swiper-animate-duration="1s" swiper-animate-delay="0s">
+				<img class="page2_text_1 ani" src="images/page2_text_1.png" swiper-animate-effect="pulse infinite" swiper-animate-duration="2s" swiper-animate-delay=".1s">
+				<img class="page2_text_2 ani" src="images/page2_text_2.png" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="0s">
+				<img class="page2_point_1 ani" src="images/page2_point_1.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay="0s">
+				<img class="page2_point_2 ani" src="images/page2_point_2.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".1s">
+				<img class="page2_point_3 ani" src="images/page2_point_3.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".2s">
+			</div>
+			<div class="swiper-slide page3">
+				<div class="page3_bg_2">
+					<img class="page3_bg_3" src="images/page3_bg_3.png">
+					<img class="page3_bg_4" src="images/page3_bg_4.png">
+					<img class="page3_plane_1" src="images/page3_plane_1.png">
+					<img class="page3_content_1 ani" src="images/page3_content_1.png" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="0s">
+					<img class="page3_triangle_top" src="images/page3_triangle_top.png">
+					<img class="page3_triangle_bottom" src="images/page3_triangle_bottom.png">
+					<img class="page3_text_1 ani" src="images/page3_text_1.png" swiper-animate-effect="pulse infinite" swiper-animate-duration="2s" swiper-animate-delay=".5s">
+					<img class="page3_text_2 ani" src="images/page3_text_2.png" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="0s">
+					<img class="page3_plane_2" src="images/page3_plane_2.png">
+					<img class="page2_point_1 ani" src="images/page2_point_1.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay="0s">
+					<img class="page2_point_2 ani" src="images/page2_point_2.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".1s">
+					<img class="page2_point_3 ani" src="images/page2_point_3.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".2s">
+				</div>
+			</div>
+			<div class="swiper-slide page4">
+				<img class="page3_bg_3" src="images/page3_bg_3.png">
+				<img class="page4_adv" src="images/page4_adv.png">
+				<img class="page4_content_1 ani" src="images/page4_content_1.png" swiper-animate-effect="zoomInDown" swiper-animate-duration="1s" swiper-animate-delay="0s">
+				<img class="page4_taolu" src="images/page4_taolu.png">
+				<img class="page4_xuetou" src="images/page4_xuetou.png">
+				<img class="page4_more" src="images/page4_more.png">
+				<img class="page4_text_1 ani" src="images/page4_text_1.png" swiper-animate-effect="zoomIn" swiper-animate-duration="1s" swiper-animate-delay="1s">
+				<img class="page4_text_2 ani" src="images/page4_text_2.png" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="1s">
+				<img class="page2_point_1 ani" src="images/page2_point_1.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay="0s">
+				<img class="page2_point_2 ani" src="images/page2_point_2.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".1s">
+				<img class="page2_point_3 ani" src="images/page2_point_3.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".2s">
+			</div>
+			<div class="swiper-slide page5">
+				<div class="page5_bg_2">
+					<img class="page3_bg_3" src="images/page3_bg_3.png">
+					<img class="page3_triangle_top" src="images/page3_triangle_top.png">
+					<img class="page3_triangle_bottom" src="images/page3_triangle_bottom.png">
+					<img class="page5_content_1 ani" src="images/page5_content_1.png" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="0s">
+					<img class="page5_text_1 ani"src="images/page5_text_1.png" swiper-animate-effect="bounceIn" swiper-animate-duration="1s" swiper-animate-delay="1s">
+					<img class="page5_text_2 ani"src="images/page5_text_2.png" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="1s">
+					<img class="page5_text_3 ani"src="images/page5_text_3.png" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="1.5s">
+					<img class="page2_point_1 ani" src="images/page2_point_1.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay="0s">
+					<img class="page2_point_2 ani" src="images/page2_point_2.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".1s">
+					<img class="page2_point_3 ani" src="images/page2_point_3.png" swiper-animate-effect="zoomOut infinite" swiper-animate-duration="2s" swiper-animate-delay=".2s">
+				</div>
+			</div>
+			<div class="swiper-slide page6">
+				<div class="page6_bg_2">
+					<img class="page2_bg_2" src="images/page2_bg_2.png">
+					<img class="page6_text_1" src="images/page6_text_1.png">
+					<img class="page6_text_2" src="images/page6_text_2.png">
+					<img class="page6_code" src="images/page6_code.png">
+					<input class="page6_name" type="text" placeholder="姓名">
+					<input class="page6_tel" type="number" placeholder="电话">
+					<!-- <input class="page6_select" type="select" placeholder="选择省份"> -->
+					<div class="page6_select" id="page6_select">
+						<p>选择省份</p>
+						<span></span>
+						<ul class="page6_select_list list_display">
+							<li>四川省</li>
+							<li class="selected">山西省</li>
+							<li>陕西省</li>
+							<li>广东省</li>
+						</ul>
+					</div>
+					<button class="page6_submit" id="page6_submit">立即提交</button>
+					<!--page6_share-->
+					<div class="page6_share" id="page6_share">
+						<a class="page6_share_btn" id="page6_share_btn" href="javascript:;">知道啦！</a>
+						<img class="page6_share_content" src="images/page6_share_content.png">
+						<img class="page6_share_img_btn ani" src="images/page6_share_img_btn.png" swiper-animate-effect="swing infinite" swiper-animate-duration="2s" swiper-animate-delay="0s">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/lib/zepto.min.js"></script>
+	<script type="text/javascript" src="js/lib/swiper-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/lib/swiper.animate.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		var swiper = new Swiper('.swiper-container',{
+			direction : 'vertical',
+			onInit:function(swiper){
+				swiperAnimateCache(swiper);
+				swiperAnimate(swiper);
+			},
+			onSlideChangeEnd:function(swiper){
+				swiperAnimate(swiper);
+			}
+		});
+		$('#page6_select').on('click', function(){
+			$(this).find('.page6_select_list').toggleClass('list_display');
+		});
+		$('.page6_select_list li').on('click',function(){
+			$(this).addClass('selected').siblings().removeClass('selected');
+			$('#page6_select p').html($(this).html());
+		});
+		$('#page6_submit').on('click',function(){
+			$('#page6_share').css('display','block');
+		});
+		$('#page6_share_btn').on('click', function(){
+			$('#page6_share').css('display','none');
+		});
+	})
+	
+	</script>
+</body>
+</html>

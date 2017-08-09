@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>圆形变换</h2>
+	<p>translate(x, y)</p>
+	<p>平移 坐标的原点</p>
+	<p>rotate(arg)</p>
+	<p>arg 弧度 arg * Math.PI / 180</p>
+	<p>scale(w, h)放大缩小</p>
+	<p>w 当前元素宽度</p>
+	<p>h 当前元素高度</p>
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		// with(ctx){
+		// 	fillStyle = "orange";
+		// 	translate(10, 10);
+		// 	rotate(5*Math.PI/180);
+		// 	scale(1.2, 1.2);
+		// 	fillRect(0,0,100,100);
+		// }    //等价于将对象封装到with内部
+		/*ctx.fillStyle = "orange";
+		ctx.translate(10, 10);
+		ctx.rotate(5*Math.PI/180);
+		ctx.scale(1.2, 1.2);
+		ctx.fillRect(0,0,100,100);*/
+		ctx.beginPath();
+		ctx.fillStyle = "#f66";
+		ctx.translate(100, 50);
+		ctx.scale(1.2, 2);
+		ctx.rect(0,0,100,100);
+		ctx.fill();
+		ctx.closePath();
+	</script>
+</body>
+</html>

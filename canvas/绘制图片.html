@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>绘制图片</h2>
+	<p>drawImage(img, sx, sy, swidth, sheight, x, y, width, height)</p>
+	<p>img: 图片对象, 视频对象</p>
+	<p>sx, sy: 图片裁剪的坐标</p>
+	<p>swidth: 裁剪的宽度</p>
+	<p>sheight: 裁剪的高度</p>
+	<p>x, y: 图片的坐标</p>
+	<p>width: 图片的高度</p>
+	<p>height: 图片的高度</p>
+	---------------------------------------------------------------------
+	<canvas id="canvas" width="400" height="500"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		var img = new Image();
+		img.src="html.png";
+		img.onload = function(){ctx.drawImage(img, 10, 10, 392,302,20,20,350,350);
+		}
+
+
+	</script>
+</body>
+</html>

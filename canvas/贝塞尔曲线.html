@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>贝塞尔曲线</h2>
+	<p>quadraticCurveTo(x1, y1, x2, y2) 二次贝塞尔曲线</p>
+	<p>bezierCurveTo(x1, y1, x2, y2, x3, y3) 三次贝塞尔曲线</p>
+	<p>x1, y1: 控制点坐标</p>
+	<p>x2, y2: 终点坐标</p>
+	------------------------------------------------------------
+	<p>x1, y1: 控制点1坐标</p>
+	<p>x2, y2: 终点2坐标</p>
+	<p>x3, y3: 结束点3坐标</p>
+	------------------------------------------------------------
+	<canvas id="canvas" width="400" heihgt="400"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.strokeStyle = "#f66";
+		ctx.lineWidth = 1;
+		ctx.moveTo(20, 20);
+/*		ctx.lineTo(100, 100);
+		ctx.lineTo(200, 100);*/
+		ctx.bezierCurveTo(20, 100, 200, 100, 200, 20);
+		//ctx.quadraticCurveTo(20, 100, 200,20);
+		ctx.stroke();
+	</script>
+</body>
+</html>

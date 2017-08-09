@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		li:before{
+			content:"标题";
+			margin-right: 10px;
+		}
+		li:after{
+			content: "结束";
+		}
+		.canvas{position: relative;width: 100px;}
+		.main{width: 96px;height: 48px;background-color: #fff;border-width: 2px 2px 50px 2px;border-style: solid;border-color: #000;border-radius: 50%;}
+		.main:before{
+			display: block;width: 10px;height: 10px;position: absolute;top: 25%;left: 0;border-radius: 50%;border: 20px #fff solid;content: " ";background-color: #000;
+		}
+		.main:after{
+			display: block;width: 10px;height: 10px;position: absolute;top: 25%;right: 0;border-radius: 50%;border: 20px #000 solid;content: " ";background-color: #FFF;
+		}
+	</style>
+</head>
+<body>
+	<h2>伪元素选择器</h2>
+	<p>before, after</p>
+	<h3>before{content}</h3>
+	<ul>
+		<li>Link1</li>
+		<li>Link2</li>
+		<li>Link3</li>
+		<li>Link4</li>
+		<li>Link5</li>
+	</ul>
+
+	<div class="canvas">
+		<div class="main"></div>
+	</div>
+</body>
+</html>

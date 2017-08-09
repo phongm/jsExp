@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var MyInput = React.createClass({
+      
+      getInitialState: function() {
+        return {value: 11000};
+      },
+      
+      handleChange: function(e) {
+        this.setState({value : e.target.value});
+      },
+      formatNumber: function(num) {
+        var decimalPart = '';  
+        num = num.toString();  
+        if (num.indexOf('.') != -1) {  
+          decimalPart = '.' + num.split('.')[1];  
+          num = parseInt(num.split('.')[0]);  
+        }  
+        var array = num.toString().split('');  
+        var index = -3;  
+        while (array.length + index > 0) {  
+          array.splice(index, 0, ',');  
+          index -= 4;  
+        }  
+        return array.join('') + decimalPart;  
+      },
+        render: function() {
+          var value = this.state.value;
+          return (
+          <div>
+            <input type="text" name="inputOne" value={ value } onChange={ this.handleChange } />
+            <p> { this.formatNumber(value) } </p>
+          </div>
+          );
+        }
+      })
+      ReactDOM.render(
+        <MyInput />,
+        document.getElementById("example")
+        )
+        /*function formatNumber(num) {  
+          var decimalPart = '';  
+          num = num.toString();  
+          if (num.indexOf('.') != -1) {  
+            decimalPart = '.' + num.split('.')[1];  
+            num = parseInt(num.split('.')[0]);  
+          }  
+          var array = num.toString().split('');  
+          var index = -3;  
+          while (array.length + index > 0) {  
+            array.splice(index, 0, ',');  
+            index -= 4;  
+          }  
+          return array.join('') + decimalPart;  
+        };  
+
+        console.log(typeof formatNumber(100000924));*/
+    </script>
+  </body>
+</html>

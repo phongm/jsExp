@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>play(), pause(), load(), RequestFullScreen() (注 前缀是浏览器兼容)</h2>
+	<p>play() 执行播放</p>
+	<p>pause() 执行暂停</p>
+	<p>load() 执行加载</p>
+	<p>RequestFullScreen() 执行全屏(需加 浏览器前缀)</p>
+
+	<video id="video">
+		<source src="../temp/在这个世界相遇.mp4"></source>
+	</video>
+	<script type="text/javascript">
+		var isFull = false; 
+		var oa = document.getElementById("video");
+		oa.onmouseover = function(){
+			oa.play();
+		}
+		oa.onmouseout = function(){
+			oa.pause();
+		}
+		oa.ondblclick = function(){
+			if(!isFull){
+				isFull = true;
+				oa.webkitRequestFullScreen();
+			}else{
+				isFull = false;
+				oa.webkitExitFullScreen()
+			}
+		}
+	</script>
+</body>
+</html>

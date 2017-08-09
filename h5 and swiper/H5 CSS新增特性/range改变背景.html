@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+			$("input").each(function(index, element){
+				$(element).next().text($(element).val());
+			});
+			colorChange();
+			//鼠标弹起才改变
+			$("input").on("change", function(){
+				colorChange();
+				$(this).next().text($(this).val());
+			});
+
+			//鼠标滑动即改变
+			/*$("input").on("mousedown", function(){
+				$(document).on("mousemove", function(){
+					colorChange();
+					$(this).next().text($(this).val());
+				});
+				$(document).on("mouseup", function(){
+					$(document).on("mousemove", null);
+				});
+			});*/
+			function colorChange(){
+				var 
+					red = $("#red").val(),
+					green = $("#green").val(),
+					blue = $("#blue").val(),
+					opct = $("#opct").val();
+				$("html body").css(
+					"background-color","rgba("+red+","+green+","+blue+","+opct+")"
+				);
+				
+			};
+		});
+	</script>
+</head>
+<body>
+	<fieldset>
+		<legend>改变背景颜色</legend>
+		<input type="range" min="0" max="225" step="1" id="red"><span></span>
+		<input type="range" min="0" max="225" step="1" id="green"><span></span>
+		<input type="range" min="0" max="225" step="1" id="blue"><span></span>
+		<input type="range" min="0" max="1" step="0.1" id="opct"><span></span>
+	</fieldset>
+</body>
+</html>

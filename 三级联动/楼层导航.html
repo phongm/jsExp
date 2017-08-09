@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin:0; padding:0;}
+		#container {width:900px; margin:0 auto;}
+		.header {width:100%; height:1500px; background:#ccc;}
+		.floor {width:100%; height:1000px; font:bold 60px/100px "宋体"; text-align:center;}
+		.foot {width:100%; height:500px; background:#ccc;}
+
+		#nav {list-style:none; width:60px; position:fixed; left:50px; bottom:100px; display:none;}
+		#nav li {width:60px; text-align:center; position:relative; margin-top:1px; border-bottom:1px dotted #ccc;}
+		#nav li span {width:60px; display:inline-block; position:absolute; top:0; left:0; background:red; color:white; display:none;}
+	</style>
+
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var headerHeight = $(".header").height(),
+				winHeight = $(window).height(),
+				isScrolling = false; // false:未自动滚动   true:点击了楼层导航，正在自动滚动
+			// 滚动事件
+			$(window).on("scroll", function(){
+				if (!isScrolling) {
+					// 获取滚动距离
+					var scTop = $(this).scrollTop();
+					// 判断是否该显示导航
+					if (scTop > headerHeight - winHeight) { // 显示
+						$("#nav").show();
+					} else { // 隐藏
+						$("#nav").hide();
+					}
+
+					// 切换显示导航楼层样式
+					$(".floor").each(function(index, element){
+						// 当前遍历到的楼层与文档顶部的距离
+						var _top = $(this).offset().top;
+						// 判断
+						if (scTop > _top - winHeight / 2) {
+							$("#nav>li").eq(index).addClass("curr").children("span").show().end()
+										.siblings().removeClass("curr").children("span").hide();
+						}
+					});
+				}
+			});
+
+			// 鼠标进入与离开导航样式变化，点击实现楼层跳转
+			$("#nav>li").hover(function(){
+				$(this).children('span').show();
+			}, function(){
+				$(this).not(".curr").children('span').hide();
+			}).on("click", function(){
+				isScrolling = true;
+				var index = $(this).index(); // 所点击导航的索引
+				var _top = $(".floor").eq(index).offset().top; // 获取对应楼层滚动到的目标位置
+				$(this).addClass('curr').children('span').show().end()
+					   .siblings().removeClass('curr').children('span').hide();
+				$("html,body").animate({"scrollTop":_top}, 10000, function(){
+					isScrolling = false;
+				}); // 自定义动画
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div class="header"></div>
+		<div class="main">
+			<div class="floor" style="background:#f00;">1L 服饰</div>
+			<div class="floor" style="background:#0f0;">2L 箱包</div>
+			<div class="floor" style="background:#00f;">3L 数码</div>
+			<div class="floor" style="background:#ff0;">4L 家电</div>
+			<div class="floor" style="background:#f0f;">5L 居家</div>
+			<div class="floor" style="background:#eee;">6L 运动</div>
+		</div>
+		<div class="foot"></div>
+	</div>
+
+	<ul id="nav">
+		<li class="curr">1F<span style="display:inline-block;">服饰</span></li>
+		<li>2F<span>箱包</span></li>
+		<li>3F<span>数码</span></li>
+		<li>4F<span>家电</span></li>
+		<li>5F<span>居家</span></li>
+		<li>6F<span>运动</span></li>
+	</ul>
+</body>
+</html>

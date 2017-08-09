@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/*属性选择器*/
+		/*从开头匹配*/
+		input[id^="text"]{background-color: red;}
+		/*从结尾匹配*/
+		input[id$="text"]{background-color: red;}
+		/*--任意包含--*/
+		input[id*="text"]{background-color: red;}
+		/*只有含有完整属性*/
+		input[class~="text"]}{background-color: pink;}
+		/*有且仅有的完整属性才匹配*/
+		input[id="text"]{background-color: black;}
+		/*包含此完整属性或者此属性带连字符都匹配*/
+		input[id|="text"]{background-color: green;}
+
+		/*-------------------属性选择器--------------------*/
+		/*该类元素的第一个元素*/
+		.one li:first-child{color : red;}
+		/*该类元素的最后一个元素*/
+		.one li:last-child{color:blue;}
+		/*该类元素的仅有一个元素的情况下*/
+		.one li:only-child{color:green;}
+		/*该类元素的第几个元素的情况下*/
+		.one li:nth-child(1){color: orange;}
+		/*该类元素从后往前数的第几个*/
+		.one li:nth-last-child(1){color:pink;}
+		/*该元素的偶数元素*/
+		.one li:nth-child(even){color:mediumvioletred;}
+		.one li:nth-child(2n){color: green;}
+		/*该元素的奇数元素*/
+		.one li:nth-child(odd){color:aqua;}
+		.one li:nth-child(2n+1){color: red;}
+
+		/*-----------------伪类选择器2-----------------*/
+		/*该元素的父元素下子元素第二个（如不是该类型则不匹配）*/
+		p:nth-child(2){color : red;}
+		/*该元素的父元素下同类元素第二个（如不是该类型则不匹配）*/
+		p:nth-of-type(2){color : blue;}
+
+	</style>
+</head>
+<body>
+	<p>属性选择器</p>
+	<input type="text" id="text" class="text">
+	<input type="text" id="text2" class="text A">
+	<input type="text" id="Atext" class="textA">
+	<input type="text" id="text-2" class="text A">
+	<input type="text" id="AtextB-2" class="textA"><br>
+	--------------------------------------------------
+	<p>结构伪类选择器</p>
+	<ul class="one">
+		<li>Link1</li>
+		<li>Link2</li>
+		<li>Link3</li>
+		<li>Link4</li>
+		<li>Link5</li>
+	</ul>
+	--------------------------------------------------
+	<p>结构伪类选择器2</p>
+	<div class="two">
+		<div>nav</div>
+		<p>Link2</p>
+		<p>Link3</p>
+		<p>Link4</p>
+		<p>Link5</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		.demo{
+			width: 300px; height: 600px;
+			border: 1px solid red;
+			background-color: #f66;
+			margin: 40px auto;
+			position: relative;
+			perspective: 200px;
+			transform-style: preserve-3d;
+		}
+		img{width: 100px; position: absolute;left: 0; top: 0;}
+		.demo img:nth-of-type(1){opacity: .5;}
+		.demo img:nth-of-type(2){transform: scale3D(1, 1.2,1.2) rotateX(28deg);}
+	</style>
+</head>
+<body>
+	<h2>scale3D</h2>
+	<p>3d 放大缩小</p>
+	<p>不可以单独使用，必须和其他属性一块使用</p>
+	<p>scale3D(x, y, z) | scaleZ(z)</p>
+	-------------------------------------------------
+	<div class="demo">
+		<img src="../img/cardKingClub.png" alt="">
+		<img src="../img/cardKingClub.png" alt="">
+	</div>
+	-------------------------------------------------
+	<p>transform-origin(x, y, z)</p>
+	<p>设置旋转起点</p>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+		/*function getLength(a){
+			return a.toString(2).split("1").length - 1;
+		}
+		function getCount(a, b, c){
+			var count = 0;
+			for(var i = a; i < b; i++){
+				if(getLength(i) === c)
+					count++;
+			}
+			return count;
+		}
+
+		
+		var line;
+		while(line = read_line()){
+		    line = line.split(' ');
+		    print(getCount(parseInt(line[0]), parseInt(line[1]), parseInt(line[2])));
+		}
+		            */       
+		$.get(
+		"../students.jsonp",
+		function(data){
+			console.log(data);
+		}
+		);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

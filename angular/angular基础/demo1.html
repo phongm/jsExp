@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+	<!-- 双向数据绑定 -->
+	
+	<!--
+		ng-app指令定义了AngularJS所管理的范围
+		ng-app指令在页面加载完毕时会自动引导应用程序
+		ng-app定义了一个应用程序
+	-->
+	<div ng-app="my-app">
+	<!--
+		ng-model指令将html元素绑定到应用程序中
+	-->
+		<div ng-controller="myControl">
+			<input type="text" ng-model="name">
+			<br>
+			<!--
+				ng-bind指令将应用程序中的数据绑定到了p标签中
+			-->
+			输入的内容是：<p ng-bind="name"></p>
+			<div>{{name}}</div>
+			<button ng-click="change()">改变</button>
+		</div>
+	</div>
+
+	<!--  不起作用，没有在ng-app中 -->
+		<input type="text" ng-model="name"/>
+		<br />
+		输入的内容是：<p ng-bind="name"></p>
+	
+</body>
+
+<script type="text/javascript">
+	var myApp = angular.module("my-app", []);
+	myApp.controller("myControl", function($scope){
+		$scope.name = "帅哥";
+		$scope.change = function(){
+			this.name = "美女";
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div{width: 20px;height: 20px;border:2px solid #000;float: left;margin-right: 4px;}
+		.screen{width: 50px; height: 50px;}
+		.r{background-color: red;}
+		.g{background-color: green;}
+		.b{background-color: blue;}
+		.p{background-color: pink;}
+	</style>
+
+</head>
+<body>
+	<div class="screen"></div>
+	<div class="r"></div>
+	<div class="g"></div>
+	<div class="b"></div>
+	<div class="p"></div>
+	<script type="text/javascript" src="../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			$("div").on("mousemove", function(){
+				$(".screen").css({
+					"background-color" : $(this).css("background-color")
+				});
+			});
+			$("div").on("click", function(){
+				$("html body").css({
+					"background-color" : $(this).css("background-color")
+				});
+			});
+		});
+	</script>
+</body>
+</html>

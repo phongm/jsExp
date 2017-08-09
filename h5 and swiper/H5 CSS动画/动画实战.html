@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		figure{width: 33.3%; height: 360px;float: left;position: relative;overflow: hidden;}
+		figure img{height: 100%;transition: .5s linear;}
+		figure:hover img{opacity: 0.5;transform: translateX(-20px);}
+		figure h2, figure p{position: absolute;transition: 0.2s linear; color: #fff;}
+		.effect1 h2{top: 50%;left: 20px;}
+		.effect1 p{top: 100%;left: 20px;}
+		.effect1:hover p{top: 70%;}
+		.effect1:hover img{transform: translateX(-20px);}
+		.effect2 .info2{transition: .2s linear 0.1s;}
+		.effect2 .info3{transition: .2s linear 0.2s;}
+		.effect2 .info4{transition: .2s linear 0.3s;}
+		.effect2 h2{top: 15%; left: 15%;}
+		.effect2 .info1{top: 35%; left: -40%;}
+		.effect2 .info2{top: 45%; left: -40%;}
+		.effect2 .info3{top: 55%; left: -40%;}
+		.effect2 .info4{top: 65%; left: -40%;}
+		.effect2:hover img{transform: translateX(-100px);}
+		.effect2:hover p{left: 20%;}
+		.effect3 h2{position: absolute; top: 20%;left: 15%;}
+		.effect3 p{position: relative;background: #fff;color:#000;bottom: 0; transition: .5s linear;line-height: 18px;}
+		.effect3:hover img{transform: scale(1.2); }
+		.effect3:hover p{bottom: 72px;}
+		.effect4 p{width: 200%;height: 100px;background-color: #fff;transition: .5 linear;position: absolute;}
+		.effect4 .info1{position: absolute; left: 65%;top: 150%;transition:0.2s linear;color: #000;}
+		.effect4 .info2{position: absolute; left: 80%;top: 150%;transition:0.2s linear 0.2s;color: #000;}
+		.effect4:hover p{transform: rotate(-15deg);transform-origin:0% 0%;}
+		.effect4:hover span{ top: 85%;}
+		.effect5 h2{top: 20%; left: -120%;}
+		.effect5 p{top: 30%;left: -125%;}
+		.effect5 div{height: 260px; width: 80%; border: 4px solid #f66; position: absolute;top: -270px; left: 10%; transition: .2s linear;}
+		.effect5:hover div{top: 15%;transform: rotate(360deg);}
+		.effect5:hover h2{left: 20%;}
+		.effect5:hover p{left: 25%;}
+		.effect6 h2{top: 20%; left: 120%;}
+		.effect6 p{top: 30%;left: 125%;}
+		.effect6:hover h2{left: 20%;transform: skew(25deg);}
+		.effect6:hover p{left: 25%;transform: skew(25deg);}
+		.effect7 h2{top: 25%; left: 20%;}
+		.effect7 p{top: 35%;left: 25%;}
+		.effect7 div{height: 260px; width: 80%; border: 4px solid #fff; position: absolute;top: 15%; left: 10%; transition: .2s linear;}
+		.effect7:hover div{transform: scale(0.8);}
+		.effect8 h2{top: 25%; left: 30%;}
+		.effect8 p{top: 35%;left: 28%;}
+		.effect8 .row{height: 260px; width: 0; position: absolute;top: 50px; left: 20%; transition: 1s linear;border-top: 2px solid #fff;border-bottom: 2px solid #fff;}
+		.effect8 .col{height: 0; width: 50%; position: absolute;top: 40px; left: 25%; transition: 1s linear;border-left: 2px solid #fff;border-right: 2px solid #fff;}
+		.effect8:hover .row{width: 60%;}
+		.effect8:hover .col{height: 280px;}
+	</style>
+
+</head>
+<body>
+
+		<figure class="effect1">
+			<img src="../img/pic1.jpg" alt="">
+			<h2>平移动画</h2>
+			<p>最简单的平移动画</p>
+		</figure>
+		<figure class="effect2">
+			<img src="../img/pic2.jpg" alt="">
+			<h2>平移动画</h2>
+			<p class="info1">这是平移动画1</p>
+			<p class="info2">这是平移动画2</p>
+			<p class="info3">这是平移动画3</p>
+			<p class="info4">这是平移动画4</p>
+		</figure>
+		<figure class="effect3">
+			<img src="../img/pic3.jpg" alt="">
+			<h2>底部滑出动画</h2>
+			<p>嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟!嘿嘿，我隐藏在底部的哟
+			</p>
+		</figure>
+		<figure class="effect4">
+			<img src="../img/pic4.jpg" alt="">
+			<p></p>
+			<span class="info1">info1</span>
+			<span class="info2">info2</span>
+		</figure>
+		<figure class="effect5">
+			<img src="../img/pic5.jpg" alt="">
+			<h2>旋转飞入</h2>
+			<p>通过旋转和位移</p>
+			<div></div>
+		</figure>
+		<figure class="effect6">
+			<img src="../img/pic6.jpg" alt="">
+			<h2>扭曲飞入飞出</h2>
+			<p>通过扭曲和位移，执着出飞入的效果，扭曲属性到达90度。元素就看不见了</p>
+		</figure>
+		<figure class="effect7">
+			<img src="../img/pic7.jpg" alt="">
+			<h2>缩放</h2>
+			<p>这里是缩放文字</p>
+			<div></div>
+		</figure>
+		<figure class="effect8">
+			<img src="../img/pic8.jpg" alt="">
+			<h2>绘制线条效果</h2>
+			<p>通过缩放属性绘制边框萧条</p>
+			<div class="row"></div>
+			<div class="col"></div>
+		</figure> 
+		<figure class="effect9">
+			<img src="../img/pic9.jpg" alt="">
+		</figure>
+</body>
+</html>

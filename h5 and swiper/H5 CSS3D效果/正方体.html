@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{padding: 0; margin: 0;}
+		.carvas{width: 500px;height: 500px;margin: 50px auto;position: relative;
+			transform-style: preserve-3d;
+			tranform: perspective(500px) rotateX(-15deg);
+		}
+		.box{position: absolute;width: 350px; height: 350px;background-color: rgba(255,0,0,0.5);text-align: center;line-height: 350px; font-size: 48px;border: 1px solid #f00;left:75px; top:75px;color: #fff;}
+		.center{transform: rotateX(90deg) translateZ(-175px);}
+		.top{transform: translateZ(175px); }
+		.left{transform: translateX(-175px) rotateY(-90deg); }
+		.right{transform: translateX(175px) rotateY(90deg); }
+		.bottom{transform: translateZ(-175px); }
+		.before{transform: rotateX(90deg) translateZ(175px);}
+	</style>
+</head>
+<body>
+	<h2>transform-style: preserve-3d</h2>
+	<div class="carvas">
+		<div class="top box">上</div>
+		<div class="center box">中</div>
+		<div class="left box">左</div>
+		<div class="right box">右</div>
+		<div class="bottom box">下</div>
+		<div class="before box">前</div>
+	</div>
+</body>
+</html>

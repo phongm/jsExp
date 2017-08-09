@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/*可用状态下*/
+		.enable:enabled{background-color: :orange;}
+		/*不可用状态下*/
+		.disabled:disabled{background-color: gray;}
+		/*只读状态下*/
+		.readOnly:read-only{background-color: blue;}
+		/*非只读状态下*/
+		.readWrite:read-write{background-color: red;}
+		/*被勾选状态*/
+		.checkbox:checked{outline : 2px solid red;}
+		/*被选中的状态*/
+		.section::selection{background-color: orange;color:#fff;}
+		/*预先提示状态*/
+		.place::-webkit-input-placeholder{color : orange;}
+	</style>
+</head>
+<body>
+	<h2>hover active enabled disabled read-obly read-write check section</h2>
+	<div>
+		<input type="text" class="enable">
+		<input type="text" class="disable" disabled="true">
+		<input type="text" class="readOnly" readonly="true" value="我不帅">
+		<input type="text" class="readWrite">
+		<input type="checkbox" class="checkbox">
+		<p class="section">我已经在努力了！！我已经在努力了！！我已经在努力了！！我已经在努力了！！我已经在努力了！！我已经在努力了！！</p>
+		<input type="text" class="place" placeholder="你能怎么样？">
+	</div>
+
+</body>
+</html>

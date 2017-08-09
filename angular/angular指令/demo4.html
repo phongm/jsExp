@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../js/angular.min.js"></script>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			body, html{
+				width: 100%;
+				height: 100%;
+			}
+			.wrapper{
+				width: 100%;
+				height: 100%;
+				background: #ccc;
+			}
+			.tab-bar{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 49px;
+				width: 100%;
+				display: -webkit-flex;
+			}
+			.tab-bar li{
+				flex: 1;
+				box-sizing: border-box;
+				border: 1px solid #ddd;
+				height: 100%;
+				list-style: none;
+				text-align: center;
+			}
+			.content{
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 49px;
+				width: 100%;
+			}
+			.content div{
+				width: 100%;
+				height: 100%;
+			}
+			.red{
+				background: red;
+			}
+			.green{
+				background: green;
+			}
+			.blue{
+				background: blue;
+			}
+			.yellow{
+				background: yellow;
+			}
+			.white{
+				background-color: #fff;
+			}
+		</style>
+</head>
+<body ng-app="myApp">
+	<div class="wrapper" ng-controller="firstContrl">
+			<div class="content" ng-switch on="selectedBox">
+			    <div ng-switch-when="main" class="red">微信</div>
+				<div ng-switch-when="contact" class="green">通讯录</div>
+				<div ng-switch-when="discover" class="blue">发现</div>
+				<div ng-switch-when="me" class="yellow">我</div>
+			</div>
+
+			<ul class="tab-bar">
+			<!-- 	在循环体里面也可以调用 循环的参数。例如￥index，n==== -->
+				<li ng-repeat="n in num" ng-click="changeBoxAction($index, $event)" ng-class="{'white':$index==index}">
+		            {{n}}
+				</li>
+				
+			</ul>
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('firstContrl', ['$scope', function($scope){
+				$scope.num  = ['首页','热吗',"孽欲","北京"];
+				$scope.boxName = ['main', 'contact', 'discover', 'me'];
+				// $scope.color = ["red", "green", "blue", "yellow"];
+				$scope.selectedBox = $scope.boxName[3];
+				
+				$scope.changeBoxAction = function(index,ent){
+					console.log(ent.target);
+					//ent.target.colorName = $scope.color[index];
+					$scope.colorName = "white";
+					$scope.index = index;
+					$scope.selectedBox = $scope.boxName[index];
+				}
+			}]);
+		</script>
+</body>
+</html>

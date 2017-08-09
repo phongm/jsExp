@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>绘制 线段</h2>
+	<p>ctx.moveTo(x, y) | 设置你的起始坐标</p>
+	<p>ctx.lineTo(x, y) | 设置你下一个坐标</p>
+	<p>注: 通常绘制线段只存在一个moveTo()</p>
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		ctx.moveTo(10, 10);
+		ctx.fillStyle = "orange";
+		ctx.strokeStyle = "#f66";
+		ctx.lineWidth = 2;
+		ctx.lineTo(110, 10);
+		ctx.lineTo(110, 210);
+		ctx.lineTo(10, 210);
+		ctx.lineTo(10, 10);
+		ctx.fill();
+		ctx.stroke();
+		
+	</script>
+</body>
+</html>

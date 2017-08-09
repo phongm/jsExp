@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.box{width: 100px; height: 100px;background-color: orange;animation: move 2s linear infinite;-webkit-animation: move 2s linear infinite alternate;
+			}
+		.run{width: 540px;height: 300px; position: relative;border: 2px solid #ccc;margin: 50px auto 0;
+			
+		}
+		.img{width: 180px; height: 300px;background: url(../img/charector.png) no-repeat;animation: jump 0.5s linear infinite;
+			-webkit-animation: jump 0.5s step-end infinite alternate;}
+		@keyframes jump{
+			0%{background-position: 0 0;}
+			17%{background-position: -180px 0;}
+			34%{background-position: -360px 0;}
+			51%{background-position: -540px 0;}
+			68%{background-position: -720px 0;}
+			84%{background-position: -900px 0;}
+			100%{background-position: -1080px 0;}
+		}
+		@-webkit-keyframes jump{
+			0%{background-position: 0 0;}
+			17%{background-position: -180px 0;}
+			34%{background-position: -360px 0;}
+			51%{background-position: -540px 0;}
+			68%{background-position: -720px 0;}
+			84%{background-position: -900px 0;}
+			100%{background-position: -1080px 0;}
+		}
+		
+		@keyframes move{
+			from{margin-left: 0;}
+			to{margin-left: 90%;background-color: #f66}
+		}
+		@-webkit-keyframes move{
+			from{margin-left: 0;}
+			to{margin-left: 90%;background-color: #f66}
+		}
+	</style>
+</head>
+<body>
+	<h2>关键帧动画</h2>
+	<p>animation(-o-, -moz-, -webkit-, -ms-)</p>
+	<h3>animation{name, duration, timing-function, delay, iteration-count, direction}</h3>
+	<p>name : 动画定义的名字</p>
+	<p>duration : 动画需要的时间</p>
+	<p>timing-function : 时间曲线（step-start， step-end）</p>
+	<p>delay : 延迟时间</p>
+	<p>iteration-count : number | infinite</p>
+	<p>direction : 是否允许反播 alternate</p>
+	-----------------------------------------------------------
+	<h2>关键帧</h2>
+	@keyframes name{
+	from{}
+	to{}
+	@keyframes name{
+		0%{}
+		5%{}
+		100%{}
+	}
+}
+<div class="box"></div>
+<div class="run">
+	<div class="img"></div>
+</div>
+</body>
+</html>

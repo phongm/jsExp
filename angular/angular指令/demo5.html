@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/angular.min.js"></script>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			body, html{
+				width: 100%;
+				height: 100%;
+			}
+			.wrapper{
+				width: 100%;
+				height: 100%;
+				background: red;
+			}
+			.tab-bar{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 49px;
+				width: 100%;
+				display: -webkit-flex;
+			}
+			.tab-bar li{
+				flex: 1;
+				box-sizing: border-box;
+				border: 1px solid #ddd;
+				height: 100%;
+				list-style: none;
+			}
+			.content{
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 49px;
+				width: 100%;
+			}
+			.content div{
+				width: 100%;
+				height: 100%;
+			}
+			.red{
+				background: red;
+			}
+			.green{
+				background: green;
+			}
+			.blue{
+				background: blue;
+			}
+			.yellow{
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body ng-app="myApp">
+		<div class="wrapper" ng-controller="firstContrl">
+			<div class="content" ng-switch on="selectedBox">		
+				<div ng-switch-when="main">
+					<div ng-include="url1"></div>
+				</div>
+				<div ng-switch-when="contact" class="green">通讯录</div>	
+				<div ng-switch-when="discover" class="blue">发现</div>
+				<div ng-switch-when="me" class="yellow">我</div>
+			</div>
+			<ul class="tab-bar">
+				<li ng-click="changeBoxAction(0,$event)">微信</li>
+				<li ng-click="changeBoxAction(1)">通讯录</li>
+				<li ng-click="changeBoxAction(2)">发现</li>
+				<li ng-click="changeBoxAction(3)">我</li>
+			</ul>
+		</div>
+		
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('firstContrl', ['$scope', function($scope){
+				$scope.url1 = 'template1.html';
+				
+				$scope.boxName = ['main', 'contact', 'discover', 'me'];
+				$scope.selectedBox = $scope.boxName[0];
+				
+				$scope.changeBoxAction = function(index,event){
+					//console.log(event);
+					$scope.selectedBox = $scope.boxName[index];
+				}
+
+			}]);
+
+			app.controller('temp',['$scope',function($scope){
+                 $scope.go=function(event){
+                 	console.log(event);
+                 }
+			}]);
+		</script>
+	</body>
+</html>

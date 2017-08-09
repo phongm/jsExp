@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.canvas{width: 100%; height: 300px; position: relative; border: 1px solid orange;}
+		.ball{width: 12px; height: 12px; border-radius: 100%;background-color: #f66;position: absolute; animation: ball 1s linear infinite alternate;}
+		.running{animation-play-state: running; background-color: #f66;}
+		.paused{animation-play-state: paused;background-color: #ccc;}
+		@keyframes ball{
+			0%{left: 0; top: 0;}
+			10%{left: 30px; top: 30px;}
+			20%{left: 60px; top: 60px;}
+			30%{left: 90px; top: 90px;}
+			40%{left: 120px; top: 120px;}		
+			50%{left: 150px; top: 150px;}		
+			60%{left: 180px; top: 180px;}		
+			70%{left: 210px; top: 210px;}
+			80%{left: 240px; top: 240px;}
+			90%{left: 270px; top: 270px;}
+			100%{left: 280px; top: 280px;}
+		}
+	</style>
+</head>
+<body>
+	<h2>animate-play-state</h2>
+	<p>animate-play-state{ running | paused }</p>
+	<p>动画的启动和暂停</p>
+	<div class="canvas"><p class="ball"></p></div>
+	<input type="button" value="暂停" id="btn">
+	<script type="text/javascript" src="../../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		var isMoving = true;
+		$("#btn").on("click", function(){
+			if(isMoving){
+				$(".ball").removeClass("running").addClass("paused");
+				$(this).val("开始");
+				isMoving = false;
+			}else{
+				$(".ball").removeClass("paused").addClass("running");
+				$(this).val("暂停");
+				isMoving = true;
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+		*{margin:0px;padding:0px;}
+		.box{width:760px;height:300px;margin:100px auto;position:relative;}
+		.pic{width:760px;height:300px;overflow:hidden;}
+		.pic ul li{list-style-type:none;width:760px;height:300px;position:relative;overflow:hidden;}
+		.pic ul li .img1{position:absolute;left:-760px;top:0px;}
+		.pic ul li .img2{position:absolute;left:-15px;top:0px;display:none;}
+		.nav{width:100px;height:14px;position:absolute;bottom:10px;right:20px;}
+		.nav ul li{list-style-type:none;width:12px;height:12px;float:left;margin-right:5px;cursor:pointer;
+			border:1px solid #fff;}
+		.nav ul .bg{background:#ff7300;width:14px;height:14px;border:none;}
+  </style>
+ </head>
+ <body>
+	<div class="box">	
+		<div class="pic">
+			<ul>
+				<li style="background:url(images/bg1.jpg) center">
+					<img class="img1" src="images/text1.png" />
+					<img class="img2" src="images/con1.png" />
+				</li>
+				<li style="background:url(images/bg2.jpg) center">
+					<img class="img1" src="images/text2.png" />
+					<img class="img2" src="images/con2.png" />
+				</li>
+				<li style="background:url(images/bg3.jpg) center">
+					<img class="img1" src="images/text3.png" />
+					<img class="img2" src="images/con3.png" />
+				</li>
+				<li style="background:url(images/bg4.jpg) center">
+					<img class="img1" src="images/text4.png" />
+					<img class="img2" src="images/con4.png" />
+				</li>
+				<li style="background:url(images/bg5.jpg) center">
+					<img class="img1" src="images/text5.png" />
+					<img class="img2" src="images/con5.png" />
+				</li>
+			</ul>
+		</div>
+		<div class="nav">
+			<ul>
+				<li class="bg"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		var i = -1;
+		var time=0;
+		junmper();
+		function junmper(){
+			i++;
+			if(i>4)
+			i=0;
+			$(".nav ul li").eq(i).addClass("bg").siblings().removeClass("bg");
+				$(".pic ul li").eq(i).fadeIn(100).siblings().fadeOut(100);
+				$(".pic ul li").eq(i).find(".img1").css({left:"-760px"});
+				$(".pic ul li").eq(i).find(".img2").css({display:"none",left:"-15px"});
+				$(".pic ul li").eq(i).find(".img1").animate({left:"0px"},500,function(){
+					$(".pic ul li").eq(i).find(".img2").css("display","block");
+					$(".pic ul li").eq(i).find(".img2").animate({left:"0px"},500);
+				});
+	
+		}
+		time=setInterval("junmper()",3700);
+		$(".nav ul li").click(function(){
+			i=$(this).index();
+			$(".nav ul li").eq(i).addClass("bg").siblings().removeClass("bg");
+				$(".pic ul li").eq(i).fadeIn(100).siblings().fadeOut(100);
+				$(".pic ul li").eq(i).find(".img1").css({left:"-760px"});
+				$(".pic ul li").eq(i).find(".img2").css({display:"none",left:"-15px"});
+				$(".pic ul li").eq(i).find(".img1").animate({left:"0px"},500,function(){
+					$(".pic ul li").eq(i).find(".img2").css("display","block");
+					$(".pic ul li").eq(i).find(".img2").animate({left:"0px"},500);
+				});
+	
+		})
+	$(".nav ul li").hover(function(){
+		clearInterval(time);
+	},function(){
+		time=setInterval("junmper()",3700);
+	})
+	</script>
+ </body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="data/angular.min.js"></script>
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		html, body{width: 100%; height: 100%;background-color: #eee;font-size: 16px;}
+		h1{height: 74px;width: 100%;position: absolute;left: 0;top: 0;text-align: center;line-height: 74px;color: #f66;}
+		.content{width: 80%;position: absolute;top: 74px;bottom: 0;left: 10%;}
+		.first{border-top: 1px solid #000;}
+		.row.first > div{cursor: pointer;background-color: deepskyblue; font-weight: bold;}
+		.row.first .end{cursor: auto;display: block;}
+		.row.addRow .end > div{cursor: pointer;}
+		.row{width: 100%; height: 46px;box-sizing:border-box; border-bottom: 1px solid #000;display:-webkit-flex;position: relative;}
+		.row > div{height: 100%;flex: 1; background-color: skyblue; color: #fff;text-align: center;line-height: 46px;box-sizing: border-box; border-left: 1px solid #000;}
+		.row .end{border-right: 1px solid #000;display: -webkit-flex; flex: 2;}
+		.end > div{-webkit-flex: 1;box-sizing:border-box;border-top:10px solid #ccc;border-bottom:10px solid #ccc;border-left:20px solid #ccc;border-right: 20px solid #ccc;line-height: 26px;}
+		.end > .button{cursor: pointer;}
+		.footer{width: 100%; height: 46px;margin-top: 20px;}
+		.addRow  input{width: 100%; height: 100%;outline: none;font-size: 16px;box-sizing:border-box; padding: 4px 6px; float: left;color: #fff;line-height: 36px;text-align: center;font-weight: normal;}
+		.add{width: 100px;height: 46px;line-height: 46px;text-align: center;position: absolute;left: 50%;margin-left: -50px;}
+		.search{width: 100%; height: 46px;position: relative;margin-bottom: 20px;margin-top: 20px;}
+		.search select{width: 160px;height: 100%;position: absolute;left: 50%;margin-left: -160px;padding-left: 50px;font-size: 16px;color: #f66;border: none;outline: none;}
+		.search input{width: 160px;height: 100%;position: absolute;left: 50%;font-size: 16px;padding-left: 20px;border: 0;outline: none;color: #f66;}
+		.addRow .addColor{background-color: #fff; color: #666;}
+	</style>
+</head>
+<body ng-app="myapp">
+	<h1>书库管理</h1>
+	<div class="content  table-hover" ng-controller="firstContrl">
+		<div class="search">
+			<select ng-model="selected" ng-options="m.key for m in ways">
+				<option value="">请选择</option>
+			</select>
+			<input type="text" ng-model="inputVal" placeholder="{{m.warning}}">
+		</div>
+		<div class="row first">
+			<div ng-click="changeBool('id')">序号</div>
+			<div ng-click="changeBool('name')">书名</div>
+			<div ng-click="changeBool('author')">作者</div>
+			<div ng-click="changeBool('amount')">数量</div>
+			<div ng-click="changeBool('price')">单价(￥)</div>
+			<div class="end">操作</div>
+		</div>
+		<div class="row" ng-repeat="ele in items | filter:typeFun(selected.value) | orderBy:type:order">
+			<div>{{ele.id}}</div>
+			<div>{{ele.name}}</div>
+			<div>{{ele.author}}</div>
+			<div>{{ele.amount}}</div>
+			<div>{{ele.price}}</div>
+			<div class="end">
+				<div ng-click="update($index, ele.id)" class="button">修改</div>
+				<div ng-click="delete($index, ele.id)" class="button">删除</div>	
+			</div>
+		</div>
+		<div class="row addRow" ng-show="isShow">
+			<div><input type="text" ng-model="newId" ng-class="{'addColor':true}"></div>
+			<div><input type="text" ng-model="newName" ng-class="{'addColor':true}"></div>
+			<div><input type="text" ng-model="newAuthor" ng-class="{'addColor':true}"></div>
+			<div><input type="text" ng-model="newAmount" ng-class="{'addColor':true}"></div>
+			<div><input type="text" ng-model="newPrice" ng-class="{'addColor':true}"></div>
+			<div class="end">
+				<div  ng-click="sure()" class="button">确定</div>
+				<div  ng-click="cancle()" class="button">取消</div>
+			</div>
+		</div>
+<!-- 		<div class="row addRow" ng-show="isUpdate">
+			<div><input type="text" ng-model="upId"></div>
+			<div><input type="text" ng-model="upName"></div>
+			<div><input type="text" ng-model="upAmount"></div>
+			<div><input type="text" ng-model="upPrice"></div>
+			<div class="end" ng-click="sure()">确定</div>
+		</div> -->
+		<div class="footer" ng-show="isButtonShow">
+			<button ng-click="addBook()" class="add">增加</button>
+		</div>
+	</div>
+		
+
+	<script type="text/javascript">
+		var myapp = angular.module("myapp", []);
+		myapp.service('require', ['$http',function($http) {
+			    this.getData = function (api,data,callback) {
+			        $http.get(api, data).then(function(res){
+                         callback(res);
+			        }, function(error){
+			        	console.log("error: "+error);
+			        })
+			    };
+			    this.deleteData = function(api, data, callback){
+			    	this.getData(api,data,callback);
+			    };
+			    this.updateData = function(api, data, callback){
+			    	this.getData(api,data,callback);
+			    };
+			    this.addData = function(api, data, callback){
+			    	this.getData(api,data,callback);
+			    };
+
+			}]);
+		myapp.controller("firstContrl", ["$scope", "require", function($scope, require){
+			$scope.items = [];
+			$scope.isShow = false;
+			$scope.order = false;
+			$scope.type = "price";
+			$scope.isButtonShow = true;
+			$scope.isUpdate = false;
+			$scope.edit = false;
+			$scope.ways = [{"key":"序号", "value":"id", "warning":"请输入序号！"}, {"key":"书名","value":"name", "warning":"请输入书名！"}, {"key":"作者","value":"author", "warning":"请输入作者！"}, {"key":"数量","value":"amount", "warning":"请输入数量！"}, {"key":"单价", "value":"price", "warning":"请输入单价！"}];
+			
+			require.getData("data/famous.json", {}, function(res){
+				$scope.items = res.data;
+			});
+			$scope.addBook = function(){
+				$scope.isShow = true;
+				$scope.edit = true;
+			}
+			$scope.changeBool = function(ty){
+				$scope.order = !$scope.order;
+				$scope.type = ty;
+			}
+			$scope.typeFun = function(selected){
+				var obj = {};
+				obj[selected] = this.inputVal;
+				return obj;
+			}
+			$scope.sure = function(){
+				var book = {};
+				if($scope.newId){
+					book.id = $scope.newId;
+					if($scope.newName){
+						book.name = $scope.newName;
+						if($scope.newAuthor){
+							book.author = $scope.newAuthor;
+							if($scope.newAmount){
+								book.amount = parseInt($scope.newAmount);
+								if($scope.newPrice){
+									book.price = parseFloat($scope.newPrice);
+									console.log(book);
+									$scope.items.push(book);
+									$scope.newId = "";
+									$scope.newName = "";
+									$scope.newAuthor = "";
+									$scope.newAmount = "";
+									$scope.newPrice = "";
+									$scope.isShow = false;
+									$scope.edit = false;
+									require.addData("data/famous.json",{params:{"add":{"id":book.id}}}, function(res){
+									});
+								}else{
+									alert("价格输入不正确");
+								}
+							}else{
+								alert("数量输入不正确!");
+							}
+						}else{
+							alert("请输入作者");
+						}
+					}else{
+						alert("书名输入不正确!");
+					}
+				}else{
+					alert("序号输入不正确!");
+					return;
+				}
+				
+			};
+			$scope.cancle = function(){
+				$scope.newId = "";
+				$scope.newName = "";
+				$scope.newAuthor = "";
+				$scope.newAmount = "";
+				$scope.newPrice = "";
+				$scope.isShow = false;
+				$scope.edit = false;
+			};
+			$scope.findIndex = function(id){
+				var index = -1;
+				var len = $scope.items.length;
+				for(var i = 0; i < len; i++){
+					if($scope.items[i].id === id){
+						index = i;
+						break;
+					}
+				}
+				return index;
+			}
+			$scope.delete = function(i, id){
+				if(!$scope.edit){
+					var index = $scope.findIndex(id);
+					$scope.items.splice(index, 1);/*"data/famous.json"*/
+					require.deleteData("data.php",{params:{"delete":{"id":id}}}, function(res){
+					});
+				}
+			}
+			$scope.update = function(i, id){
+				if(!$scope.edit){
+					$scope.isShow = true;
+					var index = $scope.findIndex(id);
+					$scope.newId = $scope.items[index].id;
+					$scope.newName = $scope.items[index].name;
+					$scope.newAuthor = $scope.items[index].author;
+					$scope.newAmount = $scope.items[index].amount;
+					$scope.newPrice = $scope.items[index].price;
+					$scope.delete(i, id);
+					$scope.edit = true;
+					require.updateData("data/famous.json",{params:{"update":{"id":id}}},function(res){
+					});
+					
+				}
+			}
+		}]);
+	</script>
+	
+	
+</body>
+</html>

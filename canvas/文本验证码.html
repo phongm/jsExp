@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/* <h2>文本参数</h2>
+		<p>ctx.font = "style, size, family" </p>
+		<p>ctx.textBaseLine = "top | bottom | middle</p>
+		<p>ctx.textAlign = "left | center | right "</p>
+		<p>ctx.fillText(text, x, y) | 实心文字</p>
+		<p>ctx.strokeText(text, x, y) | 描边文字或者空心文字</p>
+		<p>text: 你要装饰的文本</p>
+		<p>x, y: 距离原点的距离</p> */
+		/*input,span{float: left;}*/
+	</style>
+</head>
+<body>
+	<input type="text" id="text">
+	<canvas id="canvas" width="80" height="40"></canvas>
+	<input type="button" value="换一张" id="btn" onclick="change()">
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		creatTxt(ctx);
+
+		function creatTxt(ctx){
+			
+			ctx.clearRect(0,0,80,40);
+			var text = getText();
+			ctx.font = "italic bold 30px microsoft yahei";
+			var lg = ctx.createLinearGradient(0,0,80,40);
+			lg.addColorStop(0.3, "yellow");
+			lg.addColorStop(0.5, "blue");
+			lg.addColorStop(0.7, "skyblue");
+			lg.addColorStop(1, "orange");
+			ctx.strokeStyle = lg;
+			//ctx.textBaseLine = "top";
+			ctx.strokeText(text, 0,40);
+		}
+		function change(){
+			creatTxt(ctx);
+		}
+		function getText(){
+			var text = Math.floor(Math.random()*8999+1000);
+			return text;
+		}
+	</script>
+</body>
+</html>

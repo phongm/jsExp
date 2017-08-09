@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+<meta name="apple-touch-fullscreen" content="YES" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<style>
+	button{
+		padding:10px;
+		color: red;
+	}
+	.div{
+		display: -webkit-box;
+	}
+	.div> div{
+		-webkit-box-flex:1;
+		box-sizing:border-box;
+
+	}
+	.one{
+		border: 1px solid red
+	}
+	.two{
+		border: 1px solid blue
+	}
+	.imgBox{
+		display: block;
+		height: 100px;
+		width: 100px;
+		border: 1px solid blue;
+	}
+	.imgBox img{
+        max-width: 100%;
+	}
+</style>
+</head>
+<body>
+	<div class="div"><div class="one">呵呵</div><div class="two">嘻嘻</div></div>
+	<button id="getSign">签名获取</button>
+	<button id="scanQRCode1">扫描</button>
+	<button id="choseImg">选择图片</button>
+	<div class="imgBox"><img src="../assets/img3.png" alt=""></div>
+</body>
+<script type="text/javascript" src="../assets/zepto.js"></script>
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+        $('#getSign').on('click', function(event) {
+        	event.preventDefault();
+        	$.post("/getSignature", {}, function(config) {
+			if (config != undefined && config != null) {
+
+				wx.config({
+					debug : true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					appId : 'wx42b6b1e2e9bc0ea4', // 必填，appID公众号的唯一标识
+					timestamp : config.timestamp, // 必填，生成签名的时间戳
+					nonceStr : config.nonceStr, // 必填，生成签名的随机串
+					signature : config.signature,// 必填，签名，见附录1
+					jsApiList : [ 'scanQRCode','onMenuShareTimeline','chooseImage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone' ]
+				// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+				alert('配置成功！');
+			}
+		  });
+        });
+
+		wx.ready(function() {
+			// 9.1.2 扫描二维码并返回结果
+			document.querySelector('#scanQRCode1').onclick = function() {
+				//微信扫描接口
+				/*wx.scanQRCode({
+				    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+				    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+				    success: function (res) {
+				    	var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+				    	//return result;
+					}
+				});*/
+				wx.scanQRCode({
+					needResult : 1,
+					desc : '微信调扫描',
+					success : function(res) {
+						//扫描成功的返回值
+						alert(JSON.stringify(res));
+					}
+				});
+			};
+	        document.querySelector('#choseImg').onclick=function(){
+				wx.chooseImage({
+				    count: 1, // 默认9
+				    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+				    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+				    success: function (res) {
+				        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+				      document.querySelector('img').src = localIds[0];
+				      wx.uploadImage({
+						    localId: localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+						    isShowProgressTips: 1, // 默认为1，显示进度提示
+						    success: function (res) {
+						        var serverId = res.serverId;
+						        alert(serverId)
+						    }
+						});
+				    }
+				});
+			}
+            //分享到朋友圈
+            wx.onMenuShareTimeline({
+                title: 'Catch My Breath', // 分享标题
+                link: 'http://music.163.com/#/song?id=25657526', // 分享链接
+                imgUrl: 'http://y.gtimg.cn/music/photo_new/T002R300x300M0000000vy7f4FVpFS.jpg?max_age=2592000', // 分享图标
+                success: function () { 
+                    // 用户确认分享后执行的回调函数
+                    alert("分享成功");
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                    alert("取消分享");
+                }
+            });
+            wx.onMenuShareQQ({
+                title: 'hello world', // 分享标题
+                desc: 'first test', // 分享描述
+                link: 'wechatDemo/views/index.html', // 分享链接
+                imgUrl: 'https://www.baidu.com/img/2016_10_09logo_61d59f1e74db0be41ffe1d31fb8edef3.png', // 分享图标
+                success: function () { 
+                   // 用户确认分享后执行的回调函数
+                   alert("分享成功");
+                },
+                cancel: function () { 
+                   // 用户取消分享后执行的回调函数
+                   alert("取消分享");
+                }
+            });
+            wx.onMenuShareWeibo({
+                title: 'hello world', // 分享标题
+                desc: 'first test', // 分享描述
+                link: 'wechatDemo/views/index.html', // 分享链接
+                imgUrl: 'https://www.baidu.com/img/2016_10_09logo_61d59f1e74db0be41ffe1d31fb8edef3.png', // 分享图标
+                success: function () { 
+                   // 用户确认分享后执行的回调函数
+                    alert("分享成功");
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                    alert("取消分享");
+                }
+            });
+            wx.onMenuShareQZone({
+                title: 'hello world', // 分享标题
+                desc: 'first test', // 分享描述
+                link: 'wechatDemo/views/index.html', // 分享链接
+                imgUrl: 'https://www.baidu.com/img/2016_10_09logo_61d59f1e74db0be41ffe1d31fb8edef3.png', // 分享图标
+                success: function () { 
+                   // 用户确认分享后执行的回调函数
+                    alert("分享成功");
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                   	alert("取消分享");
+                }
+            });
+
+
+		});//endof wx.ready
+		
+	});
+</script>
+</html>
+

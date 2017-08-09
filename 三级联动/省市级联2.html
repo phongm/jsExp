@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>省市级联</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			/*var array = [];
+			array[0] = "abc";
+			array[1] = "bcd";
+
+			array["abc"] = "cdef";
+			array.bcd = "cdefg";
+
+			console.log(array["bcd"]);*/
+
+			// 数组[省份] = ["成都", "绵阳"];
+			// 数组[省份][成都] = ["青羊", "金牛"];
+			// 将在 address.json 文件中的数据结构转换为
+			//	address = [
+					// 省份名1 : [
+							// 城市名1 : [],
+							// 城市名2 : []
+					// ],
+					// 省份名2 : [
+							// 城市名1 : [],
+							// 城市名2 : []
+					// ]
+			// ];
+			//
+			// 
+
+			// var address = [];
+			var address = {};
+			$.getJSON("address.json", function(data){
+				var provinces = data.regions;
+				// console.log(provinces);
+				$.each(provinces, function(index, province){
+					// address[province.name] = [];
+					address[province.name] = {};
+					var cities = province.regions;
+					$.each(cities, function(index, city){
+						// console.log(city);
+						address[province.name][city.name] = city.regions;
+					});
+				});
+				initProvince();
+				// console.log(address);
+			});
+
+			// 省份初始化
+			function initProvince() {
+				$("#province").empty().append('<option value="-1">请选择省份</option>');
+				for (var provinceName in address) {
+					$("<option value='"+ provinceName +"'>"+ provinceName +"</option>").appendTo("#province");
+				}
+			}
+
+			// 城市加载
+			function initCity() {
+				// 获取当前已选的省份
+				var provinceName = $("#province").val();
+				// 获取该省份下的所有城市
+				var cities = address[provinceName];
+				// 显示城市
+				$("#city").empty().append("<option value='-1'>请选择城市</option>");
+				for (var cityName in cities) {
+					$("<option>"+ cityName +"</option>").appendTo("#city");
+				}
+			}
+
+			// 加载区县
+			function initDistrict() {
+				// 获取已选省份与城市
+				var provinceName = $("#province").val(),
+					cityName = $("#city").val();
+				// 获取选定城市下的所有区县信息
+				var districts = address[provinceName][cityName];
+				// 显示区县
+				$("#district").empty().append("<option value='-1'>请选择区县</option>");
+				for (var i in districts) {
+					$("<option>"+ districts[i].name +"</option>").appendTo("#district");
+				}
+			}
+
+			$("#province").on("change", initCity);
+			$("#city").on("change", initDistrict);
+		});
+	</script>
+</head>
+<body>
+	<select id="province"></select>
+	<select id="city"></select>
+	<select id="district"></select>
+</body>
+</html>

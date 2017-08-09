@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.min.js"></script>
+		<style>
+			.box {
+				width: 200px;
+				height: 200px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body ng-app="my-app">
+		
+		
+		<div class="box" ng-controller="firstContrl"></div>
+		
+		<script>
+			var myApp = angular.module('my-app', []);
+			//app的配置方法，在这里只可以得到$provide
+			//$provide上创建服务 provider service factory
+			
+			myApp.config(['$provide', function($provide){
+				//在config中只使用$provide的provider方法创建服务
+			}]);
+			
+
+			myApp.provider('providerService01', function(){
+				this.$get = function(){
+					return 'providerService01';
+				}
+			});
+			
+			myApp.service('serviceService01', function(){
+				this.name = 'zhangsan';
+			});
+			
+			myApp.factory('factoryService01', function(){
+				return {
+					"name" : "phm",
+					"age" : "23"
+				};
+			});
+			
+			myApp.service('hex', ['$http',function($http) {
+			    this.getList = function (api,data,callback) {
+			        $http.get(api).then(function(res){
+                         callback(res);
+			        }, function(){})
+			    }
+			}]);
+
+			myApp.controller('firstContrl', ['$scope', 'providerService01', 'factoryService01', 'serviceService01','hex', function($scope, providerService01, factoryService01, serviceService01,hex){
+				console.log('第一个控制器创建');
+				console.log(providerService01);
+				console.log(serviceService01);
+				console.log(factoryService01);
+				hex.getList('./test.json',{},function(res){
+					console.log(res.data);
+				});
+			}]);
+			
+		
+			
+		</script>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

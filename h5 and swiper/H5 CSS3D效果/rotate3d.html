@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.canvas{
+			width: 300px;
+			height: 300px;
+			border: 1px solid red;
+			margin: 0 auto;
+			perspective: 300px;
+		}
+		.rotate3D{
+			width: 100px; height: 100px;
+			background-color: #f66;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: rotate3d(1,1,0,45deg);
+		}
+	</style>
+</head>
+<body>
+	<h2>rotate3D</h2>
+	<p>3d旋转</p>
+	<p>rotate3d(x, y, z); rotateX(x);rotateY(y); rotateZ(z)</p>
+	<div class="canvas"><div class="rotate3D"></div></div>
+</body>
+</html>

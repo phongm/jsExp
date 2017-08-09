@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.min.js"></script>
+	</head>
+	<body>
+		
+		<div ng-app="my-app">
+			<div ng-controller="firstContrl"></div>
+		</div>
+		
+		<script>
+			//创建Angularjs 常用工具函数
+			
+			var myapp = angular.module('my-app', []);
+			
+			//创建控制器
+			myapp.controller('firstContrl', ['$scope', function($scope){
+				var arr = [1, 2, 3, 4];
+				//判断是否是数组
+				//console.log(angular.isArray);
+				//console.log(angular.isArray(arr));
+				//console.log(angular.isObject(arr));
+				//isDate
+				//isDefined
+				//isUndefined
+				//isObject
+				//isNumber
+				//isFunction
+				
+				var str = 'aJISOafdasDNAO';
+				//转为大写字符
+				//console.log(angular.uppercase(str));
+				//转为小写字符
+				//console.log(angular.lowercase(str));
+				
+				//判断两个数据是否完全相等
+				var num1 = 111;
+				var num2 = '111';
+				var arr1 = [1, 2, 3];
+				var arr2 = [1, 2, 3];
+				var obj1 = {name : 'zhangsan', age: 24};
+				var obj2 = {name : 'zhangsan', age: 23};
+				//比较value用的
+				console.log('arr1==arr2'+angular.equals(obj1, obj2));
+				
+				//拷贝（对象才用拷贝）
+				var obj3 = {name: '张三', age: 30};
+				//var obj4 = obj3;
+				//var obj4 = angular.copy(obj3);
+				//var obj4 = new Object();
+				//angular.copy(obj3, obj4);//将obj3的值拷贝给obj4
+				//console.log(obj3==obj4)
+				//obj4.name = '李四';
+				
+				//console.log(obj3);
+				//console.log(obj4);
+				
+				//继承
+				var obj5 = {name : 'zhangsan'};
+				var obj6 = {age : 40};
+				
+				angular.extend(obj5, obj6);//obj5继承obj6
+				console.log(obj5)
+				//console.log(obj6)
+				
+				//遍历 forEach（数组，对象）
+				var jsonObj = {name: 'zhangsan', age: 40, sex : "man", id : "101"};
+				var array = [];
+				//参数1：需要遍历的对象
+				//参数2：遍历的方法
+				//参数3：遍历方法的上下文，在遍历方法中可以通过this调用
+				angular.forEach(jsonObj, function(val, key){
+					console.log('key:'+key+" val:"+val);
+					array.push(key);
+				});
+
+				console.log(array);
+				
+				//绑定对象，作为函数的上下文
+				var obj7 = {name: 'lisi'};
+				var fun = angular.bind(obj7, function(age){
+					console.log(this.name);
+					console.log('age:' + age);
+				},100);
+				
+                //如果写了默认参数，传参将失效
+				fun(200);
+				
+				//字符串和对象的相互转换
+				//字符串转对象
+//				JSON.parse()
+				var jsonStr = '{"name": "李四"}';
+				console.log(angular.fromJson(jsonStr));//Json指的是json格式的字符串
+				
+				//对象转字符串
+//				JSON.stringify()
+				//console.log(angular.toJson(obj7));
+				
+			}]);
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

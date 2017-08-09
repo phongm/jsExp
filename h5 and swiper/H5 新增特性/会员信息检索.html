@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>json串的存储</h2>
+	<fieldset>
+		<legend>客户信息</legend>
+		<table>
+			<tr><td>姓名：</td><td><input type="text" id="name"></td></tr>
+			<tr><td>邮箱：</td><td><input type="text" id="email"></td></tr>
+			<tr><td>电话：</td><td><input type="text" id="phone"></td></tr>
+			<tr><td>备注：</td><td><input type="text" id="info"></td></tr>
+			<tr><td><input type="button" value="保存" id="save" onclick="save()"></td><td></td></tr>
+		</table>
+		----------------------------------------------------------------------------------------<br>
+		<input type="text" placeholder="请输入姓名查询" id="sename">
+		<input type="button" id="search" value="查询" onclick="search()">
+		<p id="msg"></p>
+	</fieldset>
+	<script type="text/javascript" src="../../jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		function save(){
+			var data = new Object();
+			data.name = $("#name").val();
+			data.email = $("#email").val();
+			data.phone = $("#phone").val();
+			data.info = $("#info").val();
+			var str = JSON.stringify(data);
+			localStorage.setItem(data.name, str);
+
+		}
+		function search(){
+			var oName = $("#sename").val();
+			var value = localStorage.getItem(oName);
+			var data = JSON.parse(value);
+			var code = "姓名：" + data.name + "<br>邮箱：" + data.email + "<br>电话：" + data.phone + "<br>备注："+data.info;
+			$("#msg").html(code);
+		}
+	</script>
+
+
+
+</body>
+</html>

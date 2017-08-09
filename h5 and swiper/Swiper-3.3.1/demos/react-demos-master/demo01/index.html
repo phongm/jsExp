@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      
+      /*let Mycomponent = React.createClass({
+        render: function() {
+          return <ul>
+          {
+          
+             React.Children.map(this.props.children, function(item) {
+                return <ol> {item} </ol>
+              })
+          }
+             
+          </ul>
+        }
+
+      });
+      
+      ReactDOM.render(
+        <Mycomponent>
+          <p>new list 1</p>
+          <p>new list 2</p>
+          <p>new list 3</p>
+          <p>new list 4</p>
+        </Mycomponent>,
+        document.getElementById("example")
+      )*/
+
+      var Double = React.createClass({
+        getInitialState: function() {
+          return {value : "hello"}
+        },
+        handleChange: function(e){
+          this.setState({value: e.target.value});
+        },
+        render: function() {
+          return (
+            <div>
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+              <p>{ this.state.value }</p>
+            </div>
+          );
+        }
+      });
+      ReactDOM.render(
+        <Double />,
+        document.getElementById("example")
+      )
+    </script>
+  </body>
+</html>

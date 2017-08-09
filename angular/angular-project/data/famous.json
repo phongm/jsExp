@@ -1,0 +1,8 @@
+[
+{"id" : "746521", "name" : "红楼梦", "author" : "曹雪芹", "amount" : 7, "price" : 49},
+{"id" : "960402", "name" : "水浒传", "author" : "罗贯中", "amount" : 4, "price" : 58},
+{"id" : "586403", "name" : "三国演义", "author" : "施耐庵", "amount" : 6, "price" : 37},
+{"id" : "142534", "name" : "西游记", "author" : "吴承恩", "amount" : 5, "price" : 72},
+{"id" : "325405", "name" : "聊斋志异", "author" : "蒲松龄", "amount" : 2, "price" : 25},
+{"id" : "270306", "name" : "方谬神探", "author" : "李小龙", "amount" : 0, "price" : 64}
+]

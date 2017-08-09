@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cart</title>
+	<style type="text/css">
+		#cart {clear:both; overflow:hidden;}
+		#cart div{width:160px; height:30px; line-height:30px; float:left; border:1px solid;}
+		#cart .title, #cart .cart_body {width:1300px; border:none;}
+		.minus, .add{ display:inline-block; width:50px; height:30px; line-height:30px; text-align:center; cursor:default;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			// 从 cookie 中读取所保存的购物车信息 (数组)
+			$.cookie.json = true;
+			var products = $.cookie("products");
+			// ....判断数组是否存在或是否为空
+			// 遍历数组中的每个元素
+			$.each(products, function(index, element){
+				$(".template").clone(true).removeClass("template")
+							  .addClass("cart_body").appendTo("#cart").show()
+							  .children(".index").text(element.id)
+							  .next(".name").text(element.name).parent()
+							  .children(".price").text(element.price).end()
+							  .find(".num").val(element.amount).end()
+							  .children(".sub").text((element.price * element.amount).toFixed(2)).end()
+							  .find("a").data("product", element); // 在 删除 的超级链接上保存当前行的商品对象
+			});
+
+			// 删除行
+			$("#cart a").click(function(){
+				/* 从 cookie 中删除 */
+				// 获取待删除的对象
+				var prod = $(this).data("product");
+				// 找出该删除对象在数组中的索引
+				var index = $.inArray(prod, products);
+				if (index !== -1) {
+					// 从数组中删除元素
+					products.splice(index, 1);
+					// 将数组重新存回到 cookie 中（覆盖之前所保存的 cookie 信息）
+					$.cookie("products", products, {expires:7});
+					/* 从页面删除 */
+					$(this).parents(".cart_body").remove();
+				}
+			});
+
+			// 全选
+			$("#ck_all").click(function(){
+				// 获取“全选”复选框的选中状态
+				var status = $(this).prop("checked"); // true/false
+				// 设置每行商品前的复选框选中状态与 “全选” 一致
+				$(".ck").prop("checked", status);
+
+				// alert(this.checked);
+				// alert(this.getAttribute("checked"));
+				// alert($(this).attr("checked"));
+				// alert($(this).prop("checked"));
+				// $ck.prop("checked", !$ck.prop("checked"));
+			});
+
+			// 删除选中行
+			$("#del_checked").click(function() {
+				// 简洁
+				$(".ck:checked").parents(".cart_body")
+								.find("a").click();
+
+				// 遍历
+				/*$(".ck").each(function(index, element){
+					// $(this).prop("checked");
+					if ($(this).is(":checked")){ // 当前遍历到的复选框是被选中的
+						$(this).parents(".cart_body").find("a").click();
+					}
+				});*/
+			});
+
+			// 加数量
+			$(".add").click(function() {
+				// 获取当前的数量
+				var amount = parseInt($(this).prev(".num").val());
+				// 数量加
+				amount++;
+				/* cookie 中加 */
+				// 将当前行商品对象数量加
+				var prod = $(this).parents(".cart_body").find("a").data("product");
+				prod.amount = amount;
+				// 保存回 cookie 中
+				$.cookie("products", products, {expires:7});
+
+				/* 页面上加 */
+				$(this).prev().val(amount);
+
+				/* 更新小计金额 */
+				var subTotal = (prod.price * amount).toFixed(2);
+				$(this).parents(".cart_body").find(".sub").text(subTotal);
+			});
+			// 减数量
+			$(".minus").click(function() {
+				// 获取当前的数量
+				var amount = parseInt($(this).next().val());
+				if (amount <= 1)
+					return;
+				// 减数量
+				amount--;
+				/* cookie减 */
+				var prod = $(this).parents(".cart_body").find('a').data("product");
+				prod.amount = amount;
+				$.cookie("products", products, {expires:7});
+
+				/* 页面显示减 */
+				$(this).next().val(amount);
+
+				/* 更新小计金额 */
+				var subTotal = (prod.price * amount).toFixed(2);
+				$(this).parents(".cart_body").find(".sub").text(subTotal);
+			});
+
+			//  文本框中修改数量
+			$(".num").blur(function() {
+				// 验证输入的文本是否为合法数字
+				if (/^[1-9]\d*$/.test($(this).val())) {
+					/* cookie修改 */
+					var prod = $(this).parents(".cart_body").find('a').data("product");
+					prod.amount = parseInt($(this).val());
+					$.cookie("products", products, {expires:7});
+
+					/* 更新小计金额 */
+					var subTotal = (prod.price * prod.amount).toFixed(2);
+					$(this).parents(".cart_body").find(".sub").text(subTotal);
+				} else {
+					alert("数量应该为数字");
+					var prod = $(this).parents(".cart_body").find("a").data("product");
+					$(this).val(prod.amount);
+				}
+			});
+
+			// 小计
+
+			// 合计
+		});
+	</script>
+</head>
+<body>
+	<div id="cart">
+		<div class="title">
+			<div class="product"><label><input type="checkbox" id="ck_all">全选</label></div>
+			<div class="index">序号</div>
+			<div class="name">商品名称</div>
+			<div class="price">单价</div>
+			<div class="amount">数量</div>
+			<div class="sub">小计</div>
+			<div class="oper">操作</div>
+		</div>
+	</div>
+	<div>合计金额：<span class="total">111111</span></div>
+	<div>
+		<button id="del_checked">删除选中</button>
+		<button>清空购物车</button>
+	</div>
+
+	<div class="template" style="display:none">
+		<div class="product"><input type="checkbox" class="ck"></div>
+		<div class="index"></div>
+		<div class="name"></div>
+		<div class="price"></div>
+		<div class="amount"><span class="minus">-</span><input type="text" value="1" class="num" size="1"><span class="add">+</span></div>
+		<div class="sub"></div>
+		<div class="oper"><a href="javascript:void(0);">删除</a></div>
+	</div>
+</body>
+</html>

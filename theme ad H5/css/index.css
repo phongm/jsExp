@@ -1,0 +1,58 @@
+html, body{height: 100%;}
+.swiper-container{width: 100%;height: 100%;}
+.page1, .page2, .page3, .page4, .page5, .page6, .share{width: 100%;height: 100%;background-size: 100% 100%;background-repeat: no-repeat;}
+.page1{background-image: url(../img/bg-page1.jpg);}
+.page2{background-image: url(../img/bg-page2.jpg);}
+.page3{background-image: url(../img/bg-page3.jpg);}
+.page4{background-image: url(../img/bg-page4.jpg);}
+.page5{background-image: url(../img/bg-page5.jpg);}
+.page6{background-image: url(../img/bg-page6.jpg);}
+.share{background-image: url(../img/share.jpg);}
+.swiper-slide img, .swiper-slide div{position: absolute;}
+.swiper-slide div{text-align:center;opacity:.8;font-size: 0.703rem;font-weight:bold;color: #fff;background-color: #feb800;border: 3px solid #ff5850;border-radius: 100%;}
+.common{width: 6.814rem;height: 1.277rem;left: 50%;top: 31.5%;margin-left: -4.5rem;}
+.please{width: 4.555rem;height: 1.444rem;left: 50%; top: 38%;margin-left: -3rem;}
+.free{width: 9.777rem;height: 1.444rem;left: 50%;top: 43%; margin-left: -5rem;}
+.more{height: 1.574rem;line-height:1.574rem;width: 1.574rem;left: 65%;top: 37%;}
+.food{height: 2.388rem;line-height:2.388rem;width: 2.388rem;left: 80%;top: 42%;}
+.hotel{height: 2.388rem;line-height:2.388rem;width: 2.388rem;left: 3%;top: 42%;}
+.plane{height: 3.166rem;line-height:3.166rem; width: 3.166rem;left: 50%;top: 53%;margin-left: -1.5rem;}
+.info{width: 13.333rem; height: .759rem;left: 50%;top: 74%;margin-left: -6.5rem;}
+i.iconfont{font-size: 2rem; color: red; position: absolute;left: 45%;bottom: 5%;}
+.p1{width: 8.925rem; height: 1.518rem;left: 50%; top: 39%;margin-left: -4.5rem;}
+.p2{width: 14.166rem; height: 1.537rem;left: 50%; top: 45%;margin-left: -7rem;}
+.p3{width: 11.981rem; height: .962rem;left: 50%; top: 51%;opacity: .8;margin-left: -6rem;}
+.p4{width: 11.222rem; height: .925rem;left: 50%; top: 73%;margin-left: -5.5rem;}
+.three{width: .944rem;height: 1.351rem; top: 45.25%; left: 50%;margin-left:1.5rem;}
+.p3-p1{width: 13.333rem; height: 1.740rem;left: 50%; top: 37%;margin-left: -7.5rem;}
+.p3-p2{width: 13.444rem; height: 1.740rem;left: 50%; top: 42%;margin-left: -7.5rem;}
+.p3-p3{width: 11.240rem; height: .703rem;left: 50%; top: 49%;margin-left: -7.5rem;}
+.p3-p4{width: 5.629rem; height: .740rem;left: 50%; top: 52%;margin-left: -7.5rem;}
+.p3-p5{width: 7.277rem; height: .907rem;left: 50%; top: 73%;margin-left: -3rem;}
+.p4-p1{width: 15.235rem; height: .944rem; left: 50%; top: 32.5%; margin-left: -7.5rem;}
+.p4-p2{width: 8.203rem; height: 1.388rem; left: 50%; top: 39%; margin-left: -5.5rem;}
+.p4-p3{width: 8.111rem; height: 1.388rem; left: 50%; top: 44%; margin-left: -4.5rem;}
+.amazing{width: .5rem; height: 1.518rem; left: 50%; top: 44%; margin-left: 3.5rem;}
+.p4-p4{width: 7.296rem; height: 1.314rem; left: 50%; top: 71%; margin-left: -3.5rem;}
+.p5-p1{width: 10.925rem; height: 1.481rem; left: 50%; top: 37%; margin-left: -6rem;}
+.p5-p2{width: 10.111rem; height: 1.481rem; left: 50%; top: 43%; margin-left: -6rem;}
+.p5-p3{width: 10.703rem; height: .740rem; left: 50%; top: 49%; margin-left: -6rem;}
+.p5-p3-1{width: 2.648rem;height: .740rem; left: 50%; top: 51%;margin-left: -6rem;}
+.p5-p4{width: 17.333rem; height: .814rem; left: 50%; top: 73%; margin-left: -9rem;}
+.p6-p1{width: 6.055rem; height: 1.407rem; left: 50%; top: 16%; margin-left: -3.5rem;}
+.p6-p2{width: 3.055rem; height: .888rem; left: 50%; top: 20%; margin-left: -2rem;}
+.username, .phone, .cityList, .submit{width: 10.925rem; margin-left: -5.5rem; height: 2.222rem; position: absolute;}
+.page6 input{border: 0; outline: none; color:#222;width: 100%;height: 100%; float: left; line-height: 2.222rem;padding-left: 1rem;box-sizing: border-box;}
+.page6 input::-webkit-input-placeholder{color:#222;font-weight: normal;}
+.username{left: 50%; top: 38%; }
+.phone{left: 50%; top: 46%; color: #3f7ee8;}
+.cityList{left: 50%; top: 54%;background-color: #fff;}
+.submit{left: 50%; top: 64%;}
+.submit > input{background-color: #ec8119;text-align: center;padding: 0;color: #fff;}
+.success{left: 50%;top: 40%;margin-left: -2.5rem;width: 4.907rem;height: 2.277rem;}
+.sharearrow{width: 11.259rem; height: 2.074rem;left: 50%; margin-left: -5.5rem;top: 21%;}
+.ok{width: 10.777rem; height: 1.925rem;position: absolute; left: 50%; top: 62%;margin-left: -5.5rem;color: #fff;text-align: center;line-height: 1.925rem;border: 1px dashed #fff;}
+
+
+
+

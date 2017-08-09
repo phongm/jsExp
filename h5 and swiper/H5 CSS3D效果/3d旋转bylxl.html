@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		html body{width: 100%; height: 100%;background-color: #000;-webkit-user-select: none;}
+		.main{width: 133px; height:200px;margin: 240px auto; 
+			transform-style: preserve-3d;
+			transform: perspective(800px) rotateX(-40deg);
+			border: 2px solid #fff; background-color: transparent;
+		}
+		img, .img_0{position: absolute;-webkit-box-reflect: below 12px -webkit-linear-gradient(top, rgba(0,0,0,0) 50%, rgba(0,0,0,.7) 100%);}
+		.down{cursor: pointer;}
+		.img_0{transform: rotateX(-10deg);}
+		.img_1{transform: rotateX(0deg) translateZ(300px);}
+		.img_2{transform: rotateY(33deg) translateZ(300px);}
+		.img_3{transform: rotateY(66deg) translateZ(300px);}
+		.img_4{transform: rotateY(99deg) translateZ(300px);}
+		.img_5{transform: rotateY(132deg) translateZ(300px);}
+		.img_6{transform: rotateY(165deg) translateZ(300px);}
+		.img_7{transform: rotateY(197deg) translateZ(300px);}
+		.img_8{transform: rotateY(230deg) translateZ(300px);}
+		.img_9{transform: rotateY(263deg) translateZ(300px);}
+		.img_10{transform: rotateY(296deg) translateZ(300px);}
+		.img_11{transform: rotateY(327deg) translateZ(300px);}
+
+	</style>
+</head>
+<body>
+	<div class="main" id="main">
+		<img src="../img/1.jpg" alt="" class="img_1">
+		<img src="../img/2.jpg" alt="" class="img_2">
+		<img src="../img/3.jpg" alt="" class="img_3">
+		<img src="../img/4.jpg" alt="" class="img_4">
+		<img src="../img/5.jpg" alt="" class="img_5">
+		<img src="../img/6.jpg" alt="" class="img_6">
+		<img src="../img/7.jpg" alt="" class="img_7">
+		<img src="../img/8.jpg" alt="" class="img_8">
+		<img src="../img/9.jpg" alt="" class="img_9">
+		<img src="../img/10.jpg" alt="" class="img_10">
+		<img src="../img/11.jpg" alt="" class="img_11">
+	</div>
+	<script type="text/javascript" src="../jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			var main = document.getElementById("main");
+			var rotX = null;
+			var rotY = null;
+			var stepX = null;
+			var stepY = null;
+
+			document.ondragstart = function(){
+				return false;
+			}
+			document.onmousedown = function(e){
+				//记录鼠标点击时的位置
+				var startX = e.clientX;
+				var startY = e.clientY;
+				document.onmousemove = function(e){
+					//记录鼠标移动到此刻的位置
+					var endX = e.clientX;
+					var endY = e.clientY;
+					//保存位移量
+					stepX = endX - startX;
+					stepY = endY - startY;
+
+					rotX -= stepY * 0.1;
+					rotY += stepX * 0.1;
+					var str = "perspective(800px) rotateX(-40deg) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg)";
+					main.style["transform"] = str;
+				}
+			}
+			document.onmouseup = function(){
+				document.onmousemove = null;
+				document.onmouseup = null;
+			}
+		});
+	</script>
+</body>
+</html>

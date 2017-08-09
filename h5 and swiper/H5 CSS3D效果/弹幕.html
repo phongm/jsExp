@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0; padding: 0;}
+		html, body{height: 100%;width: 100%;overflow: hidden;}
+		.content{width: 100%;height: 90%;}
+		.content p{width: 100%;animation: move 5s linear; -webkit-animation: move 5s linear;position: absolute;left: 120%;position: absolute;}
+		.shuru{height: 10%; width: 100%;background: orange; text-align: center;}
+		@keyframes move{
+			form{left: 120%;}
+			to{left: -200%;}
+		}
+		@-webkit-@keyframes move{
+			form{left: 120%;}
+			to{left: -200%;}
+		}
+	</style>
+</head>
+<body>
+	<div class="content" id="content">
+		<p>主播好厉害！</p>
+	</div>
+	<div class="shuru">
+		<input type="text" id="text">
+		<button class="btn" onclick="send()">发送</button>
+	</div>
+	<script type="text/javascript" src="../jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+		function send(){
+			var texts = $("#text").val();
+			if(texts === ""){
+				alert("请输入文字");
+			}else{
+				var y = randomY(10, 400);
+				var color = randomColor();
+				var info = new Info(y, color, texts);
+			}
+		}
+		var contentDiv = document.getElementById("content");
+		function Info(y, color, texts){
+			this.y = y;
+			this.color = color;
+			this.texts = texts;
+			this.p = null;
+			this.init = function(){
+				this.p = document.createElement("p");
+				this.p.style.top = this.y + "px";
+				this.p.style.color = this.color;
+				this.p.innerHTML = this.texts;
+				contentDiv.appendChild(this.p);
+			}
+			this.init();
+		}
+		function randomY(min, max){
+			return Math.floor(min+Math.random()*(max-min));
+		}
+		function randomColor(){
+			return "rgba("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+",1)";
+		}
+	</script>
+</body>
+</html>

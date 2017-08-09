@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.min.js"></script>
+	</head>
+	<body ng-app="myapp">
+		<div ng-controller="firstContrl">
+			<!-- Angular提供的基本的过滤器 -->
+			<!-- 需要过滤的对象|过滤器的名字:[过滤的条件] -->
+			{{money | currency}}<br />
+			{{money | currency:'RMB'}}<br />
+			{{money | currency:"￥"}}<br />
+			{{str | uppercase}}<br />
+			{{str | lowercase}}<br />
+			{{json | json}}<br />
+			{{num | number:3}}<br />
+			{{currentTime | date:'yyyy-MM-dd hh:mm:ss'}}<br />
+			{{str1 | limitTo:7}}<br />
+			{{str1 | limitTo:-7}}<br />
+			
+			{{12.5432 | number:1 | currency:'￥'}} <!-- number会四舍五入的保留小数 -->
+			<!-- 一般number不与currency 混用，因为currency默认保留两位小数 -->
+			<br>
+
+			
+			<ul>
+				<li ng-repeat="person in arr | orderBy:name:bool">
+					姓名：{{person.name}},年龄：{{person.age}}
+				</li>
+			</ul>
+
+			<button ng-click="change()">更换顺序</button>
+
+			<ul>
+				<li ng-repeat="num in [134,143,3465,432,6] | orderBy:num:true">
+					{{num}}
+				</li>
+			</ul>
+			
+			<!-- <input type="text" ng-model="inputVal" /> -->
+			<input type="text" ng-model="inputVal1" placeholder="{{ty}}" />
+			<!-- <ul>
+				person对象中任意属性都可以过滤
+				<li ng-repeat="person in arr | filter:inputVal">
+					姓名：{{person.name}},年龄：{{person.age}}
+				</li>
+			</ul> -->
+			<ul>
+				<!-- person对象指定属性进行过滤 -->
+				<li ng-repeat="person in arr | filter:typeFun(ty) | orderBy:'name'">
+					姓名：{{person.name}},年龄：{{person.age}}
+				</li>
+			</ul>
+			<button ng-click="changeType('name')">姓名</button>
+			<button ng-click="changeType('age')">年龄</button>
+			
+			
+			<ul>
+				<!-- repeat基本数据类型时，数组中不允许出现相同的值 一旦出现就会报错 -->
+				<li ng-repeat="n in ['d', 'dd', 'ddd', 'da', 'ad']">
+					{{n}}
+				</li>
+			</ul>
+			
+		</div>
+		
+		
+	<script>
+		var myApp = angular.module("myapp", []);
+		myApp.controller("firstContrl", function($scope){
+			$scope.money = 1024;
+			$scope.str = "my name IS LXL";
+			$scope.json = {name : "lxl", age: 26};
+			$scope.num = 31.41592653;
+			var time = new Date();
+			$scope.currentTime = time.getTime();
+			$scope.str1 = "I love you my dear";
+
+			$scope.bool = false;
+			$scope.arr = [
+			{name : "zhangsan", age : 32},
+			{name : "lisi", age : 23},
+			{name : "wangwu", age : 68},
+			{name : "puliu", age : 54},
+			{name : "chenqi", age : 28}
+			];
+			$scope.name = "name";
+			$scope.change = function(){
+				$scope.bool = !this.bool;	
+			}
+			$scope.ty = "name";
+			$scope.typeFun = function(ty){
+				var obj = {};
+				obj[ty] = this.inputVal1;
+				return obj;
+			}
+			$scope.changeType = function(type){
+				$scope.ty = type;
+			}
+
+		});
+
+	</script>
+	</body>
+</html>

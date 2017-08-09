@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+	<!-- 双向数据绑定 -->
+	
+	<!--
+		ng-app指令定义了AngularJS所管理的范围
+		ng-app指令在页面加载完毕时会自动引导应用程序
+		ng-app定义了一个应用程序
+	-->
+	<div ng-app="my-app">
+	<!--
+		ng-model指令将html元素绑定到应用程序中
+	-->
+		<div ng-controller="myControl1">
+			<input type="text" ng-model="name">
+			<br>
+			<!--
+				ng-bind指令将应用程序中的数据绑定到了p标签中
+			-->
+			输入的内容是：<p ng-bind="name"></p>
+			<p>hello ------- {{name}}</p>
+			<button ng-click="changeName()">改变名</button>
+			{{obj.name}} is 
+			{{obj.age}} year's old,and 
+			<!-- 函数的调用 -->
+			{{obj.fun()}}<hr>
+			{{rootFun()}}
+			<hr>
+		</div>
+
+		<br >
+		<div ng-controller="myControl2">
+			{{hello}}
+			<button ng-click="changeName()">改变名</button>
+		</div>
+
+	</div>
+	
+</body>
+
+<script type="text/javascript">
+	var myApp = angular.module("my-app", []);
+	myApp.controller("myControl1", function($scope){
+		$scope.name = "帅哥";
+		$scope.obj = {
+			name : "MM",
+			age  : 23,
+			fun  : function(){
+				return "she is a beauty girl";
+			}
+		}
+		$scope.rootFun = function(){
+			return "this Fun is OK";
+		}
+		$scope.changeName = function(msg){
+			this.name = "美女";
+		}
+	});
+	myApp.controller("myControl2", function($scope){
+		$scope.hello = "美女",
+		$scope.changeName = function(msg){
+			this.hello = "帅哥";
+		}
+	});
+
+</script>
+</html>

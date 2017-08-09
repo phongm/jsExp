@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/* .bigC{position: relative; width: 100px; height: 100px; background: #f66;border: 1px solid #f00;border-radius: 50%;}
+		.smaC{width: 50px; height: 50px;position: absolute;}
+		.c1{background: orange;left: 0; top: 25px;border-radius: 50%;}
+		.c2{background: yellow; left: 50px; top: 25px;border-radius: 50%;}
+		.circle{width: 10px;height: 10px;border-radius: 50%;background: pink;position: absolute;left: 50%; top: 50%;margin-left: -5px;margin-top: -5px;}
+		.white{width: 5px;height: 5px;background: #fff;border-radius: 50%;position: absolute;left: 50%; top: 50%;margin-left: -2.5px;margin-top: -2.5px;} */
+		.canvas{position: relative;;overflow: hidden;width: 100px;}
+		.main{width: 96px; height: 48px; background: #fff;border-width: 2px 2px 50px 2px;border-style: solid;border-color: #000;}
+		.main{border-radius: 50%;}
+		.front{width: 10px; height: 10px;border: 20px #fff solid;background: #000;position: absolute;top: 25%; left: 0;border-radius: 50%;}
+		.back{width: 10px; height: 10px;border: 20px #000 solid;background: #fff;position: absolute;top: 25%; right: 0;border-radius: 50%;}
+
+		.btn{
+			width: 128px;height: 40px;line-height: 40px;font-size: 18px;
+			background: #f85c44;text-align: center;
+			color: #fff; cursor: pointer;
+		}
+		.btn:{opacity: .8;}
+		.btn{border-radius: 5px;box-shadow:0 4px 4px rgba(100, 97, 98, .35)};
+	</style>
+</head>
+<body>
+	<h1>八卦图</h1>
+	<!-- <div class="bigC">
+		<div class="smaC c1">
+			<div class="circle">
+				<div class="white"></div>
+			</div>		
+		</div>
+		<div class="smaC c2">	
+			<div class="circle">
+				<div class="white"></div>
+			</div>	
+		</div>
+	</div> -->
+	<div class="canvas">
+		<div class="front"></div>
+		<div class="main"></div>
+		<div class="back"></div>
+	</div>
+	<div>
+		<p>offset-x: 水平偏移的距离</p>
+		<p>offset-y: 垂直偏移的距离</p>
+		<p>blur: 模糊的大小</p>
+		<p>spread: 阴影的大小</p>
+		<p>color: 阴影的颜色</p>
+		<p>Inset outset: 内阴影，外阴影</p>、
+		
+		<p>offset-x = dis*cos(180-arg)</p>
+		<p>offset-y = dis*sin(180-arg)</p>
+		<p>spread = size*rel 阴影尺寸</p>
+		<p>blur = size-spread 模糊大小</p>
+	</div>
+	<div>
+		<div class="btn">立即购买</div>
+	</div>
+</body>
+</html>

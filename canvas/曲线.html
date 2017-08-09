@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<h2>绘制圆形</h2>
+	<p>ctx.arc(x1, y1, r1, start_point, end_point,counterWise)</p>
+	<p>x1, y1: 圆心的坐标</p>
+	<p>r1: 半径</p>
+	<p>start_point: 起始点</p>
+	<p>end_point: 终点</p>
+	<p>counterWise: 旋转方向{ true | false }(其中true表示逆时针绘制)</p>
+	-------------------------------------------------------------
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.strokeStyle = "orange";
+		ctx.lineWidth = 2;
+		ctx.arc(100, 100, 50, 0, 1.5*Math.PI, false);
+		ctx.stroke();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 2;
+		ctx.arc(260, 260, 50, 0, 2*Math.PI, true);
+		ctx.stroke();
+		ctx.closePath();
+
+		
+	</script>
+</body>
+</html>

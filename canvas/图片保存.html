@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2>图片保存</h2>
+	<p>save(); restore()</p>
+	<p>save(): 保存当前的状态</p>
+	<p>restore(): 取出你最近保存的状态</p>
+
+	<canvas id="canvas" width="400" height="500"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		ctx.fillStyle = "red";
+		ctx.save();
+		ctx.fillStyle = "blue";
+		ctx.save();
+		ctx.fillStyle = "yellow";
+		ctx.fillRect(0, 0, 100, 100);
+		window.open(canvas.toDataURL("image/png"), "smallWin", "height=400, width=600");
+		ctx.restore();
+		ctx.fillRect(0, 0, 100, 100);
+		
+		
+	</script>
+	
+</body>
+</html>

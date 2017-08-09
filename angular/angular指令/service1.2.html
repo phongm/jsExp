@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.min.js"></script>
+		<style>
+			.box{
+				width: 200px;
+				height: 200px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body ng-app="my-app">
+		
+		
+		<div ng-controller="secondContrl">
+			
+			<input type="checkbox" ng-model="showDiv" />
+			<input type="button" ng-click="printInfo()" value="打印" />
+			<div class="box" ng-if="showDiv" ng-controller="firstContrl"></div>
+		</div>
+		
+		<script>
+		    // 第三个[] 可以使用 my.app.config 来配置
+			var myApp = angular.module('my-app', []);
+//			console.log(myApp);
+			//app的配置方法，在这里只可以得到$provide
+			myApp.config(['$provide', function($provide){
+				$provide.provider('providerService01', function(){
+					var service = {};
+					var _name = '';
+					
+					service.setName = function(name){
+						_name = name;
+					}
+					service.getName = function(){
+						return _name;
+					}
+					
+					this.$get = function(){
+						return service;
+					}
+				})
+			}]);
+			
+			
+			myApp.controller('firstContrl', ['$scope', 'providerService01', function($scope, providerService01){
+				console.log('第一个控制器创建');
+				providerService01.setName('zhangsan');
+			}]);
+			
+			myApp.controller('secondContrl', ['$scope', 'providerService01', function($scope, providerService01){
+				//providerService01.setName('lxl');
+				$scope.printInfo = function(){
+					console.log(providerService01.getName());
+				}
+			}]);
+			
+		</script>
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

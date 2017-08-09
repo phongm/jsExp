@@ -1,0 +1,16 @@
+<html>  
+<body>  
+<input type="file" id="file" onchange="onInputFileChange()">  
+<video id="video_id" controls autoplay loop>
+    Your browser can't support HTML5 video
+</video>  
+<script>  
+function onInputFileChange() {  
+   var file = document.getElementById('file').files[0];  
+   var url = URL.createObjectURL(file);  
+   console.log(url);  
+   document.getElementById("video_id").src = url;  
+}  
+</script>  
+</body>  
+</html>  

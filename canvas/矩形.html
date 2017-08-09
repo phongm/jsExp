@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{padding: 0; margin: 0;}
+		body{text-align: center;}
+		canvas{background-color: #ccc;}
+	</style>
+</head>
+<body>
+	<h2>矩形</h2>
+	<p>ctx.rect(x1, y1, w, h)</p>
+	<p>x1, y1: 起始坐标</p>
+	<p>w: 矩形的宽度</p>
+	<p>h: 矩形的高度</p>
+	<p>ctx.fillRect(x1, y1, w, h) | 填充矩形</p>
+	<p>
+		ctx.rect(x1, y1, w, h);
+		ctx.fill;
+	</p>
+	<p>ctx.strokeRect(x1, y1, w, h) | 边框矩形</p>
+	<p>
+		ctx.rect(x1, y1, w, h);
+		ctx.stroke(); (描边)
+	</p>
+	<p>ctx.clearRect(x1, y1, w, h) | 清除矩形</p>
+	<p>
+		ctx.rect(x1, y1, w, h);
+		ctx.stroke(); (描边)
+	</p>
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.beginPath();
+		ctx.fillStyle = "#f66";
+		ctx.rect(0,0,100,100);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "skyblue";
+		ctx.fillRect(110,0,100,100);
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.strokeStyle = "orange";
+		ctx.rect(0,110,200,100);
+		ctx.stroke();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.clearRect(0,0,50,50);
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "#fff";
+		ctx.rect(100,500,50,150);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.fillStyle = "#fff";
+		ctx.rect(50,550,150,50);
+		ctx.fill();
+		ctx.closePath();
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	/*text-overflow*/
+		.one, .two{width: 400px;font-size: 24px;word-wrap: keep-all; margin: 10px;}
+		.one{word-break:break-all;}
+		.two{word-wrap: break-word;}
+		/* .three{width: 400px; white-space: nowrap;overflow: hidden;text-overflow:ellipsis;} */
+		.three{width: 400px;-webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient:vertical;text-overflow: ellipsis;overflow: hidden;}
+		@font-face{
+			font-family: lxl;
+			src: url("fonts/Fontin_Sans_I_45b.otf");
+		}
+		@font-face{
+			font-family: lixiaolong;
+			src: url("fonts/Fontin_Sans_B_45b.otf");
+		}
+		.four{font-family: lxl; font-size: 30px;}
+		.five{font-family: lixiaolong; font-size: 30px;}
+		/*--------------------------------------*/
+		div{background-color: orange; width: 100px; height: 100px; margin: 10px; padding: 20px; border: 10px dotted #f66; }
+		div:nth-of-type(2){-webkit-background-clip:padding-box;}
+		div:nth-of-type(3){-webkit-background-clip:content-box;}
+		div:nth-of-type(4){-webkit-background-clip:border-box;}
+	</style>
+</head>
+<body>
+	<h2>word-break</h2>
+	<p>文本换行属性</p>
+	<h3>word-break{normal | keep-all | break-all}</h3>
+	<div>
+		<p>keep-all : 半角空格以及连接符时才会换行</p>
+		<p>break-all: 单词内部也可以换行</p>
+	</div>
+	<p class="one">
+		there are moments in life when you miss someone so much that you just want to pick to pick them form your dreams and hug them for real! Dream what you want to dream; go where you want to go;be what you want to be, because you have only one life and one chance to do all the things you want to do.
+	</p>
+	-----------------------------------------
+	<h2>word-wrap</h2>
+	<p>文本换行属性</p>
+	<h3>word-wrap{normal | break-word}</h3>
+	<p class="two">
+		there are moments in life when you miss someone so much that you just want to pick to pick them form your dreams and hug them for real! Dream what you want to dream; go where you want to go;be what you want to be, because you have only one life and one chance to do all the things you want to do.
+	</p>
+	<h2>text-overflow</h2>
+	<p>文本溢出处理</p>
+	<h3>text-overflow{clip | ellipsis}</h3>
+	<p class="three">
+		心情不好，情绪低落。哈哈哈，是这样的吧？人生既然如戏，那我就要坐战机！心情不好，情绪低落。哈哈哈，是这样的吧？人生既然如戏，那我就要坐战机！心情不好，情绪低落。哈哈哈，是这样的吧？人生既然如戏，那我就要坐战机！心情不好，情绪低落。哈哈哈，是这样的吧？人生既然如戏，那我就要坐战机！
+	</p>
+
+	--------------------------------------
+
+	<h2> font (自定义字体)</h2>
+	<p class="four">hello world, i'm brooke</p>
+	<p class="five">hello world, i'm brooke</p>
+	
+	--------------------------------------
+	<h2>background-clip</h2>
+	<p>限制北京图片范围</p>
+	<h3>background-clip{padding-box | content-box | border-box}</h3>
+	<div>背景图片</div>
+	<div>背景图片</div>
+	<div>背景图片</div>
+	--------------------------------------
+	<h2>background-origin</h2>
+	<p>相对于内容框背景图片定位</p>
+	<h3>background-origin{pading-box | content-box | border-box}</h3>
+	<div>背景图片</div>
+	<div>背景图片</div>
+	<div>背景图片</div>
+</body>
+</html>

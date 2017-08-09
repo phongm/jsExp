@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="my-first-app">
+		<!-- 由于firstController嵌套了secondController，所以secondController会继承firstController的$scope上的所有属性和方法 -->
+		<div ng-controller="firstController">
+			{{person.name}}
+			<div ng-controller="secondController">
+				<p>我是second</p>
+				{{person.name}}
+				<br>
+				名字：{{name}}
+				<button ng-click="fun()">XX</button>
+			</div>
+
+		</div>
+
+	</div>	
+<script>
+	var myApp = angular.module('my-first-app', []);
+	//run()是myApp应用程序加载完毕后直接调用的，在run的方法中做app全局的初始化配置
+
+	myApp.run(function($rootScope){
+		console.log(3);
+	    $rootScope.name = "猛女！";
+	})
+	
+	//$rootScope 是ng-app上的作用域,是全局的
+
+	myApp.controller('firstController', function($scope,$rootScope){//将$rootScope注入到控制器中
+		$scope.person = {
+			name : 'zhangsan'
+		}
+		var fun = function(){
+			console.log('test');
+		}
+		$scope.fun = function(){
+		    $rootScope.name = 'hello world';
+		}
+	});
+	
+	myApp.controller('secondController', function($scope){
+		$scope.person = {
+			name : 'lisi'
+		}
+	});
+
+</script>
+	</body>
+</html>

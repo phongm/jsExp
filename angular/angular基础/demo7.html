@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="my-app">
+		<div ng-controller="firstContrl">{{name}}</div>
+		<div ng-controller="secondContrl">{{name}}</div>
+		<div ng-controller="thirdContrl">{{name}}</div>
+	</div>
+
+	<script type="text/javascript">
+		var app1 = angular.module("first-app", []);
+		var app2 = angular.module("second-app", ["first-app"]);
+		//将first-app和second-app模型注入到myApp中 之后注入的模型的配置(contro,server,direct)可以被 被注入的模型使用
+		var myApp = angular.module("my-app", ["second-app"]);
+		app1.controller("firstContrl", ["$scope", function($scope){
+			$scope.name = "嘻嘻";
+		}]);
+		app2.controller("secondContrl", ["$scope", function($scope){
+			$scope.name = "呵呵";
+		}]);
+		myApp.controller("thirdContrl", ["$scope", function($scope){
+			$scope.name = "哈哈";
+		}]);
+	</script>
+</body>
+</html>

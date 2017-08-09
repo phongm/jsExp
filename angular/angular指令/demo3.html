@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<style type="text/css">
+		.box{width: 100px;height: 100px;background-color: red;margin: 10px;}
+		.red{color: red;}
+	</style>
+</head>
+<body ng-app="my-app">
+	<div ng-controller="firstContrl">
+		<div class="box" ng-show="isShow">show</div>
+		<div class="box" ng-hide="isShow">hide</div>
+		<div class="box" ng-if="isShow">渲染不</div>
+		<button ng-click="ifShow()"> show </button>
+		<div ng-switch on="currentVal">
+			<div ng-switch-when="home">home</div>
+			<div ng-switch-when="setting">setting</div>
+			<div ng-switch-when="hot">hot</div>
+			<div ng-switch-when="default">default</div>
+		</div>
+
+		<div ng-switch on="boolVal">
+			<div ng-switch-when="true">男</div>
+			<div ng-switch-when="false">女</div>
+		</div>
+		<!-- <input type="text" type="checkbox" value="true"> -->
+		<input type="checkbox" ng-model="boolVal">
+		
+		<details ng-open="boolVal">
+			<summary>百度</summary>
+			<p>百度一下，你就知道</p>
+			<p>百度一下，我也知道</p>
+		</details>
+		
+		<ul>
+			<li ng-repeat="p in person" ng-class="{'red':$index==2}">
+				{{p.name}} {{p.age}}
+				{{$index}}
+				{{$odd}}
+				{{$first}}{{$last}}{{$middle}}
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module("my-app", []);
+		app.controller("firstContrl", ["$scope", function($scope){
+			$scope.isShow = false;
+			$scope.currentVal = "";
+			$scope.boolVal = false;
+			$scope.ifShow = function(){
+				this.isShow = !$scope.isShow;
+			};
+
+			//遍历数组重复数据问题
+			//<li ng-repeat="item in items track by $index">{{item}}</li>
+			$scope.person = [
+				{name : "xiaohong", age : 20},
+				{name : "xiaomei", age : 21},
+				{name : "xiaoLee", age : 20},
+				{name : "xiaoying", age : 19}
+			];
+		}]);
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.content{	width:100px;
+					height:100px;
+					padding:10px;
+					background:orange;
+					margin:40px auto;
+					border: 10px solid red;
+					box-sizing: content-box;
+					-webkit-box-sizing:content-box;
+				}
+		.border{	width:100px;
+					height:100px;
+					padding:10px;
+					background:deepskyblue;
+					margin:40px auto;
+					border: 10px solid red;
+					box-sizing: border-box;
+					-webkit-box-sizing:border-box;
+				}
+		/*
+			box-sizing:;
+			box-orient:;
+			box-shadow:;
+			box-direction:;
+		*/
+	</style>
+</head>
+<body>
+	<h2>box-sizing</h2>
+	<p>限制盒子模型的大小</p>
+	<p>box-sizing: {content-box | border-box }</p>
+	<p>移动端一般写-webkit- 以及原生</p>
+	<p>最好仅在移动端使用</p>
+	----------------------------------------------------
+	<div class="content"></div>
+	<div class="border"></div>
+	----------------------------------------------------
+
+</body>
+</html>
