@@ -1,0 +1,187 @@
+/**{
+	padding: 0;
+	margin: 0;
+}
+html, body{height: 100%;}
+.contentDiv{
+	width: 320px; 
+	height: 568px;
+	position: absolute;
+}
+.startDiv{
+	width: 320px;
+	height: 568px;
+	background: url(../img/开始背景.png) no-repeat;
+	position: absolute;
+}
+button{
+	outline: none;
+}
+.startDiv button{
+	width: 100px;
+	height: 50px;
+	background-color: #ccc;
+	border-radius: 35px;
+	position: absolute;
+	top: 400px;
+	left: 110px;
+	border: 1px solid #000;
+}
+.mainDiv{
+	width: 320px;
+	height: 568px;
+	position: absolute;
+	background: url(../img/background_1.png) repeat-y;
+	left: 0;
+	top: 0;
+}
+.scoreDiv{
+	display: none;
+}
+.scoreDiv label{
+	position: absolute;
+	top: 10px; 
+	left: 10px;
+}
+.scoreDiv .num{
+	margin-left: 74px;
+}
+.suspendDiv{
+	position: absolute;
+	top: 200px;
+	left: 100px;
+	display: none;
+}
+.suspendDiv button{
+	width: 100px;
+	height: 50px;
+	background-color: #ccc;
+	border-radius: 35px;
+	outline: none;
+	margin-top: 10px;
+	border: 1px solid #000;
+}
+
+.endDiv{
+	position: absolute;
+	top: 200px;
+	height: 88px;
+	background-color: #ccc;
+	border: 1px solid;
+	border-radius: 10px;
+	text-align: center;
+	width: 136px;
+	height: 130px;
+	padding-top: 28px;
+	display: none;
+}
+.endDiv button{
+	width: 100px;
+	height: 50px;
+	background-color: #ccc;
+	border-radius: 35px;
+	outline: none;
+	margin-top: 10px;
+	border: 1px solid #000;
+}
+
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+.contentDiv{
+    position: absolute;
+}
+.startDiv{
+    width: 320px;
+    height: 568px;
+    background-image: url(../img/开始背景.png);
+}
+button{
+    outline: none;
+    cursor: pointer;
+}
+.startDiv button{
+    position: absolute;
+    top: 500px;
+    left: 85px;
+    width: 150px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: #c4c9ca;
+}
+.mainDiv{
+    width: 320px;
+    height: 568px;
+    background-image:url(../img/background_1.png) ;
+    display: none;
+    overflow: hidden;
+/*    position: absolute;*/
+}
+.mainDiv img{
+    position: absolute;
+    z-index: 1;
+}
+.scoreDiv{
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+.suspendDiv{
+    position: absolute;
+    top: 210px;
+    left: 82px;
+    display: none;
+    z-index: 2;
+}
+.suspendDiv button{
+    width: 150px;
+    height: 30px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: #c4c9ca;
+}
+.endDiv{
+    position: absolute;
+    top: 210px;
+    left: 75px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    background-color:#d7ddde;
+    display: none;
+    z-index: 2;
+}
+.planText{
+    width: 160px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+#planScore{
+    width: 160px;
+    height: 80px;
+    line-height: 80px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    font-size: 16px;
+    font-weight: bold;
+}
+.endDiv div{
+    width: 160px;
+    height: 50px;
+}
+.endDiv button{
+    margin-top:10px ;
+    width: 90px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 30px;
+}

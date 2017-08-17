@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="746" height="746"></canvas>
+	<script type="text/javascript">
+
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		function init(){
+			//清楚之前的数据
+			ctx.clearRect(0,0,746,746);
+			//获取下系统时间
+			var date = new Date();
+			var h = date.getHours();
+			h = h > 12 ? h - 12 : h;
+			var m = date.getMinutes();
+			var s = date.getSeconds();
+			// 广告内容
+			ctx.beginPath();
+			ctx.fillStyle = "red";
+			ctx.arc(50,100,25,0,2*Math.PI, true);
+			ctx.fill();
+			ctx.closePath();
+			// 广告内容
+			ctx.beginPath();
+			ctx.fillStyle = "green";
+			ctx.arc(150,100,25,0,2*Math.PI, true);
+			ctx.fill();
+			ctx.closePath();
+			//外圈
+			ctx.beginPath();
+			ctx.strokeStyle = "deepskyblue";
+			ctx.lineWidth = 10;
+			ctx.arc(100,100,100,0,2*Math.PI, true);
+			ctx.stroke();
+			ctx.closePath();
+			//内圈
+			ctx.beginPath();
+			ctx.strokeStyle = "#746746";
+			ctx.lineWidth = 3;
+			ctx.arc(100,100,90,0,2*Math.PI, true);
+			ctx.stroke();
+			ctx.closePath();
+
+			//分刻度 每5个切换下大小
+			for(var m = 0;m < 60;m++){
+			    ctx.save();
+			    if(m % 5 === 0){ //画时钟刻度
+			    	 ctx.lineWidth = 6;
+			    	 ctx.strokeStyle = "#000";
+			    	 ctx.translate(100, 100);  //固定旋转中心
+			    	 ctx.rotate(m*6*Math.PI/180); //旋转角度
+			    	 ctx.beginPath();
+			    	 ctx.moveTo(0, 90);
+			    	 ctx.lineTo(0, 82);
+			    	 ctx.closePath();
+			    	 ctx.stroke();
+			    	 ctx.restore();
+			    }else{ //分钟刻度
+			    	 ctx.lineWidth = 4;
+			    	 ctx.strokeStyle = "#000";
+			    	 ctx.translate(100, 100);
+			    	 ctx.rotate(m*6*Math.PI/180);
+			    	 ctx.beginPath();
+			    	 ctx.moveTo(0, 90);
+			    	 ctx.lineTo(0, 85);
+			    	 ctx.closePath();
+			    	 ctx.stroke();
+			    	 ctx.restore();
+			    }
+			    
+			}
+			//画时针
+			ctx.save();
+			ctx.lineWidth = 8;
+			ctx.strokeStyle = "skyblue";
+			ctx.translate(100,100);
+			ctx.rotate(h*30*Math.PI/180);
+			ctx.beginPath();
+			ctx.moveTo(0,10);
+			ctx.lineTo(0,-35);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.restore();
+			//画分针
+			ctx.save();
+			ctx.lineWidth = 4;
+			ctx.strokeStyle = "blue";
+			ctx.translate(100,100);
+			ctx.rotate(m*6*Math.PI/180);
+			ctx.beginPath();
+			ctx.moveTo(0,10);
+			ctx.lineTo(0,-60);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.restore();
+			//画秒针
+			ctx.save();
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = "#f66";
+			ctx.translate(100,100);
+			ctx.rotate(s*6*Math.PI/180);
+			ctx.beginPath();
+			ctx.moveTo(0,10);
+			ctx.lineTo(0,-75);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.restore();
+			//中心点
+			ctx.beginPath();
+			ctx.fillStyle = "red";
+			ctx.arc(100,100,3,0,2*Math.PI, true);
+			ctx.fill();
+			ctx.closePath();
+		}
+
+		setInterval(init, 1000);
+
+	</script>
+</body>
+</html>
