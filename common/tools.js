@@ -303,9 +303,54 @@ function post(url, data, fn, type){
 		"datatype" : type
 	});
 }
+//获取查询字段
+function getQueryStringArgs(){
+	// ?号后的字符串
+	var qs = (location.search.length > ? localtion.search.substring(1) : ""),
+	//保存数据的对象	
+		args = {},
+	//取得的每一项
+	items = qs.length ? qs.split("&") : [],
+	item = null, //一个键值对
+	name = null, //键
+	value = null,//值
+	i = 0,
+	len = items.length;
+	//逐个将每一项添加到args对象中
+	for(i = 0; i < len; i++){
+		item = item[i].split("=");
+		name = decodeURIComponent(item[0]);
+		value = decodeURIComponent(item[1]);
+		if(name.length){
+			args[name] = value;
+		}
+	}
+	return args;
 
+}
+//一般是写针对插件的兼容浏览器的方法
 
-
+//检查插件(非IE)
+function hasPlugin(name) {
+	name = name.toLowerCase();
+	for(var i = 0; i < navigator.plugins.length; i++) {
+		if(navigator.plugins[i].name.toLowerCase().indexOf(name) > -1) {
+			return true;
+		}
+	}
+	return false;
+}
+//IE
+function hasIEPlugin(name) {
+	try {
+		new ActiveXObject(name);
+		return true;
+	}catch {
+		return false;
+	}
+}
+console.log(hasPlugin("Flash"))
+console.log(hasIEPlugin("Flash"))
 
 
 

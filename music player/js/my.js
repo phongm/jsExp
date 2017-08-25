@@ -16,7 +16,7 @@ var musicModels = [];
 getJsonData();
 //获取数据
 function getJsonData () {
-	$.getJSON("pbl.json",function(data){
+	$.getJSON("./pbl.json",function(data){
 		for(var i = 0; i < data.length; i++){
 			var music = new Music();
 			music.src = data[i].src;
